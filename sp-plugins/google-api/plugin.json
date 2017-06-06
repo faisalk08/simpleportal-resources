@@ -1,0 +1,21 @@
+{
+	"title": "Google API Integration",
+	"description": "",
+	"version": 0.1,
+	"plugintype": "webapp",
+	"priority": 1.1,
+	"webappsetting": {
+		"iconclass":"fa fa-google",
+		"webappuri": "/google-api",
+		"dynamicwebapp": true,
+		"webapptype": "backbone",
+		"theme": "sp-default"
+	},
+	"permission": {"roles":["superadmin"]},
+	"dependencies": [],
+	"status": "active",
+	"id": "google-api", 
+	"npmdependancies":{
+		"googleapis":"", "xoauth2":""
+	}
+}
