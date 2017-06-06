@@ -1,0 +1,74 @@
+<table width="100%" id="datatable_<%= modelname %><%= (typeof subservice !== 'undefined' ? "_" + subservice : "") %>" data-plugin="datatable" class="table table-striped table-hover table-condensed dt-responsive <%= (typeof subservice !== 'undefined' && subservice ? "table-bordered" : "") %>">
+	<thead>
+		<tr>
+			<!--<th class="index">#</th>-->
+			<% if(typeof dataType !== "undefined" && dataType === "string"){%>
+				<th >
+					<%= modelname %>
+				</th>
+			<%}else{%>
+			<%for( var fieldIndex in modelfields){var modelfield = modelfields[fieldIndex];
+			if(fieldIndex == 0 && (typeof subservice == 'undefined' || !subservice)){
+			%>
+				<th data-data="<%= modelfield.field %>"><%%= getMessage("<%= modelfield.field %>") %%>></th>
+			<%}else if(fieldIndex==0 &&  typeof subservice !== 'undefined' && subservice){%>
+				<th data-data="<%= modelfield.field %>"><%%= getMessage("<%= modelfield.field %>") %%>></th>
+			<%}else if(modelfield.type != 'array' && modelfield.type != "object"){
+			%>
+				<th data-data="<%= modelfield.field %>"><%%= getMessage("<%= modelfield.field %>") %%>></th>
+			<%}}}%>			
+			<th data-data="" class="no-sort">
+				Actions
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%% for (var i=0; i < results.length; i++) { 
+			var modeldata = results[i];
+		%>
+		<tr data-id='<%%= modeldata._id %>'>
+			<!--<td ><input type="checkbox" name="checkbox-inline"></td>
+			<td><%%= (i+1) %></td>-->
+			<% if(typeof dataType !== "undefined" && dataType === "string"){%>
+				<td>
+					<%% if(typeof modeldata == "object") {%>
+					<%%= modeldata["<%= modelfields[0].field %>"] %%>>
+					<%%}else{%>
+					<%%= modeldata %>
+					<%%}%>
+				</td>
+			<%}else{%>
+			<%for( var fieldIndex in modelfields){var modelfield = modelfields[fieldIndex];
+			if(fieldIndex==0 && (typeof subservice == 'undefined' || !subservice)){
+			%>
+			<td><a href='#<%= configuration.uri %>/<%%= modeldata['<%= primaryKey %>'] %%>>'><%%= modeldata["<%= modelfield.field %>"] %%>></a></td>
+			<%}else if(fieldIndex==0 &&  typeof subservice !== 'undefined' && subservice){%>
+				<td><%% if(typeof modeldata == "object") {%>
+					<span data-field="<%= modelfield.field %>" data-id="<%%= modeldata["<%= modelfield.field %>"] %%>>" class='btn btn-link view-sub'><%%= modeldata["<%= modelfield.field %>"] %%>></span>
+				<%%}else{%>
+					<%%= modeldata %>
+				<%%}%>
+				</td>
+			<%}else if(modelfield.type != 'array' && modelfield.type !="object"){%>
+			<td><%%= modeldata["<%= modelfield.field %>"] %%>></td>	
+			<%}}%>
+			<%}%>
+			<td class="no-sort">
+				<%draw_service_list_action(serviceconfig);%>
+				<!--<div class="btn-group">
+					<button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    	<%= modelname %> <span class="caret"></span>
+				  	</button>
+				  	<ul class="dropdown-menu">
+						<% if(typeof subservice == 'undefined' || !subservice) {%>
+							<li><a href="#<%= configuration.uri %>/<%%= modeldata['<%= primaryKey %>'] %%>>" rel="qtip" title="View"><i class="glyphicons glyphicons-new-window icon-edit fa fa-view"></i> <%%= getMessage("view") %></a></li>
+							<li><a href="#<%= configuration.uri %>/edit/<%%= modeldata['<%= primaryKey %>'] %%>>" rel="qtip" title="Edit"><i class="glyphicon glyphicon-edit icon-edit fa fa-edit"></i> <%%= getMessage("edit") %></a></li>
+						<%}%>
+						<li><span href="javascript:void(0);" class="modelaction remove" data-id="<%%= modeldata['<%= primaryKey %>'] %%>>" rel="qtip" title="Delete"><i class="glyphicon glyphicon-trash icon-trash fa fa-trash-o"></i> <%%= getMessage("delete") %></span></li>
+					</ul>
+				</div>-->
+			</td>
+		</tr>
+		<%% } %>			
+	</tbody>
+</table>

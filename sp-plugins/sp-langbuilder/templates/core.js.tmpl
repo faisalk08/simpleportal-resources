@@ -1,0 +1,37 @@
+/*
+ * Language path specific to your application 
+ * default is /language/
+ * 
+ */
+window.langpath='<%= languagepath %>';
+
+/**
+ * Global variable for language list
+ * @languageid - id used for storing and cookies 
+ * @display - Language display used
+ * @icon - Icon for the language 
+ */
+window.languages=[<%var count=0;for(var index in languageids){var language= languageids[index];%>
+	{languageId:'<%= language.languageid %>', native:'<%= language.native ? language.native : language.display %>', display:'<%= language.display ? language.display : language.languageid %>', icon:'<%= language.icon %>'}<%= count++==languageids.length-1 ? '':','  %><%}%>
+];
+
+/*
+ * Default translations
+ */
+var _int_tl_def_ = {
+	<%var count=0;for(var index in languageids){var language= languageids[index];%><%= language.languageid %>:{}<%= count++==languageids.length-1 ? '':','  %><%}%>
+};
+
+/**
+ * Global variable for translation keys
+ */
+if(window && !window.translations)
+	window.translations=_int_tl_def_;
+
+/**
+ * Including all language packs using requirejs, make sure require js is included
+ */
+ if(typeof require == 'function' && typeof $ !== "undefined")
+	require([<%var count=0;for(var index in languageids){var language= languageids[index];%>
+		window.langpath + '<%= language.languageid %>.js'<%= count++==languageids.length-1 ? '':','  %><%}%>
+	]);

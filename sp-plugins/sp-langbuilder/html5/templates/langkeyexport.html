@@ -1,0 +1,26 @@
+<ol class="breadcrumb">
+	<li><%= getMessage("langauge-pack-export") %><li>
+</ol>
+<form id="langkey-form" class="smart-form form" action="/api/langkey/export" method="POST" download="language.tar.gz">
+	<fieldset>
+		<section>
+			<div class="form-group" id='tagscontainer'>
+				<label for="tags" class="label form-label">Tags</label>
+				<input type="text" class='form-control' name="tags" id="tags" value="" />
+				<p class="help-block">
+					Please mention tags which needs to be included in the bundle, if empty all translations will be included
+				</p>
+			</div>
+		</section>
+	</fieldset>
+	<hr/>
+	<footer>
+		<a class="btn btn-default back">
+			&laquo; <%= getMessage("go-back") %>
+		</a>
+		
+		<button type="submit" name="submit" class="save btn btn-primary">
+			<i class='glyphicon glyphicon-download fa fa-download'></i> <%= getMessage("export") %>
+		</button>
+	</footer>
+</form>

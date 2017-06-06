@@ -1,0 +1,76 @@
+<section id="widget-grid" class="">
+	<div class="row">
+		<article class="col-sm-12 col-md-12 col-lg-12">
+			<div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+				<header>
+					<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+					<h2>langkey form</h2>
+				</header>
+				<div>					
+					<div class="jarviswidget-editbox"></div>
+					<div class="widget-body no-padding">
+						<form id="langkey-form" class="smart-form" action="/api/langkey" method="POST" >
+							<input type="hidden" name="id" id="id" value="<%= id %>"/>
+							<fieldset>
+								<section>
+									<label class="label">Key</label>
+									<label class="input">
+										<i class="icon-append fa fa-tag"></i>
+										<input type="text" name="key" id="key" value="<%= key %>" />
+										<b class="tooltip tooltip-top-right">
+											<i class="fa fa-info-circle txt-color-teal"></i> 
+											language key. A mandatory field.
+										</b>
+									</label>
+								</section>
+								
+								<section>
+									<label class="label">Translation</label>
+									<label class="input">
+										<i class="icon-append fa fa-tag"></i>
+										<input type="text" name="translation" id="translation" value="<%= translation %>" />
+										<b class="tooltip tooltip-top-right">
+											<i class="fa fa-info-circle txt-color-teal"></i> 
+											Translation.
+										</b>
+									</label>
+								</section>
+								
+								<section id='languageidselector'>
+									<label class="label">Please select language id</label>
+									<label class="select" id='languageidcontainer'>
+									<%if(typeof languages !== 'undefined'){%>
+										<select name='langId' id='langId'>
+										<%for(var i in languages){%>
+											<option value="<%= languages[i].langId %>"><%= languages[i].display +'('+languages[i].native+')' %></option>
+										<%}%>
+										</select>
+									<%}%>
+									</label>
+								</section>
+								
+								<section id='statuselector'>
+									<label class="label">Select a status</label>
+									<label class="select"  id='statuscontainer'>
+									<%if(typeof statuslist !== 'undefined'){%>
+										<select name='status' id='status'>
+										<%for(var i in statuslist){%>
+										<option value='<%= i %>'><%= statuslist[i] %></option>
+										<%}%>
+										</select>
+									<%}%>
+									</label>
+								</section>
+							</fieldset>
+							<footer>
+								<button type="submit" name="submit" class="save btn btn-primary">
+									Submit
+								</button>
+							</footer>
+						</form>
+					</div>
+				</div>
+			</div>
+		</article>			
+	</div>
+</section>

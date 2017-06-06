@@ -1,0 +1,69 @@
+{
+	"title":"Language builder",
+	"description":"Language builder",
+	"version":"1.02",
+	"plugintype":"webapp",
+	"priority":1,
+	"permission":{
+		"roles":["superadmin"]
+     },
+	"id":"sp-langbuilder",
+	"webappsetting": {
+		"changetheme":false,
+		"iconclass": "fa fa-language",
+		"theme":"sp-default",
+		"webappuri":"/sp-langbuilder",
+		"dynamicwebapp": true,
+		"webapptype": "backbone",
+		"javascript": {
+			"routerfiles":["/api/langkey/js"]
+		},
+		"dependencies":[
+            "virtual-keyboarduiplugin", 
+            "flag-icon-cssuiplugin", 
+            "bootstrap-iconpickeruiplugin",
+            "bootstrap-session-timeoutuiplugin", 
+            "jqueryuiplugin@cookiecuttr"
+		],
+		"layout": {
+			"sidepanel":[
+	            {
+	            	 "uri":"#langkey", "icon":"glyphicon glyphicon-globe", "display":"translation",
+	            	 "subpage":[
+						  {
+							  "templateName":"translator.html", "remoteTemplate":"templates/translator.html?layout=accordion", "uri":"#translator", 
+							  "icon":"glyphicon glyphicon-edit", "display":"translator"
+						  },
+	        	          {
+							  "remoteTemplate":"templates/langkeyexport.html?layout=accordion", "templateName":"langkeyexport.html", "uri":"#langkeyexport", 
+	        	        	  "icon":"glyphicon glyphicon-download", "display":"export"
+	        	          }
+	            	 ]
+	             }
+             ]
+		}, "integrationlatest":{
+			"latest":{
+				"css":[
+				    "/uiplugin/flag-icon-css/flag-icon-css-master/css/flag-icon.min.css"
+				],
+				"javascript":{
+					"routerfiles":["/api/langkey/js"]
+				}
+			}, "inlinetranslation":{
+				"javascript":{
+					"routerfiles":["js/inlineeditor.js"]
+				}
+			}
+		}, "integration":{
+			"javascript": {"routerfiles":["/api/langkey/js"]},
+			"css":[
+			    "/uiplugin/flag-icon-css/flag-icon-css-master/css/flag-icon.min.css"
+			]
+		}
+	}, "resources":[
+	    {
+	    	"resourcename":"iso_639-2.json",
+	    	"downloadlink":"http://gist.githubusercontent.com/franz-josef-kaiser/4582383/raw/497e8167f88f5b1689b77e0f6993b2fd250c602f/iso_639-2.json"
+	    }            
+	], "preference":{"tabview":true}
+}

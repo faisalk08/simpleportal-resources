@@ -1,0 +1,9 @@
+if(!window.translations)
+	window.translations={"<%= langId %>":{}};
+
+if(typeof $ !== "undefined"){
+	window.translations["<%= langId %>"]=$.extend(window.translations["<%= langId %>"], {
+	<%var count=0;for(var index in translations){var translation= translations[index];%>
+		"<%= translation.key.toLowerCase() %>":"<%= translation.translation %>"<%= count==translations.length-1 ? '':','  %><%}%>
+	});
+}
