@@ -1,0 +1,58 @@
+<% 
+	tabs = servicelinks;
+	var viewmode = serviceviewmode;
+	var servicename = servicename||name;
+%>
+<span class='view-info'></span>
+<div id='<%= servicename %>_tabs'>
+	<ul class="nav nav-tabs" role="tablist">
+		<% for(var i in tabs) {
+			var tab = tabs[i];%>
+			<% if(!tab.disabled && tab.subpage){%>
+				<%%if(typeof <%= primaryKey %> != "undefined" && <%= primaryKey %>){%%>>
+					<li role="presentation" class="<%= tab.cssclass %> <%= tab.id == viewmode ? "active" :"" %>"><a href='#<%= servicename %>_tab_<%= tab.id %>' data-url="#<%= servicename %>/<%= tab.id %>/<%%= <%= primaryKey %> %%>>" aria-controls="<%= servicename %>_tab_<%= tab.id %>" role="tab" data-toggle="tabajax"><%%= getMessage("<%= servicename %>") %%>>  <%%= getMessage("<%= tab.id %>") %%>> (<%%= <%= primaryKey %> %%>>)</a></li>
+				<%%} else if("<%= tab.id %>" == "form" ){%%>>
+					<li role="presentation" class="<%= tab.cssclass %> <%= tab.id == viewmode ? "active" :"" %>"><a href='#<%= servicename %>_tab_<%= tab.id %>' data-url="#<%= servicename %>/<%= tab.id %>" aria-controls="<%= servicename %>_tab_<%= tab.id %>" role="tab" data-toggle="tabajax"><%%= getMessage("<%= servicename %>") %%>>  <%%= getMessage("<%= tab.id %>") %%>></a></li>
+				<%%}%>
+			<%} else if(!tab.disabled){%>
+				<li role="presentation" class="<%= tab.cssclass %> <%= tab.id == viewmode ? "active" :"" %>"><a href='#<%= servicename %>_tab_<%= tab.id %>' data-url="<%= tab.url ? tab.url : ("#" + servicename + "/" + tab.id) %>" aria-controls="<%= servicename %>_tab_<%= tab.id %>" role="tab" data-toggle="tabajax"><%%= getMessage("<%= servicename %>") %%>> <%%= getMessage("<%= tab.id %>") %%>></a></li>
+			<%}%>
+		<%}%>
+	</ul>
+	<div class="tab-content">
+		<hr/>
+		<% for(var i in tabs) {
+			var tab = tabs[i];
+			if(tab.id == viewmode){%>
+			<div role="tabpanel" class="tab-pane active" id="<%= servicename %>_tab_<%= tab.id %>">
+				<%- include(bodytemplate) %>
+			</div>
+			<% }else{%>
+				<div role="tabpanel" class="tab-pane" id="<%= servicename %>_tab_<%= tab.id %>"></div>
+			<%}%>
+		<%}%>
+	</div>
+</div>
+<script>
+	$('#<%= servicename %>_tabs [data-toggle="tabajax"]').click(function(e) {
+	    e.preventDefault();
+	    $this = $(this);
+	    var loadurl = $(this).attr('data-url');
+	   
+	    //$this.parent().addClass('active').siblings().removeClass('active');
+	    var arguments_ = loadurl.replace('#', '').split('/');
+	    
+	    arguments = [{dataprops:{"app-uri":loadurl}, container:'#'+ $(this).attr('aria-controls'), disablelayout:true}];
+	    arguments = arguments.concat(arguments_);
+	    
+	    $this.tab('show');
+	    var exisitingurl = $('#'+ $(this).attr('aria-controls')).attr('data-app-uri');
+	    	    
+	    if(exisitingurl == loadurl && $('#'+ $(this).attr('aria-controls')).attr('data-remote-loading') == 'loaded'){
+	    	app.navigate(loadurl, {trigger:false});
+	    } else{
+	    	app.navigate(loadurl, {trigger:false});
+	    	app.loadView.apply(app, arguments);
+    	}
+	});
+</script>
