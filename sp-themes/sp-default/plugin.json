@@ -1,0 +1,66 @@
+{
+	"id": "sp-default",
+	"plugintype": "theme",
+	"title": "Default sp theme",
+	"description": "Theme for Simpleportal",
+	"version": "0.66",
+	"themeuri": "/sp-default",
+	"iconclass": "fa fa-gears",
+	"disabled": false,
+	"public": true,
+	"themesetting": {
+		"mobilesetting": {
+			"css": {
+				"theme": [
+					"css/mobile.css"
+				]
+			},
+			"dependencies": [
+				"fontawesomeuiplugin",
+				"jquerymobileuiplugin"
+			]
+		},
+		"css": {
+			"theme": [
+				"css/signin.css",
+				"css/dashboard.css",
+				"css/search.css",
+				"css/classic.css"
+			]
+		},
+		"dependencies": [
+			"jqueryuiplugin",
+			"jquery-uiuiplugin",
+			"jquery-ui-bootstrapuiplugin",
+			"jqueryuiplugin@cookiecuttr",
+			"jqueryuiplugin@browser",
+			"jqueryuiplugin@blockUI",
+			"jqueryuiplugin@form",
+			"jqueryuiplugin@media",
+			"jqueryuiplugin@validate",
+			"jqueryuiplugin@sparkline",
+			"jqueryuiplugin@easypiechart",
+			"jqueryuiplugin@qtip2",
+			"underscorejsuiplugin",
+			"backbonejsuiplugin",
+			"bootstrapuiplugin",
+			"bootstrap-progressbaruiplugin",
+			"fontawesomeuiplugin",
+			"flag-icon-cssuiplugin",
+			"datatablesuiplugin",
+			"select2uiplugin",
+			"chartjsuiplugin@v102"
+		],
+		"mobile": true
+	},
+	"layout": {
+		"servicelayout": "accordion"
+	},
+	"preferencesetting": {
+		"headercolorscheme": ""
+	},
+	"preference": {
+		"colorskin": "b",
+		"headercolorscheme": "inverse"
+	}
+}

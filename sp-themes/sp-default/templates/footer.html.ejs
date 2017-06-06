@@ -1,0 +1,32 @@
+<div class="navbar navbar-default navbar-fixed-bottom footer">
+	<div class="container container-fluid">
+		<div class="row">
+			<%if(serverconfig && typeof serverconfig.footerconfig === 'object' && serverconfig.footerconfig && serverconfig.footerconfig.copyright){%>
+				<span class='pull-left'>&copy; <a href='<%= serverconfig.footerconfig.copyright.website %>' target='_blank'><%= serverconfig.footerconfig.copyright.company %> <%= serverconfig.footerconfig.copyright.info %></a></span>
+			<%}%>
+			
+			<%if(serverconfig && typeof serverconfig.footerconfig === 'object' && serverconfig.footerconfig && serverconfig.footerconfig.contact){%>
+				<span class='pull-right'>
+			      &nbsp;&nbsp;<i class="icon-volume-down"></i><%= serverconfig.footerconfig.contact.phone %>
+				</span>
+				<%if(serverconfig.footerconfig.contact.email){%>
+				<span class='pull-right'>
+					<a href='mailto:<%= serverconfig.footerconfig.contact.email %>'><i class="icon-envelope"></i><%= serverconfig.footerconfig.contact.email %></a> 
+				</span>
+				<%}%>
+			<%}%>
+		</div>
+		<div class="row versioninfo">
+			<center>
+				<%if(serverconfig && typeof serverconfig.termsofserviceuri){%>
+					<a href='<%= serverconfig.termsofserviceuri %>'><%= getMessage("terms-of-service") %></a>
+				<%}%>
+				<i>
+					<%if(typeof webappsetting == 'object' && webappsetting.id){%><%= webappsetting.title %>@v<%= webappsetting.version %> / <%}%>
+					<%if(typeof themeconfig == 'object'){%><%= themeconfig.title %>@v<%= themeconfig.version %> - <%}%>
+				 	<%= getMessage("upated-on") %> '<b><%= curtime %></b>'
+				</i>
+			</center>
+		</div>
+    </div>
+</div>
