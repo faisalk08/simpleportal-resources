@@ -1,0 +1,38 @@
+{
+	"title":"Hello world",
+	"description":"Hello world : webapp",
+	"version":"1.0",
+	"permission": [
+   		{
+   			"roles": [
+	          	"guest"
+   			]
+   		}
+	],
+	"plugintype":"webapp",
+	"htmldir":"html5", "iconclass":"custom",
+	"servicedir":["services"],
+	"priority":100001,
+	"configuration":{},
+	"webappuri":"/helloworld",
+	"id":"helloworld", "public":true,
+	"webappsetting":{
+		"theme":"edu-theme",
+		"dynamicwebapp":true,
+		"mobile":false, 
+		"websiteconfig":{
+			"webpages":[
+	     	   {"id":"home", "display":"Home", "header":true, "footer":false, "icon":"fa fa-home"},
+	     	   {"id":"aboutus", "display":"About us", "icon":"fa fa-info"},
+	     	   {"id":"sitemap", "display":"Sitemap", "sidepanel":false, "footer":true, "header":false, "icon":"fa fa-sitemap"},
+	     	   {"id":"terms-service", "display":"Terms & service", "footer":true, "sidepanel":false, "icon":"fa fa-gavel"}
+	     	]
+		}, "footerconfig":{
+			"copyright":{
+				"info":"2009-2016",
+				"company":"Hello world",
+				"website":"http://www.simpleportaljs.com"
+			}
+		}, "dependencies":[]
+	}
+}

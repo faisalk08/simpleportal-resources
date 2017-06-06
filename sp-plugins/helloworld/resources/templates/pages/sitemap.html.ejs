@@ -1,0 +1,19 @@
+<%	var staticpagelinks=[
+	{url:'', uri:'/', display:'Home'},
+	{url:'', uri:'/pages/aboutus.html', display:'About us'},
+	{url:'', uri:'/pages/terms-of-service.html', display:'Terms & service'}
+];%>
+<div class="container">
+	<div class="page-header">
+	  <h1>Sitemap</h1>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<ul>
+			<% for(var spi in staticpagelinks){var staticpagelink=staticpagelinks[spi];%>
+				<li><a href="<%= pluginsetting.webappuri %><%= staticpagelink.uri %>"><%= staticpagelink.display %></a></li>
+			<%}%>
+			</ul>
+		</div>
+	</div>
+</div>
