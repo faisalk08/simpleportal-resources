@@ -1,0 +1,14 @@
+<ol class="breadcrumb">
+  	<li><a href="#pluginmanager"><%= getMessage("plugin-manager")%></a> / <a href="#pluginmanager/view/<%= id %>"><%= title %></a> / <%= getMessage("resources") %></li>
+</ol>
+<%if(typeof usage != "undefined" && usage && usage.length > 0){%>
+<ul class="list-group">
+<% 
+   	usage.forEach(function(depplugin){%>
+	<li class="list-group-item">
+		<%= depplugin.title %>
+	</li>
+<% }) %>
+</ul>
+<%}%>
+<a href="#pluginmanager" class="btn btn-xs btn-default">&laquo; <%= getMessage("go-back") %></a>

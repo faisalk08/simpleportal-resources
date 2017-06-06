@@ -1,0 +1,13 @@
+<ol class="breadcrumb">
+  	<li><a href="#pluginmanager"><%= getMessage("plugin-manager")%></a> / <a href="#pluginmanager/view/<%= id %>"><%= title %></a> / <%= getMessage("pluginsource") %></li>
+</ol>
+<ul class="list-group">
+	<%for(var i in pluginsetting.preference.pluginsource){var pluginsource = pluginsetting.preference.pluginsource[i];%>
+		<li class="list-group-item">
+			<%= pluginsource.host %><%= (pluginsource.port ? ':' + pluginsource.port : '') %> <%= pluginsource.url %>
+			
+			<span class="showplugin btn btn-link" data-remoteurl="http://<%= pluginsource.host %><%= (pluginsource.port ? ':' + pluginsource.port : '') %><%= pluginsource.url %>"> Show plugins </span>
+		</li>
+	<%}%>
+</ul>
+<div id="pluginlist"></div>

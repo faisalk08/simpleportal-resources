@@ -1,0 +1,32 @@
+{
+	"id": "sp-pluginmanager",
+	"plugintype": "webapp",
+	"title": "Plugin manager",
+	"description": "SP - Plugin manager for installing and updating.",
+	"version": "1.08",
+	"permission": [
+	    {
+			"roles": ["superadmin"]
+		}
+	],
+	"webappsetting":{
+		"iconclass": "fa fa-puzzle-piece",
+		"dynamicwebapp":true,
+		"webappuri":"/sp-pluginmanager",
+		"theme":"sp-default",
+		"webapptype": "backbone",
+		"layout":{
+			"sidepanel":[
+			     {
+			    	 "icon":"glyphicon glyphicon-console", 	
+			    	 "display":"pluginmanager", "uri":"#pluginmanager", "urlRoot":"/api/system/pluginsource/pluginlist"
+	             }
+			]
+		}
+	},"preferencesetting":{
+		"pluginsource":[{
+			"host":"", "port":"", "url":""
+		}]
+	}, "preference":{"tabview":false},
+	"priority": 1
+}

@@ -1,0 +1,74 @@
+<% for (var i=0; i < results.length; i++) { 
+	var plugin = results[i],
+		installedplugin;
+		
+	if(plugin.installedplugin && plugin.installedplugin.length >0){
+		installedplugin = plugin.installedplugin[0];
+		if(installedplugin.version && plugin.version){
+			plugin.hasupdate = Number(installedplugin.version) < Number(plugin.version)
+		}
+		plugin.installed=true;
+	} else if(plugin.installed)
+		installedplugin=plugin;
+	else installedplugin=null;
+%>
+<div class='well padding' data-id='<%= plugin.id %>'>
+	<%= i+1 %>.
+	<%if(installedplugin){%>
+		<a href="#plugin/view/<%= plugin._id %>">
+			<%if(plugin.installed){%><i class="fa fa-check"></i><%}%> <%= plugin.title %>
+		</a>
+	<%}else{%>
+		<a href="#pluginsource/view/<%= plugin._id %>">
+			<%if(plugin.installed){%><i class="fa fa-check"></i><%}%> <%= plugin.title %>
+		</a>
+	<%}%>
+	<span class='label label-info'><%= plugin.plugintype %> : v<%= plugin.version %></span>
+	
+	<div class='pull-right'>
+		<%if(!plugin.installed){%>
+			<button class='btn btn-s btn-primary processapp'  data-process='install'><i class='fa fa-download'></i><%= getMessage(plugin.plugintype=="pluginstore" ? "update": "install") %></button>
+		<%}else{%>
+			<% if(plugin.id != 'pluginmanager' && plugin.pluginsourcetype == 'installed'){%>
+				<button class='btn btn-s btn-danger processapp'  data-process='uninstall'><i class='fa fa-archive'></i><%= getMessage("uninstall") %></button>
+			<%}%>
+			<%if(plugin.hasupdate){%>
+				<button class='btn btn-s btn-primary processapp'  data-process='update'><i class='fa fa-download'></i><%= getMessage("update-to") %> (v<%= plugin.version %>)</button>
+			<%}%>
+			<%if(false){%>
+				<button class='btn btn-s btn-link processapp' data-process='updatecheck'><i class='fa fa-download'></i><%= getMessage("check-for-update") %></button>
+			<%}%>
+		<%}%>
+	</div>
+	<div>
+		<hr/>
+		<%= plugin.description %>
+		<%if(plugin.homepage){%><br/><i class="fa fa-globe"></i> : <a target="_new" href="<%= plugin.homepage %>"><%= plugin.homepage %></a><%}%>
+		<%
+			if(!plugin.missingdependencies)
+				plugin.missingdependencies=[];
+		%>
+		<% if(plugin.dependencies&&plugin.dependencies.length >0){%>
+			<%= getMessage("dependancy") %> : 
+			<%for(var dep_ in plugin.dependencies){
+				var depend =plugin.dependencies[dep_];
+				var missingdepend ="label-success";
+				
+				if(_.contains(plugin.missingdependencies, depend)){
+					missingdepend="label-danger";
+				}
+			%>
+				<span class='label <%= missingdepend %>'><%= depend %></span>
+			<%}%>
+		<%}%>
+	</div>
+	<%if(installedplugin && installedplugin.modified_at){%>
+		<span><%= getMessage("last-modified") %> : <%= installedplugin.modified_at ? installedplugin.modified_at : '' %></span>
+	<%}%>
+	<div class='pull-right'>
+		<%if(installedplugin && installedplugin.installed){%>
+			<span class='pull-right'><%= getMessage("installed-on") %> : <%= installedplugin.created_at ? installedplugin.created_at : '' %></span>
+		<%}%>
+	</div>
+</div>
+<%}%>

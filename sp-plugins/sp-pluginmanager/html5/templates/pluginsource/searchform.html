@@ -1,0 +1,21 @@
+<form class="form-inline well">
+  <div class="form-group">
+    <div class="dropdown">
+	  <a class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" style="border:none;">
+	  	<span class="fa fa-cog"><%=getMessage("select-plugintype") %></span> <span class="text"></span>
+	  </a>
+	  <ul class="dropdown-menu">
+	    <li><a href="#" data-value="-1"><input value="-1" name="plugintype" type="checkbox"/>&nbsp; All</a></li>
+	    <li><a href="#" data-value="webapp"><input checked value="webapp" name="plugintype" type="checkbox"/>&nbsp; <%=getMessage("webapp") %></a></li>
+	    <li><a href="#" data-value="theme"><input checked value="theme" name="plugintype" type="checkbox"/>&nbsp; <%=getMessage("theme") %></a></li>
+	    <li><a href="#" data-value="uiplugin"><input value="uiplugin" name="plugintype" type="checkbox"/>&nbsp; <%=getMessage("uiplugin") %></a></li>
+	  </ul>
+  </div>
+  </div>
+  <div class="form-group">
+    <label for="installed"><%=getMessage("installed-plugin") %> :</label>
+    <input type="checkbox" name="installed" />
+  </div>
+  <button type="submit" class="btn btn-xs btn-primary"><i class="fa fa-search"></i><%= getMessage("search") %></button>
+</form>
+<div id="pluginsourceresult" class="searchresult"></div>

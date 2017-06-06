@@ -1,0 +1,30 @@
+<ol class="breadcrumb">
+  	<li><a href="#pluginmanager"><%= getMessage("plugin-manager")%></a> / <a href="#pluginmanager/view/<%= id %>"><%= title %></a> / <%= getMessage("resources") %></li>
+</ol>
+<%if(typeof resources != "undefined" && resources && resources.length > 0){%>
+<ul class="list-group">
+<% 
+	var _missingresources = {};
+	if(typeof missingresources != "undefined" && missingresources.length > 0)
+		for(var i in missingresources){
+			var _mresource = missingresources[i];
+			_missingresources[_mresource] = true;
+		}
+	var displayresources=[];
+   	resources.forEach(function(webresource){%>
+	<li class="list-group-item">
+		<ul class="list-group">
+			<li class="list-group-item">
+				Resource name : <%= webresource.resourcename %>
+				<%if(_missingresources.hasOwnProperty(webresource.resourcename)){%><span data-resource="<%= webresource.resourcename %>" class="btn btn-primary btn-xs installresource"><i class="fa fa-download"></i> <%= getMessage("install") %></span><%} else if(webresource.mtime){%>
+				<span class="label label-success label-lg"><i class="fa fa-check fa-tick"></i> <%= getMessage("installed-on", webresource.mtime) %> <%= webresource.mtime %>
+				<%}%>
+			</li>
+			<li class="list-group-item">Resource folder : <%= webresource.resourcefolder %></li>
+			<li class="list-group-item">Download link : <%= webresource.downloadlink %></li>
+		</ul>
+	</li>
+<% }) %>
+</ul>
+<%}%>
+<a href="#pluginmanager" class="btn btn-xs btn-default">&laquo; <%= getMessage("go-back") %></a>

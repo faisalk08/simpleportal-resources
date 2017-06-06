@@ -1,0 +1,23 @@
+<ol class="breadcrumb">
+  	<li><%= getMessage("plugin") %> / <%= title %></li>
+</ol>
+<div class="table-responsive">
+	<table class="table table-striped">
+		<tbody>
+			<tr>
+				<td  width='30%'>Title</td><td><%= title %></td>										
+			</tr>
+			<tr>
+				<td>Version</td><td><%= version ? version : 'Not defined' %></td>
+			</tr>
+			<tr>
+				<td>Type</td><td><%= plugintype ? getMessage(plugintype) : 'Not defined' %></td>
+			</tr>
+		</tbody>
+	</table>
+</div>								
+<a href="#pluginmanager" class="btn btn-s btn-default">&laquo; <%= getMessage("go-back") %></a>
+
+<%if(typeof missingresources !== "undefined" && missingresources.length > 0 ) {%>
+	<a href="#plugin/resources/<%= _id %>" class="btn btn-s btn-primary"><i class="fa fa-download"></i> <%= getMessage("plugin-resources") %></a>
+<%}%>

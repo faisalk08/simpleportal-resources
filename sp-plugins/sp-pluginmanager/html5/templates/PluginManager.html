@@ -1,0 +1,100 @@
+<ol class="breadcrumb">
+  	<li><%= getMessage("plugin-manager") %></li>
+</ol>
+<div class="">
+	<ul class="nav nav-tabs">
+		<!-- <li role="presentation" class="active"><a href="#plugin" role="tab" data-toggle="tab"><i class='fa fa-tasks'></i> <%= getMessage("installed") %></a></li> -->
+		<li class="ajaxload pluginsearch active"><a href="#pluginsearch" role="tab" data-toggle="tab"><i class='fa fa-search'></i> <%= getMessage("pluginsearch") %></a></li>
+		<li class="ajaxload showpluginsource"><a href="#pluginsource" role="tab" data-toggle="tab"><i class='fa fa-cloud-download'></i> <%= getMessage("pluginstore") %></a></li>
+		<li role="presentation"><a href="#pluginform" role="tab" data-toggle="tab"><i class='fa fa-upload'></i> <%= getMessage("upload") %></a></li>
+		
+		<li role="#" class='pull-right'>
+			<a class='updatecache btn btn-xs btn-default'><i class='fa fa-refresh'></i> <%= getMessage("update") %></a>
+		</li>
+	</ul>
+	
+	<div class="tab-content">
+		<%if(false){%>
+		<div role="tabpanel" class="tab-pane active" id="plugin">
+			<% for (var i=0; i < results.length; i++) { 
+				var plugin = results[i];
+				if(plugin.installed){
+			%>
+			<div class='well padding' data-id='<%= plugin.id %>'>
+				<%= i+1 %>.
+				<a href="#pluginmanager/view/<%= plugin._id %>"><%= plugin.title %></a>
+				<span class='label label-info'><span class='label label-info'></span><%= plugin.plugintype %> : v<%= plugin.version %></span>
+				
+				<div class='pull-right'>
+					<%if(!plugin.installed){%>
+						<button class='btn btn-s btn-primary processapp'  data-process='install'><i class='fa fa-download'></i><%= getMessage("install") %></button>
+					<%}else if(plugin.id != 'pluginmanager' && plugin.pluginsourcetype == 'installed'){%>
+						<button class='btn btn-s btn-danger processapp'  data-process='uninstall'><i class='fa fa-archive'></i><%= getMessage("uninstall") %></button>
+					<%}%>
+					<%if(plugin.hasupdate){%>
+						<button class='btn btn-s btn-primary processapp'  data-process='update'><i class='fa fa-download'></i><%= getMessage("update-to") %> (v<%= plugin.curversion %>)</button>
+					<%}%>
+					<button class='btn btn-s btn-link processapp' data-process='updatecheck'><i class='fa fa-download'></i><%= getMessage("check-for-update") %></button>
+					<% if(typeof plugin.missingresources !== "undefined" && plugin.missingresources.length > 0 ) {%>
+						<button href="#pluginmanager/resources/<%= plugin.id %>" class="btn btn-s btn-link"><i class="fa fa-download"></i> <%= getMessage("install-missing-resources") %></button>
+					<%}%>
+				</div>
+				<div>
+					<hr/>
+					<%= plugin.description %>
+					<%
+						if(!plugin.missingdependencies)
+							plugin.missingdependencies=[];
+					%>
+					<% if(plugin.dependencies&&plugin.dependencies.length >0){%>
+						<%= getMessage("dependancy") %> : 
+						<%for(var dep_ in plugin.dependencies){
+							var depend =plugin.dependencies[dep_];
+							var missingdepend ="label-success";
+							
+							if(_.contains(plugin.missingdependencies, depend)){
+								missingdepend="label-danger";
+							}
+						%>
+							<span class='label <%= missingdepend %>'><%= depend %></span>
+						<%}%>
+					<%}%>
+				</div>
+				<%if(plugin.installed && plugin.modified_at){%>
+					<span><%= getMessage("last-modified") %> : <%= plugin.modified_at ? plugin.modified_at : '' %></span>
+				<%}%>
+				<div class='pull-right'>
+					<%if(plugin.installed){%>
+						<span class='pull-right'><%= getMessage("installed-on") %> : <%= plugin.created_at ? plugin.created_at : '' %></span>
+					<%}%>
+				</div>
+			</div>
+			<% }} %>
+		</div>
+		<%}%>
+	  	<div role="tabpanel" class="tab-pane" id="pluginform">
+	  		<form id="plugin-upload-form" onSubmit="javascript:return false;"class="smart-form form" action="/api/system/plugin/upload" method="POST" enctype="multipart/form-data">
+				<fieldset class="well">
+					<section>
+						<label class="label"><%= getMessage("plugin-exported-from-server") %></label>
+						<label class="input">
+							<input accept=".gz" type="file" name="pluginfile" id="pluginfile" value=''>
+							<b class="tooltip tooltip-top-right">
+								<i class="fa fa-info-circle txt-color-teal"></i> 
+								<%= getMessage("plugin-exported-and-packaged-in") %> .gz
+							</b>
+						</label>
+					</section>
+				</fieldset>
+				<footer>
+					<button type="submit" name="submit" class="save btn btn-primary">
+						<i class="fa fa-upload"></i> <%= getMessage("upload") %>
+					</button>
+				</footer>
+			</form>
+	  	</div>
+	  	
+	  	<div role="tabpanel" class="tab-pane" id="pluginsource"></div>
+	  	<div role="tabpanel" class="tab-pane active" id="pluginsearch"></div>
+	</div>
+</div>
