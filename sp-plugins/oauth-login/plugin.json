@@ -1,0 +1,22 @@
+{
+	"title":"Oauth2 server",
+	"description":"Oauth2 server",
+	"version":"1.0",
+	"plugintype":"webapp",
+	"priority":1,
+	"dependencies":[],
+	"permission":{
+		"roles":["superadmin"]
+     },
+	"status":"active",
+	"id":"oauth2-server",
+	"webappsetting":{
+		"changetheme":false,
+		"webappuri":"/oauth2-server",
+		"theme":"sp-default",
+		"dynamicwebapp":false,
+		"iconclass": "fa fa-signin"
+	}, "npmdependancies":{
+		"oauth2-server":""
+	},"disabled":true
+}
