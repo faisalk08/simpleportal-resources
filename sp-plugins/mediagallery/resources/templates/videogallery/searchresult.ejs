@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <title>&lt;Simpleportal&gt; Dashboard</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">    
+    
+    <!-- CSS files-->
+    <link href="<%= webappsetting.webappuri %>/app.css" rel="stylesheet">
+</head>
+
+<body>
+	<!-- Navbar -->
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="<%= webappsetting.webappuri %>"><%= webappsetting.title %> | Video Gallery</a>
+				<div class="nav-collapse">
+					<ul class="nav pull-right">
+						<li class="divider-vertical"></li>
+						<li><a href="<%= serverconfig.logouturi %>"><i class="icon-lock"></i>&nbsp;&nbsp;Logout</a></li>
+						<li class="divider-vertical"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="main-content">
+		<div class="container">
+			<div class="row">
+				<div class="span3">
+					<ul id="sidebar" class="nav nav-tabs nav-stacked">
+						<li><a href="<%= webappsetting.webappuri %>"><i class="icon-dashboard"></i>&nbsp;&nbsp;Main dashboard view</a></li>
+						<li class="active"><a href="<%= webappsetting.webappuri %>/view/video/search"><i class="icon-camera-retro"></i>&nbsp;&nbsp;Back to Gallery</a></li>
+					</ul>
+				</div>
+				<div class="span9">
+					<h1 class="page-title"><%= webappsetting.title %> | Video Gallery</h1>
+					<div class="widget">
+						<div class="widget-header">
+							<h3><i class="icon-camera-retro"></i>&nbsp;&nbsp;Gallery</h3>
+						</div>
+						
+						<div class="widget-content">
+							<ul id="gallery-content">
+								<% for( var i in results){
+									var file = results[i]; if(file&&file.thumbnail){
+								%>
+										<li>
+											<a href="<%=serviceconfig.viewurl%>/<%= file.id %>">
+											<img src="<%= webappsetting.webappuri %><%= escape(file.thumbnail) %>" alt="120x120"></a>
+											<br/><span><%= file.title %></span>
+										</li>
+								<%	}
+								}%>
+							</ul>
+						</div>
+					</div>
+				</div>
+			<div id="footer">
+				<hr>
+				<p class="pull-right"><%= serverconfig.title %> | <%= webappsetting.title %></p>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="<%= webappsetting.webappuri %>/js/appconfig.js"></script>
+	<script data-main="<%= webappsetting.webappuri %>/js/javascript.js" src="/cdn/lib/require.min.js"></script>
+</body>
+</html>

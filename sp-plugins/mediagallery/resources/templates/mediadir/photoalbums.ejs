@@ -1,0 +1,26 @@
+<%var gridsize=4;%>
+<%if(result && result.length > 0){%>
+	<%for(var i in result){var gallery = result[i];%>
+	<%if(i%gridsize == 0){%>
+	<div class="row">
+	<%}%>
+	<div class="col-md-3">
+    	<div class="thumbnail imagegallery">
+      		<a href="/view/mediadir/<%= gallery.id %>/photos">
+        		<img class="img-thumbnail img-circle" width="100px" height="100px" src="<%= gallery.uri %><%= gallery.thumbnail %>" alt="<%= gallery.title %>">
+    		</a>
+    		<%if(gallery.title){%>
+        		<div class="caption">
+        			<span class="heading"><%= gallery.title  %></span>
+        		</div>
+    		<%}%>
+    	</div>
+	</div>
+	<%if(i%gridsize == gridsize-1){%>
+	</div>
+	<%}%>
+	<%}%>
+<%}%>
+<div class="row">
+	<div class="col-md-9 photoalbums"></div>
+</div>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <title>&lt;Simpleportal&gt; Dashboard</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">    
+    
+    <!-- CSS files-->
+    <link href="<%= webappsetting.webappuri %>/app.css" rel="stylesheet">
+</head>
+
+<body>
+	<!-- Navbar -->
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="index.html">&lt;Simpleportal&gt; Dashboard</a>
+				<div class="nav-collapse">
+					<ul class="nav pull-right">
+						<li class="divider-vertical"></li>
+						<li><a href="login.html"><i class="icon-lock"></i>&nbsp;&nbsp;Logout</a></li>
+						<li class="divider-vertical"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Navbar -->
+
+	<!-- Main content -->
+	<div id="main-content">
+		<!-- Container -->
+		<div class="container">
+			<div class="row">
+				<!-- Sidebar -->
+				<div class="span3">
+					<ul id="sidebar" class="nav nav-tabs nav-stacked">
+						<!--<li><a href="index.html"><i class="icon-dashboard"></i>&nbsp;&nbsp;Main dashboard view</a></li>-->
+						<li class="active"><a href="<%=serviceconfig.viewurl%>/search"><i class="icon-camera-retro"></i>&nbsp;&nbsp;Back to Gallery</a></li>
+					</ul>
+				</div>
+				<!-- Sidebar-->
+				<!-- Content -->
+				<div class="span9">
+					<h1 class="page-title"><%= title %></h1>
+					
+					<div class="flowplayer">
+					   <video>
+					   		<source type="video/mp4" src="<%=serviceconfig.apiurl%>/<%= id %>/stream">
+					   </video>
+					</div>
+				</div>
+			</div>
+			<!-- Footer -->
+			<div id="footer">
+				<hr>
+				<p class="pull-right">&lt;Simpleportal&gt; &copy; 2012-2015</p>
+			</div>
+			<!-- /Footer -->
+	
+		</div>
+		<!-- /Container -->
+	</div>
+	<!-- /Main content -->
+
+	<!-- Javascript files -->
+	<script type="text/javascript" src="<%= webappsetting.webappuri %>/js/appconfig.js"></script>
+	<script data-main="<%= webappsetting.webappuri %>/js/javascript.js" src="/cdn/lib/require.min.js"></script>
+</body>
+</html>

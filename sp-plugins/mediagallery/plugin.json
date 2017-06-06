@@ -1,0 +1,33 @@
+{
+	"title":"Media gallery",
+	"description":"Media gallery",
+	"version":"1.0",
+	"permission": [
+   		{
+   			"roles":["superadmin"]
+   		}
+	],
+	"plugintype":"webapp",
+	"htmldir":"html5", "iconclass":"custom",
+	"servicedir":["services"],
+	"priority":100,
+	"webappuri":"/mediagallery",
+	"id":"mediagallery",
+	"preference":{
+		"tabview":true
+	}, "webappsetting":{
+		"iconclass":"fa fa-video-camera",
+		"javascript":{},"theme": "sp-default", "dynamicwebapp":true,
+		"defaulturi":"#mediagallery/list",
+		"webapptype":"backbone",
+		"mobile":false,
+		"dependencies":[
+            "blueimpgalleryuiplugin",
+            "flowplayeruiplugin"
+		], "integration":{
+			"latest":{
+				"javascript":{"routerfiles":["js/integration.js"]}
+			},"javascript":{"routerfiles":["js/integration.js"]}
+		}
+	}, "disabled":false
+}

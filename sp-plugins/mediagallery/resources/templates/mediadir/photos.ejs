@@ -1,0 +1,39 @@
+<%var gridsize=4;%>
+<%if(result && result.length > 0){%>
+	<%for(var i in result){var gallery = result[i];%>
+	<h4><%= gallery.title %></h4>
+	<div class="blueimpgallery">
+		<%for(var p in gallery.photos){var photo = gallery.photos[p]; if(photo.file){%>
+		<%if(p%gridsize == 0){%>
+		<div class="row">
+		<%}%>
+		<div class="col-md-3">
+	    	<div class="thumbnail">
+	      		<a href="<%= gallery.uri%><%= photo.file %>">
+	        		<img class="img-thumbnail img-circle" width="100px" height="100px" src="<%= gallery.uri %><%= photo.thumbnail ? photo.thumbnail : photo.file %>" alt="<%= photo.display %>">
+        		</a>
+        		<%if(photo.caption){%>
+	        		<div class="caption">
+	        			<%if(photo.displayTitle){%><span class="heading"><%= photo.displayTitle  %></span><%}%>
+	          			<p> <%= photo.caption %></p>
+	        		</div>
+        		<%}%>
+	    	</div>
+		</div>
+		<%if(p%gridsize == gridsize-1){%>
+		</div>
+		<%}%>
+		<%}}%>
+	</div>
+	<%	}%>
+	<!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+	<div id="blueimp-gallery" class="blueimp-gallery">
+	    <div class="slides"></div>
+	    <h3 class="title"></h3>
+	    <a class="prev">‹</a>
+	    <a class="next">›</a>
+	    <a class="close">×</a>
+	    <a class="play-pause"></a>
+	    <ol class="indicator"></ol>
+	</div>
+<%}%>

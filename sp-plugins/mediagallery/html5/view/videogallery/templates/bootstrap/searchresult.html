@@ -1,0 +1,29 @@
+<h1 class="page-title"> 
+	<%= getMessage("video-gallery") %>
+	<input type="text" style="height:30px;"class="text input pull-right" placeholder="<%= getMessage("enter-title") %>"/>
+</h1>
+<div class="widget">
+	<div class="widget-header">
+		<h3><i class="icon-camera-retro"></i> <%= getMessage("gallery") %></h3>
+	</div>
+	<div class="widget-content">
+		<ul id="gallery-content">
+			<% for( var i in results){
+				var file = results[i]; if(file&&file.thumbnail){
+			%>
+					<li data-id="<%= file.id %>">
+						<a class="modelaction" data-method="get" data-modelaction="videoplayer" href="#videogallery/<%= file.id %>/videoplayer">
+							<img src="/api/videogallery/<%= file.id || escape(file.thumbnail) %>/thumbnail" alt="120x120">
+						</a>
+						<br/><span> <a href="#videogallery/<%= file.id %>"><i class="glyphicon glyphicon-share"></i></a> <%= file.title %></span>
+					</li>
+			<%	}
+			}%>
+		</ul>
+		<ul id="gallery-content">
+		<%if(info && info.count > results.length){%>
+			<li><a data-modelaction="more" data-method="get" class="modelaction"><%= getMessage("load-more") %></a></li>
+		<%}%>
+		</ul>
+	</div>
+</div>
