@@ -1,0 +1,26 @@
+{
+	"plugintype": "webapp",
+	"title": "Project management",
+	"pluginid": "projectmanagement",
+	"description": "",
+	"version": 0.1,
+	"priority": 1.1,
+	"webappsetting": {
+		"changetheme":true,
+		"theme":"sp-default",
+		"javascript": {},
+		"webappuri": "/projectmanagement",
+		"webapptype": "backbone",
+		"dynamicwebapp": true, "mobile":false
+	},
+	"permission": [
+		{
+			"roles": [
+				"user@innovation"
+			]
+		}
+	],
+	"dependencies": [],
+	"status": "active",
+	"id": "projectmanagement"
+}
