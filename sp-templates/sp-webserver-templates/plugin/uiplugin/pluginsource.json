@@ -296,7 +296,7 @@
     	  "comments":"Should download or create the flag iconsett to be able to use with in icon set plugin.",
     	  "resources":[{
     		  "resourcename":"flag-iconsett.js",
-    		  "downloadlink":"https://raw.githubusercontent.com/faisalk08/simpleportal-util/master/fieldplugin/flag-icon/flag-iconsett.js"
+    		  "downloadlink":"https://raw.githubusercontent.com/faisalk08/simpleportal-resources/master/sp-utils/fieldplugin/flag-icon/flag-iconsett.js"
     	  }],
     	  "integration":{
     		  "latest":{
@@ -938,7 +938,7 @@
     	  		},{
     	  			"resourcename": "fieldplugin.js",
     	  			"resourcefolder":"js",
-    	  			"downloadlink":"https://raw.githubusercontent.com/faisalk08/simpleportal-util/master/fieldplugin/dropzone/fieldplugin.js"
+    	  			"downloadlink":"https://raw.githubusercontent.com/faisalk08/simpleportal-resources/master/sp-utils/fieldplugin/dropzone/fieldplugin.js"
     	  		}
     	  	],"integration":{
 			  	"latest":{
