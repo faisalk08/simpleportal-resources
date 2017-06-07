@@ -1,0 +1,19 @@
+{
+	"createaccount":false,	
+	"secure":false,
+	"oauthHost":"localhost",
+	"oauthPort":"80",
+	"requestUrl":"/oauth/request_token",
+	"accessUrl":"/oauth/access_token",
+	"consumerKey":"",
+	"consumerSecret":"",
+	"version":"1.0",
+	"authorizeCallback":"/oauth/callback",
+	"signatureMethod":"HMAC-SHA1",
+	"loginUrl":"/oauth/login",
+	"logoutUrl":"/oauth/logout",
+	"successUrl":"/oauth/status",
+	"authorizeUrl":"/oauth/authorize",
+	"authorizedAccessUrl":"/oauth/authorized_token",
+	"profileUrl":"/services/oauth/rest/profile"
+}

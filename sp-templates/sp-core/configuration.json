@@ -1,0 +1,73 @@
+{
+	"title":"Simpleportaljs",
+	"description":"A simplified server based on Simpleportaljs / Nodejs, Mongo DB, Connectjs, Bootstrap, Backbone JS.",
+	"author":"Simpleportaljs",
+	
+	"host":"localhost",
+	"port":9615, 
+	"hidePort": false,
+	
+	"secure":false,
+	
+	"callservicestartup":true,
+	"pageuri":"/pages",
+	
+	"homeuri":"/pages/home",
+	"logouturi":"/logout",
+	"loginuri":"/pages/signin",
+	"dashboarduri":"/pages/dashboard",
+	"termsofserviceuri":"/pages/terms-of-service",
+	"helpuri":"/pages/help",
+	
+	"landinguri":"/landing",
+	"userlandinguri":"/landing",
+	"profileuri":"/pages/profile",
+	
+	"resources":{
+		"autoinstall":true,
+		"datadir":"data",
+		"root": "resources/",
+        "tempdir":"._tmp",
+		"backupdir":"backup",
+		"downloaddir":"._downloads",
+		"uploaddir":"._uploads",
+        "defaulttheme": "sp-default",
+        "publicdirs":["./resources/public"],
+        "template":{
+			"root":"public/templates",
+            "layout":"layout"
+		},"theme":{},
+		"dependencies": [],
+		"metatags":[
+		    {"attribute":"charset", "value":"utf-8"},
+		    {"attribute":"http-equiv", "value":"X-UA-Compatible", "contentoptions":"IE=edge"}
+		]
+	},"services":{
+		"userrole":{
+			"roles":[
+                {"role":"superadmin", "display":"Super admin", "roletype":"system"},
+                {"role":"admin", "display":"Administrator", "roletype":"system", "hidden":true},
+                {"role":"user", "display":"User", "roletype":"system"}
+            ]
+		}
+	}, "footerconfig":{
+		"copyright":{
+			"info":"2012-2017",
+			"company":"Simpleportaljs",
+			"website":"http://www.simpleportaljs.com"
+		},
+		"contact":{
+			"website":"http://www.simpleportaljs.com",
+			"email":"info@simpleportaljs.com",
+			"phone":"(00) 00 000 000 00-0"
+		}
+	}, "preference":{"plugin":{}, "filter":{}, "startup":{}},
+	"webpages":[
+		{"header":true, "url":"", "icon":"fa fa-book", "id":"help", "signin":false, "public":true},
+		{"header":true, "url":"", "icon":"fa fa-user", "id":"profile", "signin":true},
+		{"header":true, "url":"", "uri":"/login", "icon":"glyphicon glyphicon-log-in", "display":"login", "id":"signin", "signin":false, "public":false},
+		{"header":true, "url":"", "uri":"/logout", "icon":"glyphicon glyphicon-off", "display":"logout", "id":"logout", "signin":true},
+		{"header":false, "footer": true, "url":"", "uri":"/terms-of-service", "icon":"fa fa-cog", "display":"terms-of-service", "id":"terms-of-service", "public":true},
+		{"header":false, "footer": true, "hidden": true, "url":"", "uri":"/privace-policy", "icon":"fa fa-cog", "display":"privace-policy", "id":"privace-policy", "public":true}
+    ]
+}

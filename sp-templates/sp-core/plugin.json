@@ -1,0 +1,16 @@
+{
+	"title":"Simpleportal server core", 
+	"plugintype":"resource", 
+	"id":"simpleportal-server-core",
+	"version":"1.0",
+	"buildprops":{
+		"resource":[
+            {
+            	"subpath":"./resources","type":"directory",
+            	"files":[
+					"simpleportal-webserver-resources"
+    	       ]
+            }
+        ]
+	}
+}

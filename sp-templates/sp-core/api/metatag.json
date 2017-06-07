@@ -1,0 +1,41 @@
+{
+	"metatag":{
+		"attribute":[
+            {
+				"id":"charset", "options":["UTF-8", "ISO-8859-1"]
+			}, 
+			{
+				"id":"http-equiv",
+				"options": [
+	     		    "content-language",
+	    		    "content-type",
+	    			"default-style",
+	    			"refresh"
+				]
+			}, {
+				"id":"name", 
+				"options":[
+		   		     "application-name",
+				     "author",
+				     "description",
+				     "generator",
+				     "keywords",
+				     "creator",
+				     "googlebot",
+				     "publisher",
+				     {
+				    	 "id":"robots", 
+				    	 "options":["index", "noindex", "follow", "nofollow", "noodp", "noarchive", "nosnippet", "noimageindex", "noydir", "nocache"]
+				     },
+				     "slurp",
+				     {
+				    	 "id":"viewport", 
+				    	 "options":["width", "height", "initial-scale", "maximum-scale", "minimum scale", "user-scalable"]
+				     },{
+				    	 "id":"google", "options":["notranslate"]
+				     }
+				]
+			}
+		]
+	}
+}

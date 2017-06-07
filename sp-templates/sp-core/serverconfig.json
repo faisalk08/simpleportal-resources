@@ -1,0 +1,44 @@
+{
+	"uri":"/configuration/",	
+	"fields":[
+	   { "html":{ "caption":"Title"}, "field": "title", "type": "text", "required":"true" , "options":{ "autoFormat":false}},
+	   { "html":{ "caption":"description"}, "field": "description", "type": "text" , "options":{ "autoFormat":false}},
+       { "html":{ "caption":"Server port"}, "field": "port", "type": "int", "required":"true" , "options":{ "autoFormat":false}},
+       { "html":{ "caption":"Server host"}, "field": "host",  "type": "text", "required": true },
+       { "html":{ "caption":"Server fav icon"}, "field": "favicon",  "type": "file", "options":{ "max":1}},
+       { "html":{ "caption":"Server logo"}, "field": "logo",  "type": "file", "options":{ "max":1}},
+       
+       { "html":{ "caption":"Hide port"}, "field": "hidePort",  "type": "checkbox", "required": false},
+       { "html":{ "caption":"Secure"}, "field": "secure",  "type": "checkbox", "required": false},
+       
+	   { "html":{ "caption":"Home URI"}, "field": "homeuri", "type": "text", "required":"true" , "options":{ "autoFormat":false}},
+	   { "html":{ "caption":"Dashboard URI"}, "field": "dashboarduri", "type": "text", "required":"true" , "options":{ "autoFormat":false}},
+	   { "html":{ "caption":"Help URI"}, "field": "helpuri", "type": "text", "required":"true" , "options":{ "autoFormat":false}},
+       { "html":{ "caption":"Terms of service URI"}, "field": "termsofserviceuri", "type": "text", "required":"true" , "options":{ "autoFormat":false}},
+       
+       { "html":{ "caption":"Open URL on start"}, "field": "openurl",  "type": "checkbox"},
+       { "html":{ "caption":"Enable translation"}, "field": "translation",  "type": "checkbox"},
+       
+       { "html":{ "caption":"Enable notification center"}, "field": "notificationcenter",  "type": "checkbox"},
+       { "html":{ "caption":"Enable os notification"}, "field": "osnotification",  "type": "checkbox"},
+      
+       { "html":{ "caption":"Install automatic resources"}, "field": "resources__autoinstall",  "type": "checkbox"},
+       { "html":{ "caption":"Server data directory"}, "field": "resources__datadir",  "type": "text"},
+       { "html":{ "caption":"Temporary directory"}, "field": "resources__tempdir",  "type": "text", "disabled":true},
+       { "html":{ "caption":"Backup directory"}, "field": "resources__backupdir",  "type": "text", "disabled":true},
+       { "html":{ "caption":"Download directory"}, "field": "resources__downloaddir",  "type": "text", "disabled":true},
+       { "html":{ "caption":"Upload directory"}, "field": "resources__uploaddir",  "type": "text", "disabled":true},
+       
+       { "html":{ "caption":"Logger type"}, "field": "logger__logtype",  "type": "list", "required": "true", "options":{ "items":["info", "debug", "warn", "error"]}},
+       { "html":{ "caption":"Log directory"}, "field": "logger__root",  "type": "text", "required": "true"},
+       { "html":{ "caption":"Show in console"}, "field": "logger__console",  "type": "checkbox"},
+       
+       { "html":{ "caption":"Copyright info"}, "field": "footerconfig__copyright__info",  "type": "text"},
+       { "html":{ "caption":"Copyright company"}, "field": "footerconfig__copyright__company",  "type": "text"},
+       { "html":{ "caption":"Copyright | company website"}, "field": "footerconfig__copyright__website",  "type": "text"},
+       
+       { "html":{ "caption":"Company contact phone"}, "field": "footerconfig__contact__phone",  "type": "text"},
+       { "html":{ "caption":"Company contact email"}, "field": "footerconfig__contact__email",  "type": "text"},
+       { "html":{ "caption":"Company contact website"}, "field": "footerconfig__contact__website",  "type": "text"}
+   ]
+}
