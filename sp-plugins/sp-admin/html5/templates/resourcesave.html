@@ -1,0 +1,61 @@
+<ol class="breadcrumb">
+	<li><%= getMessage("save-resource") %><li>
+</ol>
+
+<form id="resourcesave_form" class="smart-form" method="POST">
+	<fieldset>
+		<div class="form-group">
+			<label class="control-label" for="resourcename"><%=
+				getMessage("resource-name") %> </label>
+			<div class="controls">
+				<input type="text" name="resourcename" id="resourcename"
+					class="form-control" value="<%= resourcename %>"/>
+			</div>
+			<span id="resourcename_status" class="control-label">Provide a
+				valid resource name if the file uploading is an individual file
+				default resource name will be the file name itself!.</span>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="plugintypecontainer"><%=
+				getMessage("plugintype") %> </label>
+			<div class="controls">
+				<div id="plugintypecontainer"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="plugintypecontainer"><%=
+				getMessage("plugin-id") %> </label>
+			<div class="controls">
+				<div id="pluginidcontainer"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="resourcefolder"><%=
+				getMessage("resource-folder") %> </label>
+			<div class="controls">
+				<input type="text" name="resourcefolder" id="resourcefolder"
+					class="form-control" value="<%= resourcefolder %>"/>
+			</div>
+			<span id="resourcename_status" class="control-label">Provide a
+				valid folder name where the resource will be stored!.</span>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="editorcontainer"><%=
+				getMessage("resource-data") %> </label>
+			<div class="controls">
+				<div id="editorcontainer">
+					<textarea class="form-control" width="100%" id="editor" readonly name="editor"><%= editor %></textarea>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+	<hr />
+	<footer class="form-actions form-group">
+		<button type="button" name="submit" class="btn btn-primary btn-s customsave">
+			<i class="glyphicon glyphicon-floppy-disk"></i> <%= getMessage("save") %>
+		</button>
+		<button type="reset" class="btn btn-default btn-s clear">
+			<i class="glyphicon glyphicon-repeat"></i> <%= getMessage("clear") %>
+		</button>
+	</footer>
+</form>

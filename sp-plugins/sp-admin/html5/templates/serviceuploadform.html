@@ -1,0 +1,106 @@
+<ol class="breadcrumb">
+	<li><%= getMessage("upload-form") %><li>
+</ol>
+
+<div id='apiservice_configuration'></div>
+
+<form id="upload_form" class="smart-form" method="POST" action="/api/system/apiservice/upload" >
+	<fieldset>
+		<div class="form-group">
+			<div class="controls">
+				<div id="apiservicebundle_container">
+					<div id="actions" class="row">
+						<div class="col-sm-12">
+							<div class="dropzone" action="/api/system/apiservice/upload">
+								<div class="dz-message">Drop files here or click to upload.</div>
+							</div>
+						</div><!--
+						<div class="col-sm-5">
+							<span class="btn btn-success fileinput-button dz-clickable dz-message"> <i
+								class="glyphicon glyphicon-plus"></i> <span><%= getMessage("add-file")%></span>
+							</span>
+						</div>-->
+						<div class="col-sm-12">
+							<!-- The global file processing state -->
+							<span class="fileupload-process">
+								<div id="total-progress" class="progress progress-striped active"
+									role="progressbar" aria-valuemin="0" aria-valuemax="100"
+									aria-valuenow="0">
+									<div class="progress-bar progress-bar-success" style="width: 0%;" data-dz-uploadprogress=""></div>
+								</div>
+							</span>
+						</div>
+					</div>
+					<hr />
+					<div class="table table-striped" class="files" id="apiservicebundle_preview"></div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="datatype"><%= getMessage("datatype") %> </label>
+			<div class="controls" id="csvdelimitercontainer">
+				<input type="text" name="datatype" id="datatype" class="form-control"/>
+			</div>
+			<span id="datatype_status" class="sr-only control-label">Select the data or file format!.</span>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="csvdelimiter"><%= getMessage("csv-delimiter") %> </label>
+			<div class="controls" id="csvdelimitercontainer">
+				<input type="text" name="csvdelimiter" id="csvdelimiter" class="form-control"/>
+			</div>
+			<span id="csvdelimiter_status" class="sr-only control-label">Provide a valid csv delimiter (Only if data type is CSV)!.</span>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="csvquote"><%= getMessage("csv-quote") %> </label>
+			<div class="controls" id="csvquotecontainer">
+				<input type="checkbox" name="csvquote" id="csvquote" class="form-control" value="true"/>
+			</div>
+			<span id="csvquote_status" class="sr-only control-label">If a column contains delimiter, it is able to use quote character to surround the column content. e.g. "hello, world" wont be split into two columns while parsing. default: " (double quote)!.</span>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="pluginidcontainer"><%= getMessage("plugin-id") %> </label>
+			<div class="controls">
+				<div id="pluginidcontainer"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="servicename"><%= getMessage("service-name") %> </label>
+			<div class="controls">
+				<input type="text" name="servicename" id="servicename" class="form-control"/>
+			</div>
+			<span id="servicename_status" class="sr-only control-label">Provide a valid service name!.</span>
+		</div>
+	</fieldset>
+</form>
+<!-- HTML heavily inspired by http://blueimp.github.io/jQuery-File-Upload/ -->
+<div>
+	<div id="dropzone_template" class="file-row" style="display: none;">
+		<!-- This is used as the file preview template -->
+		<div>
+			<span class="preview"><img data-dz-thumbnail /></span>
+		</div>
+		<div>
+			<p class="name" data-dz-name></p>
+			<strong class="error text-danger" data-dz-errormessage></strong>
+		</div>
+		<div>
+			<p class="size" data-dz-size></p>
+			<div class="progress progress-striped active" role="progressbar"
+				aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+				<div class="progress-bar progress-bar-success" style="width: 0%;"
+					data-dz-uploadprogress></div>
+			</div>
+		</div>
+		<div>
+			<button class="btn btn-primary start">
+				<i class="glyphicon glyphicon-upload"></i> <span>Start</span>
+			</button>
+			<button data-dz-remove class="btn btn-warning cancel">
+				<i class="glyphicon glyphicon-ban-circle"></i> <span>Cancel</span>
+			</button>
+			<button data-dz-remove class="btn btn-danger delete">
+				<i class="glyphicon glyphicon-trash"></i> <span>Delete</span>
+			</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,29 @@
+<ol class="breadcrumb">
+	<li><%= getMessage("service-configuration") %><li>
+</ol>
+
+<div class='alert alert-success'>
+	<%= getMessage("you-successfully-created-service-from-the-uploaded-csv-file-please-mention-the-primary-key-fields") %> :<%= name %>
+</div>
+	
+<table class='table table-hovered'>
+	<thead>
+		<tr>
+			<th>Field</th>
+			<th>Field type</th>
+			<th>Primary key</th>
+		</tr>
+	</thead>
+	<%for(var i in modelfields){%>
+		<tr>
+			<td><%= modelfields[i].html.caption %></td>
+			<td><%= modelfields[i].dataType %></td>
+			<td><input class='primarykey' name='primarykey' type="checkbox" value='<%= modelfields[i].field %>'/></td>
+		</tr>
+	<%}%>
+</table>
+<hr/>
+<div>
+	<input type="button" class="disabled btn btn-primary primarykeys" value="Set primary keys"/>
+	<input type="button" class="disabled btn btn-primary importdata" value="Import data&raquo;"/>
+</div>

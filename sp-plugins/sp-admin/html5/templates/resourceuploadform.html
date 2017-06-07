@@ -1,0 +1,92 @@
+<ol class="breadcrumb">
+	<li><%= getMessage("resource-upload-form") %><li>
+</ol>
+
+<form id="resourceupload_form" class="smart-form" method="POST" action="javascript:return false;">
+	<fieldset>
+		<div class="form-group">
+			<div class="controls">
+				<div id="resourcebundle_container">
+					<div id="actions" class="row">
+						<div class="col-sm-12">
+							<div class="dropzone" action="/api/system/apiservice/upload">
+								<div class="dz-message">Drop files here or click to upload.</div>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<!-- The global file processing state -->
+							<span class="fileupload-process">
+								<div id="total-progress" class="progress progress-striped active"
+									role="progressbar" aria-valuemin="0" aria-valuemax="100"
+									aria-valuenow="0">
+									<div class="progress-bar progress-bar-success" style="width: 0%;" data-dz-uploadprogress=""></div>
+								</div>
+							</span>
+						</div>
+					</div>
+					<hr />
+					<div class="table table-striped" class="files" id="resourcebundle_preview"></div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="plugintypecontainer"><%= getMessage("plugintype") %> </label>
+			<div class="controls">
+			<div id="plugintypecontainer"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="plugintypecontainer"><%= getMessage("plugin-id") %> </label>
+			<div class="controls">
+				<div id="pluginidcontainer"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="resourcename"><%= getMessage("resource-name") %> </label>
+			<div class="controls">
+				<input type="text" name="resourcename" id="resourcename" class="form-control"/>
+			</div>
+			<span id="resourcename_status" class="control-label">Provide a valid resource name if the file uploading is an individual file default resource name will be the file name itself!.</span>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="resourcename"><%= getMessage("resource-folder") %> </label>
+			<div class="controls">
+				<input type="text" name="resourcefolder" id="resourcefolder" class="form-control"/>
+			</div>
+			<span id="resourcename_status" class="control-label">Provide a valid folder name where the resource will be stored!.</span>
+		</div>
+	</fieldset>
+</form>
+
+<!-- HTML heavily inspired by http://blueimp.github.io/jQuery-File-Upload/ -->
+<div>
+	<div id="dropzone_template" class="file-row" style="display: none;">
+		<!-- This is used as the file preview template -->
+		<div>
+			<span class="preview"><img data-dz-thumbnail /></span>
+		</div>
+		<div>
+			<p class="name" data-dz-name></p>
+			<strong class="error text-danger" data-dz-errormessage></strong>
+		</div>
+		<div>
+			<p class="size" data-dz-size></p>
+			<div class="progress progress-striped active" role="progressbar"
+				aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+				<div class="progress-bar progress-bar-success" style="width: 0%;"
+					data-dz-uploadprogress></div>
+			</div>
+		</div>
+		<div>
+			<button class="btn btn-primary start">
+				<i class="glyphicon glyphicon-upload"></i> <span>Start</span>
+			</button>
+			<button data-dz-remove class="btn btn-warning cancel">
+				<i class="glyphicon glyphicon-ban-circle"></i> <span>Cancel</span>
+			</button>
+			<button data-dz-remove class="btn btn-danger delete">
+				<i class="glyphicon glyphicon-trash"></i> <span>Delete</span>
+			</button>
+		</div>
+	</div>
+</div>

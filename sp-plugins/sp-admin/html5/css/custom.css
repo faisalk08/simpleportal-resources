@@ -1,0 +1,68 @@
+.editor_row {
+	border:1px solid #EEEEEE;
+	margin-left: 0px;
+   	margin-right: 0px;
+}
+
+.editor_col {
+	border-left:1px solid #EEEEEE;
+	padding:0px;
+}
+
+.editor_resource_col {
+	padding-right:0px;
+	padding-left:0px;
+}
+
+.editor_resource_col .controls{
+	padding:0px;
+	border-bottom:1px solid #EEEEEE;
+}
+
+div.tree-multiselect div.title {
+	background: #F5F5F5;
+   	color: #4485BD;
+}
+
+.editor_resource_col #contenttypecontainer{
+	background-color:whitesmoke;
+	padding:3px;
+}
+
+/* #handler_vertical { */
+/*     width: 8px; */
+/*     height: 100%; */
+/*     padding: 5px 0; */
+/*     cursor: col-resize; */
+/*     position: absolute; */
+/*     top: -5px; */
+/*     left: 0; */
+/* } */
+
+/* .ui-resizable-handle { */
+/*     width: 10px; */
+/*     height: 10px; */
+/*     background-color: #ffffff; */
+/*     border: 1px solid #000000; */
+/* } */
+
+/* .ui-resizable-e, .ui-resizable-w { */
+/*      top:50%;     */
+/* } */
+
+/* .ui-resizable { */
+/*     border: 0 !important; */
+/*     border-right: 5px solid #333 !important; */
+/* } */
+
+#editorcontainer{
+	width: 100%;
+	min-height:600px;
+}
+
+.iframe-class {
+    width: 100%;
+    height: 100%;
+    border: 1px solid red;
+    overflow: auto;
+}

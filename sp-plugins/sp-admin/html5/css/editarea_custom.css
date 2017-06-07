@@ -1,0 +1,38 @@
+.area_toolbar{
+	background-color: #F5F5F5;
+}
+
+#editor{
+	border: solid #eee 1px;
+}
+
+#tab_browsing_area {
+    background-color: #F5F5F5;
+}
+
+#result {
+    border-top: solid #EEE 1px;
+    border-bottom: solid #EEE 1px;
+}
+
+.area_toolbar .toolbar_icon{
+	width: 20px;
+    height: 20px;
+	background-position:50% 50%;
+	background-repeat:no-repeat;
+	padding:3px 8px 3px 8px;
+}
+
+.toolbar_icon:hover, .toolbar_icon.active{
+	border: 1px solid #0A246A !important;
+    cursor: pointer;
+    background-color: #B6BDD2;
+}
+
+.area_toolbar .toolbar_icon.import {
+	background-image:url("../images/import.png");
+}
+
+.area_toolbar .toolbar_icon.sidebar{
+	background-image:url(../images/sidebar.png");
+}

@@ -1,0 +1,117 @@
+{
+	"title":"Portal administration",
+	"description":"Simple portal admin",
+	"version":"1.0",
+	"plugintype":"webapp",
+	"priority":1,
+	"dependencies":[],
+    "configuration":{
+    	 "services":{
+    		 "system_apiservice":{},
+    		 "system_plugin":{},
+    		 "system_pluginsource":{},
+    		 "system_user":{},
+    		 "system_userrole":{},
+    		 "system_userprofile":{},
+    		 "system_serverpreference":{}
+    	 }
+     },
+	"permission":{
+		"roles":["superadmin"]
+     },
+	"status":"active",
+	"id":"sp-admin",
+	"webappsetting":{
+		"changetheme":false,
+		"webappuri":"/sp-admin",
+		"webapptype":"backbone",
+		"theme":"sp-default",
+		"dynamicwebapp":true,
+		"iconclass": "fa fa-cogs",
+		"dependencies":[
+            "tree-multiselectuiplugin",
+            "jqueryuiplugin@jsoneditor",
+            "xeditableuiplugin",
+            "dropzoneuiplugin",
+			"editareauiplugin"
+		],
+		"layout":{
+			"sidepanel":[
+			     {
+			    	 "icon":"glyphicon glyphicon-console", 	
+			    	 "display":"api-service", "uri":"#apiservice", "urlRoot":"/api/system/apiservice", 
+	            	 "subpage":[
+						{
+							"display": "service-uploader",
+							"icon":"glyphicon glyphicon-wrench",
+							"uri": "upload",
+							"templatedir":"templates/",
+							"templateName":"serviceuploadform", "viewmode":"form",
+							"sidepanel":false,
+							"modelsettings":{
+								"validation":{
+									"pluginid":"required",
+									"datatype":"required"
+								},
+								"apiservicebundle":{
+									"field":"apiservicebundle", "fieldplugin":"dropzone", "displayoptions":{
+										"acceptedFiles":".xml,.csv,.json,.txt", "clickable":true
+									}
+								},"pluginid":{
+									"field":"pluginid", "url":"/api/system/plugin/search?plugintype=webapp", "displayoptions":{"datadisplay":"title"}
+								},"csvdelimiter":{
+									"field":"csvdelimiter", "options":["|", ",", ";", ":"]
+								},"datatype":{
+									"field":"datatype", "options":["json", "xml", "csv"], "fieldplugin":"radio",
+									"change":{"csv":{"csvquote":"dependant", "csvdelimiter":"dependant"}}
+								}
+							}
+						}
+					]	
+	             },
+	             {
+	            	 "icon":"glyphicon glyphicon-list",
+	            	 "display":"plugin", "uri":"#plugin", "urlRoot":"/api/system/plugin",
+	            	 "subpage":[
+							{
+								"display": "upload-resource",
+								"icon":"glyphicon glyphicon-wrench",
+								"urlRoot":"/api/system/plugin/upload",
+								"uri": "uploadresource",
+								"templatedir":"templates/",
+								"templateName":"resourceuploadform", "viewmode":"form",
+								"sidepanel":false,
+								"modelsettings":{
+									"resourcebundle":{
+										"field":"resourcebundle", "fieldplugin":"dropzone"
+									},"plugintype":{
+										"field":"plugintype", "url":"/api/system/plugin/plugintype", "displayoptions":{"datadisplay":"id"}
+									},"pluginid":{
+										"disabled":true, "field":"pluginid", "url":"/api/system/plugin/search", "displayoptions":{"newvalue":true, "datadisplay":"id"}
+									}
+								}
+							},{
+								"display": "resource-editor",
+								"icon":"glyphicon glyphicon-wrench",
+								"uri": "resourceeditor",
+								"templatedir":"templates/",
+								"templateName":"resourceeditor", "viewmode":"form",
+								"sidepanel":false,
+								"modelsettings":{
+									"plugintype":{
+										"field":"plugintype", "url":"/api/system/plugin/plugintype", "displayoptions":{"newvalue":true, "datadisplay":"id"}
+									},"pluginid":{
+										"field":"pluginid", "url":"/api/system/plugin", "displayoptions":{"newvalue":true, "datadisplay":"id"}
+									}	
+								}
+							}
+						]
+	             }
+            ]
+		}
+	}, "npmdependancies":{
+		"nodemailer":"",
+		"node-schedule":"",
+		"annotation":""
+	}
+}
