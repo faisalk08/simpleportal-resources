@@ -1,0 +1,12 @@
+{
+	"id": "sp-cdn",
+	"pluginid": "sp-cdn",
+	"plugintype": "util",
+	"title": "Default files for simpleportal",
+	"description": "Default files for simpleportal",
+	"version": "1.01",
+	"public": true,
+	"status": "active",
+	"webappuri": "/cdn",
+	"versioninfo": "Default files for simpleportal v1.01 (June 6th 2017, 2:00:20 pm)"
+}
