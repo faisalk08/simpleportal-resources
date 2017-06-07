@@ -1,0 +1,19 @@
+<nav class="navbar navbar-<%=themeconfig && themeconfig.preference && themeconfig.preference.headercolorscheme ? themeconfig.preference.headercolorscheme : 'default' %> navbar-fixed-top">
+	<div class="container-fluid" id="header" data-ajax="true" data-ajax-url="/templates/header.html"></div>
+</nav>
+<div class="container-fluid">
+	<div class="row notification" id="notification">
+		<div class="col-sm-12">
+			<div id="curtime" class='pull-right'>
+				<i class='glyphicon glyphicon-time'></i> <span class='time'><script>document.write((new Date()).toLocaleDateString() + ' ' + (new Date()).toLocaleTimeString())</script></span>
+			</div>
+		</div>
+	</div>
+	<div class="row content">
+		<div class="col-sm-2 sidebar collapse" id="sidepanel" role="navbar"></div>
+		<div class="col-sm-10 col-sm-offset-2 main" id="main" role="main">
+			<div class='loading'></div>
+		</div>
+		<div class="col-sm-9 col-sm-offset-3 main" id="subform"></div>
+	</div>
+</div>

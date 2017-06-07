@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="navbar-inner top" id="header">
+		<%- include(templatedir + "/header.html.ejs" ) %>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row notification" id="notification">
+		<div class="col-sm-12">
+			<div id="curtime" class='pull-right'>
+				<i class='glyphicon glyphicon-time'></i> <span class='time'><script>document.write((new Date()).toLocaleDateString() + ' ' + (new Date()).toLocaleTimeString())</script></span>
+			</div>
+		</div>
+	</div>
+	<div class="row content">
+		<div class="col-sm-2 sidebar" id="sidepanel" role="navbar" data-ajax="true" data-ajax-url="sidepanel.html"></div>
+		<div class="col-sm-10 main" id="main" role="main">
+			<form id="serverconfig" method="post"></form>
+		</div>
+	</div>
+</div>

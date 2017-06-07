@@ -1,0 +1,29 @@
+{
+	"id": "sp-config",
+	"pluginid": "sp-config",
+	"plugintype": "webapp",
+	"title": "Server configuration",
+	"description": "Server configuration",
+	"version": "1.0",
+	"disabled": false,
+	"public": false,
+	"status":"active",
+	"webappuri": "/sp-config",
+	"configuration":{},
+	"webappsetting":{
+		"iconclass": "fa fa-wrench",
+		"changetheme":false,
+		"webappuri": "/sp-config",
+		"dynamicwebapp":true,
+		"theme":"sp-default",
+		"webapptype":"backbone",
+		"javascript":{
+			"routerfiles":["js/configuration.js"]
+		}, "layout":{
+			"pagelayout":"config.html.ejs"
+		}, "dependencies":["w2uiuiplugin"]
+    },
+	"permission":{
+		"roles":["superadmin"]
+    }
+} 

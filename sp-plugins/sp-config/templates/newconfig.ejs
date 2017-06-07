@@ -1,0 +1,44 @@
+<div id="<%= name %>form">
+	<div class="w2ui-field w2ui-span8" style="clear: both">
+		<label><%= name  %> (ID for <%= name %> No space and special character):</label>
+		<div>
+			<input value='' name="<%= name %>" type="text" maxlength="100" maxlength="100" style="width: 250px !important;" />
+		</div>
+	</div>
+<%		
+	var index=0;
+	if(typeof fields !== "undefined"){
+		for(var i in fields){
+			var field = fields[i];
+			if(!field.html)
+				field.html={caption:field.field};
+			if(field.type&&field.type=='checkbox'){%>
+	<div class="w2ui-field w2ui-span8" style="clear: both">
+		<label><%= field.html.caption || field.field %>:</label>
+		<div>
+			<input <%= field.disabled ? 'disabled' : '' %> value='<%= record[field.field]||field.defaultvalue %>' name="<%= field.field %>" type="<%= field.type||'checkbox' %>" maxlength="100" style="width: 250px !important;" <%= record[field.field]||field.defaultvalue ? "checked":"" %> />
+		</div>
+	</div><%}else if(field.type&&field.type=='list'){%>
+	<div class="w2ui-field w2ui-span8" style="clear: both">
+		<label><%= field.html.caption || field.field %>:</label>
+		<div>
+			<input <%= field.disabled ? 'disabled' : '' %> name="<%= field.field %>" type="<%= field.type||'list' %>" maxlength="100" style="width: 250px !important;" value='<%= record[field.field]|| field.defaultvalue %>'>
+		</div>
+	</div><%}else if(field.multiple){%>
+	<div class="w2ui-field w2ui-span8" style="clear: both">
+		<label><%= field.html.caption || field.field %>:</label>
+		<div>
+			<textarea <%= field.disabled ? 'disabled' : '' %> name="<%= field.field %>" type="<%= 'list'||field.type||'text' %>" style="width: 450px; height: 80px;"><%= record[field.field]|| field.defaultvalue %></textarea>
+		</div>
+	</div><%}else if(field.dataType != "object"){%>
+	<div class="w2ui-field w2ui-span8" style="clear: both">
+		<label><%= field.html.caption || field.field %>:</label>
+		<div>
+			<input <%= field.disabled ? 'disabled' : '' %> name="<%= field.field %>" type="<%= field.type||'text' %>" maxlength="100" style="width: 250px !important;" value='<%= record[field.field] || field.defaultvalue %>'>
+		</div>
+	</div><%}}}%>
+</div>
+<div class="w2ui-buttons">
+    <input type="button" value="Reset" name="reset"/>
+    <input type="button" value="Save" name="save"/>
+</div>
