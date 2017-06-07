@@ -1,0 +1,269 @@
+<%# Constants for search form, can be extended in theme| or sub folders %>
+<%
+	searchOperators=[{"id":"=", display:"equal-to"}, {"id":"!", display:"not-equal-to"},{"id":"startswith", display:"starts-with", type:["string"]},{"id":"endswith", display:"ends-with", type:["string"]},{"id":">", display:"greater-than", type:["number"]},{"id":">=", display:"greater-than-or-equal-to", type:["number"]}, ,{"id":"<", display:"less-than", type:["number"]}, {"id":"<=", display:"less-than-or-equal-to", type:["number"]},{"id":"between", display:"between", type:["number", "date"]}];
+%>
+<%draw_form_input = function(modelfield, fieldsetting){
+	if(fieldsetting&&fieldsetting.url){
+		draw_form_input_select_url(modelfield, fieldsetting);
+	}else if(modelfield.type=="checkbox"){
+		draw_form_input_checkbox(modelfield, fieldsetting);
+	}else if(modelfield.type=="radio"){
+		draw_form_input_radio(modelfield, fieldsetting);
+	}else if(modelfield.type == "array" || modelfield.type == "object"){
+		draw_form_input_subview(modelfield, fieldsetting);
+	}else if(fieldsetting && typeof fieldsetting.options !== 'undefined' && fieldsetting.options.length > 0){
+		draw_form_input_select(modelfield, fieldsetting);
+	}else if(modelfield.type=="textarea"||fieldsetting&&fieldsetting.type=="textarea"){
+		draw_form_input_textarea(modelfield, fieldsetting);
+	} else if(modelfield.type=="number"){
+		draw_form_input_native(modelfield, fieldsetting);
+	}  else if(modelfield.type=="password" || (fieldsetting && fieldsetting.type=="password")){
+		draw_form_input_password(modelfield, fieldsetting);
+	} else{
+		draw_form_input_text(modelfield, fieldsetting);
+	}
+}%>
+<%draw_search_input = function(modelfield, fieldsetting){
+	if(fieldsetting&&fieldsetting.url){
+		draw_search_input_select_url(modelfield, fieldsetting);
+	}else if(modelfield.type=="checkbox"){
+		draw_search_input_checkbox(modelfield, fieldsetting);
+	}else if(modelfield.type=="radio"){
+		draw_form_input_radio(modelfield, fieldsetting);
+	}else if(modelfield.type=="array" || modelfield.type=="object"){
+		//draw_form_input_subview(modelfield, fieldsetting);
+	}else if(fieldsetting && typeof fieldsetting.options !== 'undefined' && fieldsetting.options.length > 0){
+		draw_search_input_select(modelfield, fieldsetting);
+	}else{
+		draw_search_input_text(modelfield, fieldsetting);
+	}
+}%>
+<%# Input fields for Form %>
+<%draw_form_input_checkbox = function(modelfield, fieldsetting){%>
+<div class="checkbox">
+  	<label>
+  		<input autocorrect="off" autocomplete="off" autofill="off" type="checkbox" name="<%= modelfield.field %>" id="<%= modelfield.field %>" <%%= typeof <%= modelfield.field %> !== "undefined" ? ( <%= modelfield.field %> ? "checked" : "" ) : "" %%>/>
+  		<%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%>
+  	</label>
+</div>
+<%}%>
+<%draw_form_input_radio = function(modelfield, fieldsetting){%>
+<div class="form-group">
+  	<label class="control-label" for="<%= modelfield.field %>"><%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%></label>
+  	<input type="text" name="<%= modelfield.field %>" id="<%= modelfield.field %>" aria-describedby="<%= modelfield.field %>_status" value='<%%= typeof <%= modelfield.field %> !== "undefined" ? <%= modelfield.field %> : "" %%>' class='form-control'/>
+  	<span class="fa fa-exclamation-triangle form-control-feedback" aria-hidden="true"></span>
+  	<span id="<%= modelfield.field %>_status" class="control-label sr-only"></span>
+</div>
+<%}%>
+<%draw_form_input_native = function(modelfield, fieldsetting){%>
+<div class="form-group">
+  	<label class="control-label" for="<%= modelfield.field %>"><%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%></label>
+  	<input <%= fieldsetting && fieldsetting.fieldplugin ? "data-fieldplugin="+fieldsetting.fieldplugin :"" %> type="<%= modelfield.type %>" name="<%= modelfield.field %>" id="<%= modelfield.field %>" aria-describedby="<%= modelfield.field %>_status" value='<%%= typeof <%= modelfield.field %> !== "undefined" ? <%= modelfield.field %> : "" %%>' class='form-control'/>
+  	<span class="fa fa-exclamation-triangle form-control-feedback" aria-hidden="true"></span>
+  	<span id="<%= modelfield.field %>_status" class="control-label sr-only"></span>
+</div>
+<%}%>
+<%draw_form_input_textarea = function(modelfield, fieldsetting){%>
+<div class="form-group">
+  	<label class="control-label" for="<%= modelfield.field %>"><%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%></label>
+  	<textarea type="text" name="<%= modelfield.field %>" id="<%= modelfield.field %>" aria-describedby="<%= modelfield.field %>_status" class='form-control'><%%= typeof <%= modelfield.field %> !== "undefined" ? <%= modelfield.field %> : "" %%></textarea>
+  	<span class="fa fa-exclamation-triangle form-control-feedback" aria-hidden="true"></span>
+  	<span id="<%= modelfield.field %>_status" class="control-label sr-only"></span>
+</div>
+<%}%>
+<%draw_form_input_text = function(modelfield, fieldsetting){%>
+<div class="form-group">
+  	<label class="control-label" for="<%= modelfield.field %>"><%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%></label>
+  	<%if(fieldsetting && fieldsetting.fieldplugin == "iconpicker" && (!fieldsetting.fieldplugin.displayoptions||fieldsetting.fieldplugin.displayoptions.iconset!='flag-icon')){%>
+  		<div class="input-group">
+	  		<span class="input-group-btn">
+	  			<button class="btn btn-default" data-icon="" role="iconpicker" name="<%= modelfield.field %>"></button>
+	  		</span>
+	  		<input <%= fieldsetting && fieldsetting.fieldplugin ? "data-fieldplugin="+fieldsetting.fieldplugin :"" %>  type="text" name="<%= modelfield.field %>" id="<%= modelfield.field %>" aria-describedby="<%= modelfield.field %>_status" value='<%%= typeof <%= modelfield.field %> !== "undefined" ? <%= modelfield.field %> : "" %%>' class='form-control'/>
+	  		<span class="fa fa-exclamation-triangle form-control-feedback" aria-hidden="true"></span>
+  		</div>
+  	<%}else{%>
+  		<input <%= fieldsetting && fieldsetting.url ? "data-url="+fieldsetting.url :"" %> <%= fieldsetting && fieldsetting.fieldplugin ? "data-fieldplugin="+fieldsetting.fieldplugin :"" %> type="text" name="<%= modelfield.field %>" id="<%= modelfield.field %>" aria-describedby="<%= modelfield.field %>_status" value='<%%= typeof <%= modelfield.field %> !== "undefined" ? <%= modelfield.field %> : "" %%>' class='form-control'/>
+  		<span class="fa fa-exclamation-triangle form-control-feedback" aria-hidden="true"></span>
+  	<%}%>
+  	<span id="<%= modelfield.field %>_status" class="control-label sr-only"></span>
+</div>
+<%}%>
+<%draw_form_input_password = function(modelfield, fieldsetting){%>
+<div class="form-group">
+  	<label class="control-label" for="<%= modelfield.field %>"><%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%></label>
+  	<input type="password" name="<%= modelfield.field %>" id="<%= modelfield.field %>" aria-describedby="<%= modelfield.field %>_status" value='<%%= typeof <%= modelfield.field %> !== "undefined" ? <%= modelfield.field %> : "" %%>' class='form-control'/>
+  	<span class="fa fa-exclamation-triangle form-control-feedback" aria-hidden="true"></span>
+  	<span id="<%= modelfield.field %>_status" class="control-label sr-only"></span>
+</div>
+<%}%>
+<%draw_form_input_text_archive = function(modelfield, fieldsetting){%>
+<div class="form-group">
+  	<label class="control-label" for="<%= modelfield.field %>"><%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%></label>
+  	<input type="text" name="<%= modelfield.field %>" id="<%= modelfield.field %>" aria-describedby="<%= modelfield.field %>_status" value='<%%= typeof <%= modelfield.field %> !== "undefined" ? <%= modelfield.field %> : "" %%>' class='form-control'/>
+  	<span class="fa fa-exclamation-triangle form-control-feedback" aria-hidden="true"></span>
+  	<span id="<%= modelfield.field %>_status" class="control-label sr-only"></span>
+</div>
+<%}%>
+<%draw_form_input_select = function(modelfield, fieldsetting){%>
+<div class="form-group">
+  	<label class="control-label" for="<%= modelfield.field %>"><%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%></label>
+  	<select name="<%= modelfield.field %>" id="<%= modelfield.field %>" aria-describedby="<%= modelfield.field %>_status" class='form-control'>
+  		<option value=""><%%= getMessage("select") %> <%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%></option>
+  		<%for(var fso in fieldsetting.options){%>
+  		<option value="<%= fieldsetting.options[fso] %>"><%= fieldsetting.options[fso] %></option>
+  		<%}%>
+  	</select>
+  	<span class="fa fa-exclamation-triangle form-control-feedback" aria-hidden="true"></span>
+  	<span id="<%= modelfield.field %>_status" class="control-label sr-only"></span>
+</div>
+<%}%>
+<%draw_form_input_select_url = function(modelfield, fieldsetting){%>
+<div class="form-group">
+	<label class="control-label" for="<%= modelfield.field %>"><%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%> </label>
+	<div class="controls">
+		<div <%= fieldsetting && fieldsetting.url ? "data-url="+fieldsetting.url :"" %> <%= fieldsetting && fieldsetting.fieldplugin ? "data-fieldplugin="+fieldsetting.fieldplugin :"" %>  class="input" id="<%= modelfield.field %>container" data-value='<%%= typeof <%= modelfield.field %> !== "undefined" && <%= modelfield.field %> ? <%= modelfield.field %> : "<%= modelfield.defaultvalue %>" %%>'></div>
+	</div>
+	<!--<span class="fa fa-exclamation-triangle form-control-feedback" aria-hidden="true"></span>-->
+  	<span id="<%= modelfield.field %>_status" class="control-label sr-only"></span>
+</div>
+<%}%>
+<%draw_form_input_subview = function(modelfield, fieldsetting){
+	var htmlstyle="";
+	var cssclass="";
+	if(fieldsetting && fieldsetting.html && fieldsetting.html.display) 
+		htmlstyle = "display:" +fieldsetting.html.display;
+		
+	if(fieldsetting && fieldsetting.html && fieldsetting.html.cssclass) 
+		cssclass = fieldsetting.html.cssclass;
+%>
+<div class="form-group <%= cssclass %>">
+  	<label class="control-label" for="<%= modelfield.field %>"><%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%> </label>
+  	<!--<label class='btn btn-default pull-right sub-form' data-sub="<%= modelfield.field %>" ><i class="glyphicon glyphicon-edit"></i> Add</label>-->
+  	<div class="controls">
+		<div id="<%= modelfield.field %>_list_container" style=<%= htmlstyle %>></div>
+		<div id="<%= modelfield.field %>container" style=<%= htmlstyle %>></div>
+	</div>
+</div>
+<%}%>
+<%draw_search_input_clause = function(modelfield, fieldsetting){%>
+<select name="<%= modelfield.field %>_operator" id="<%= modelfield.field %>_operator">
+	<%for(var index in searchOperators){
+	var option =searchOperators[index]; 
+	if(typeof option == "object" && (!option.type || (option.type && modelfield.dataType && arraycontains(option.type, modelfield.dataType)))){%>
+		<option value="<%= option.id %>"><%%= getMessage("<%= option.display %>") %%></option>
+	<%}else if(typeof option == "string"){%>
+		<option><%%= getMessage("<%= option %>") %%></option>
+	<%}}%>
+</select>
+<%}%>
+<%draw_search_input_select = function(modelfield, fieldsetting){%>
+<div class="form-group">
+	<div class="controls">
+  		<div class="input-group">
+  			<span class="input-group-addon">
+	    		<label for="<%= modelfield.field %>"><%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%></label>
+				<% draw_search_input_clause(modelfield, fieldsetting) %>
+		    </span>
+		    <div id="<%= modelfield.field %>container" data-value='<%%= typeof <%= modelfield.field %> !== "undefined" && <%= modelfield.field %> ? <%= modelfield.field %> : "<%= modelfield.defaultvalue %>" %%>'>
+				<select name="<%= modelfield.field %>" id="<%= modelfield.field %>" aria-describedby="<%= modelfield.field %>_status" class='form-control'>
+			  		<option value=""><%%= getMessage("select") %> <%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%></option>
+			  		<%for(var fso in fieldsetting.options){%>
+			  		<option value="<%= fieldsetting.options[fso] %>"><%= fieldsetting.options[fso] %></option>
+			  		<%}%>
+			  	</select>
+			</div>
+			<span id="<%= modelfield.field %>_status" class="control-label sr-only"></span>
+	  	</div>
+  	</div>
+</div>
+<%}%>
+<%# Input fields for Select plugin using ajax and url %>
+<%draw_search_input_select_url = function(modelfield, fieldsetting){%>
+<div class="form-group">
+	<div class="controls">
+  		<div class="input-group">
+  			<span class="input-group-addon">
+	    		<label for="<%= modelfield.field %>"><%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%></label>
+				<% draw_search_input_clause(modelfield, fieldsetting) %>
+		    </span>
+		    <div id="<%= modelfield.field %>container" data-value='<%%= typeof <%= modelfield.field %> !== "undefined" && <%= modelfield.field %> ? <%= modelfield.field %> : "<%= modelfield.defaultvalue %>" %%>'>
+				<input class='form-control' type="<%= modelfield.dataType == 'number' ? 'number' : 'text' %>" name="<%= modelfield.field %>" id="<%= modelfield.field %>" aria-describedby="<%= modelfield.field %>_status" value='<%%= typeof <%= modelfield.field %> !== "undefined" ? <%= modelfield.field %> : "" %%>'/>
+			</div>
+			<span id="<%= modelfield.field %>_status" class="control-label sr-only"></span>
+	  	</div>
+  	</div>
+</div>		
+<%}%>
+<%# Input  text field for Search form %>
+<%draw_search_input_text = function(modelfield, fieldsetting){%>
+<div class="form-group">
+  	<div class="controls">
+  		<div class="input-group">
+  			<span class="input-group-addon">
+	    		<label for="<%= modelfield.field %>"><%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%></label>
+				<% draw_search_input_clause(modelfield, fieldsetting) %>
+		    </span>
+		    <input class='form-control' type="<%= modelfield.dataType == 'number' ? 'number' : 'text' %>" name="<%= modelfield.field %>" id="<%= modelfield.field %>" aria-describedby="<%= modelfield.field %>_status" value='<%%= typeof <%= modelfield.field %> !== "undefined" ? <%= modelfield.field %> : "" %%>'/>
+	      	<span class="fa fa-exclamation-triangle form-control-feedback" aria-hidden="true"></span>
+  			<span id="<%= modelfield.field %>_status" class="control-label sr-only"></span>
+	  	</div>
+  	</div>
+</div>
+<%}%>
+<%# Input fields for Search form %>
+<%draw_search_input_checkbox = function(modelfield, fieldsetting){%>
+<div class="form-group">
+  	<div class="controls">
+  		<div class="input-group">
+  			<span class="input-group-addon">
+	    		<label for="<%= modelfield.field %>"><%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%></label>
+				<% draw_search_input_clause(modelfield, fieldsetting) %>
+		    </span>
+		    <label class='form-control'>
+		  		<input type="checkbox" name="<%= modelfield.field %>" id="<%= modelfield.field %>" <%%= typeof <%= modelfield.field %> !== "undefined" ? ( <%= modelfield.field %> ? "checked" : "" ) : "" %%>/>
+		  		<%%= getMessage("<%= fieldsetting && modelfield.html && modelfield.html.display ? modelfield.html.display : modelfield.html.caption %>") %%>
+		  	</label>
+	  	</div>
+  	</div>
+</div>
+<%}%>
+<%draw_service_list_action = function(serviceconfig, subservice){%>
+<div class="btn-group">
+	<button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    	<i class="fa fa-cog"></i></span>
+  	</button>
+  	<ul class="dropdown-menu">
+	<% 	if(typeof serviceconfig.subservice == 'undefined' || !serviceconfig.subservice) { -%>
+		<li><a href="javascript:void(0);" class="modelaction details" data-modelaction="details" rel="qtip" title='<%%= getMessage("view") %>'><i class="glyphicon glyphicon-zoom-in"></i> <%%= getMessage("view") %></a></li>
+	<% 	if(serviceconfig.modify) { -%>
+		<li><a href="javascript:void(0);" class="modelaction edit" data-modelaction="edit" rel="qtip" title='<%%= getMessage("edit") %>'><i class="fa fa-pencil"></i> <%%= getMessage("edit") %></a></li>
+	<%	}} -%>
+	<%if (serviceconfig.configuration && typeof serviceconfig.configuration.modelaction !== 'undefined'){ 
+		for(var actionindex in serviceconfig.configuration.modelaction){
+			var modelaction = serviceconfig.configuration.modelaction[actionindex];
+			var _iconclass=""; -%>
+		<li><a href="javascript:void(0);" class="modelaction <%= modelaction.url %>" data-modelaction="<%= modelaction.action %>" title="Edit"><i class="<%= _iconclass %> fa fa-edit"></i> <%%= getMessage("<%= modelaction.display %>") %%></a></li>
+	<%}}
+	if(serviceconfig.configuration){
+		for(var modelindex in serviceconfig.configuration.modelsettings) { 
+			var modelsetting = serviceconfig.configuration.modelsettings[modelindex];
+			if(modelsetting.type=="object"){ -%>
+			<li>
+				<a href="javascript:void(0);" class="modelaction subview" data-modelaction="form" data-subview="<%= modelindex %>" title="<%%= getMessage("edit") %>">
+					<i class="<%= _iconclass %> fa fa-edit"></i> 
+					<%%= getMessage("edit-<%= modelindex %>") %%>
+				</a>
+			</li>
+	<% }}}	
+		if(serviceconfig.modify) { -%>
+		<li>
+			<a href="javascript:void(0);" class="modelaction remove<%= (typeof subservice !== "undefined" ? "-sub" : "") %>" data-modelaction="remove" rel="qtip" title="Delete">
+				<i class="glyphicon glyphicon-trash icon-trash fa fa-trash-o"></i> 
+				<%%= getMessage("delete") %>
+			</a>
+		</li>
+	<%}	-%>
+	</ul>
+</div>
+<%} -%>

@@ -1,0 +1,19 @@
+{
+	"title":"Theme",
+	"description":"Theme - Description",
+	"version":"0.1",
+   	"plugintype":"theme",
+	"priority":0.1,
+	"themesetting":{
+		"css":{},
+		"fonts":[],
+		"javascript":{
+			"theme":[],
+			"cdn":[]
+		}	
+	},
+	"layoutdir":"layouts",
+	"templatedir":"templates",
+	"layout":{},
+	"status":"default"
+}

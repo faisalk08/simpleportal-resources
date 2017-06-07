@@ -1,0 +1,76 @@
+// Sets the require.js configuration for your application.
+require.config( {
+      paths: {
+      		"order":"/cdn/lib/order",
+      		"jquery":"/cdn/jquery/jquery-2.1.4.min",
+      		"bootstrapuiplugin":"/cdn/bootstrap/3.3.5/js/bootstrap.min",
+            "bootstrap-session-timeoutuiplugin": "/uiplugin/bootstrap-session-timeout/bootstrap-session-timeout.min",
+            "cookie":"/uiplugin/jquery/plugin/cookie",
+            "cookiecuttr":"/uiplugin/jquery/plugin/cookiecuttr"
+      },
+
+      // Sets the configuration for your third party scripts that are not AMD compatible
+      shim: {
+      		"bootstrapuiplugin": {
+                  "deps": [ "jquery" ]
+            },
+            "bootstrap-session-timeoutuiplugin": {
+                  "deps": [ "bootstrapuiplugin" ]
+            }
+      } // end Shim Configuration
+});
+
+var appdependencies = [
+	"order!cookie/jquery.cookie", "order!cookiecuttr/cookieCuttr-master/jquery.cookiecuttr"
+];
+
+require(appdependencies, function(){
+	$(function(){
+		$('[data-ajax=true]').each(function(){
+			var ajaxurl = $(this).data("ajax-url");
+			
+			var $container = $(this);
+			if(ajaxurl){
+				$.ajax({url: ajaxurl, success: function(ajaxcontent){
+					if(ajaxcontent){
+						$container.html(ajaxcontent);
+					}
+			    }});
+			}
+		});
+		
+		<%
+		var sessionTimeoutPreference = serverconfig && serverconfig.preference ? serverconfig.preference["plugin"]["bootstrap-session-timeoutuiplugin"]||{} : {};
+		%>
+		<%if(!sessionTimeoutPreference || (sessionTimeoutPreference && !sessionTimeoutPreference.disabled)){%>
+		/* 
+		 * Bootstrap Session time out warning plugin
+		 * https://github.com/orangehill/bootstrap-session-timeout 
+		 */
+		if(typeof $.sessionTimeout !== 'undefined') {
+			$.sessionTimeout({
+			    keepAliveUrl: '/keep-alive',
+			    logoutUrl: '/logout',
+			    redirUrl: '/session-locked',
+			    warnAfter: <%= sessionTimeoutPreference.warnAfter||48000 %>,
+			    redirAfter: <%= sessionTimeoutPreference.redirectAfter||78000 %>,
+			    countdownMessage: 'Redirecting in {timer} seconds.',
+			    countdownBar: true
+			});
+		}
+		<%}%>
+		
+		/*
+		 * Cookie Cuttr plugin
+		 * http://cookiecuttr.com/
+		 */
+		if(typeof $.cookieCuttr !== 'undefined')
+			$.cookieCuttr({
+				cookieDeclineButton:false,
+				cookieResetButton:false,
+				cookieOverlayEnabled:false,
+				cookiePolicyPage:false,
+				cookiePolicyLink:'/pages/terms-of-service'
+			});
+	});
+});

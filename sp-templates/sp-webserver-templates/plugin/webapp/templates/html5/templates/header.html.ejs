@@ -1,0 +1,104 @@
+<div class="navbar-header">
+  	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		<span class="sr-only"><%= getMessage("toggle-navigation") %></span>
+    	<span class="icon-bar"></span>
+    	<span class="icon-bar"></span>
+    	<span class="icon-bar"></span>
+  	</button>
+  	<button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#sidepanel" aria-expanded="false" aria-controls="navbar">
+		<span class="sr-only"><%= getMessage("toggle-navigation") %></span>
+    	<span class="icon-bar"></span>
+    	<span class="icon-bar"></span>
+    	<span class="icon-bar"></span>
+  	</button>
+  	<a class="navbar-brand brand" href="<%=typeof userprofile !== "undefined" ?  serverconfig.dashboarduri : typeof serverconfig.homeuri !== 'undefined' ? serverconfig.homeuri : '/' %>">
+		<%if(typeof serverconfig != "undefined" && serverconfig.logo && serverconfig.logo.length > 0){%>
+	  		<img class="img-responsive logo" style="display:inline-block; height:30px; margin-top:-5px" src="data:<%= serverconfig.logo[0].type %>;base64, <%= serverconfig.logo[0].content %>" alt="Logo"/>
+	  	<%}else{%> <%= serverconfig.title %> <%}%><%= title %>
+  	</a>
+</div>
+<div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+	<ul class="nav navbar-nav navbar-right">
+		<%if(serverconfig.translation ){%>
+    	<li class="dropdown preferenceselector langselector" data-preference-key="languageId">
+			<%% 
+				var userlanguage;
+				if(userprofile.preference && userprofile.preference.languageId)
+		    		userlanguage = userprofile.preference.languageId;
+				else
+					userlanguage = userprofile.languageId;
+				var curlanguage={languageId:'en', display:'English', icon:'fla-icon flagicon-us'};
+				
+				if(typeof languages != 'undefined'){
+				for( var i=0; i<languages.length; i++){
+					var language=languages[i];
+					if(language.languageId==userlanguage)
+						curlanguage=language;
+				}}
+			%>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				<%% if (curlanguage.icon){%><i class="flag-icon <%%= curlanguage.icon %>" alt="<%%= curlanguage.display %>"><%%}%></i><span> <%%= curlanguage.native || curlanguage.display %></span>
+				<b class="caret"></b>
+			</a>
+            <ul class="dropdown-menu">
+            <%% 
+            	if(typeof languages != 'undefined'){
+				for( var i=0; i<languages.length; i++){
+					var language=languages[i];
+					var active=language.languageId==userlanguage;
+				%>
+				<li>
+				<%% if(active){%>
+					<a href='#'><span data-langId="<%%= language.languageId %>" data-languageId='<%%= language.languageId %>'><i class="flag-icon <%%= language.icon %>" alt="<%%= language.display %>"></i> <%%= language.native || language.display %></span></a>
+				<%%}else{%>
+					<a href="javascript:void(0);" data-langId="<%%= language.languageId %>" data-languageId='<%%= language.languageId %>'><i class="flag-icon <%%= language.icon %>" alt="<%%= language.display %>"></i> <%%= language.native || language.display %></a>
+				<%%}%>
+				</li>
+			<%%}}%>
+            </ul>
+       	</li><%}%>
+       	<%if(pluginsetting && pluginsetting.webappsetting && pluginsetting.webappsetting.changetheme){%>
+       	<%%if(typeof themes !== 'undefined'){%>
+		<li class="dropdown preferenceselector themeselector" data-preference-key="themeId">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+				<i class='glyphicon glyphicon-picture <%%= curtheme.icon %>'></i> <%%= curtheme.title %></span>
+				<b class="caret"></b>
+			</a>
+            <ul class="dropdown-menu">
+				<%%
+				for( var i=0; i < themes.length; i++){
+					var theme=themes[i];
+					var active=theme.id==curtheme.id;
+				%>
+				<li>
+					<a href="javascript:void(0);" data-themeId='<%%= theme.id %>'> <i class='glyphicon glyphicon-picture <%%= theme.icon %>'></i> <%%= theme.title %></a>
+				</li>
+				<%%}%>
+			</ul>
+       	</li>
+	    <%% } %><%}%>
+	    <li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">@<%%= userprofile.fullName||userprofile.username %> <b class="caret"></b></a>
+            <ul class="dropdown-menu pull-right">
+              <%%if(typeof userprofile.webapps !== 'undefined'){
+              	for( var i in userprofile.webapps ){
+					var webapp = userprofile.webapps[i];
+					var _webapuri = (webapp && webapp.webappsetting) ?  webapp.webappsetting.webappuri : (webapp.webappuri||'/'+webapp.id);
+					var _iconclass = (webapp && webapp.webappsetting) ?  webapp.webappsetting.iconclass : (webapp.iconclass);
+				%>
+					<li class="<%%= window.location.pathname == _webapuri + '/' ? 'active' : '' %>">
+						<a href="/<%%= webapp.id %>"> <i class="<%%= _iconclass %>"></i> <span><%%= webapp.title %> </span></a>
+					</li>
+			  <%%}}%>
+              <li><a href="/logout"><i class="glyphicon glyphicon-off"></i> <%%= getMessage("logout") %></a></li>
+            </ul>	
+       	</li>
+       	<% if(typeof helpuri !== 'undefined') {%>
+	    <li>
+	    	<a href="<%%= typeof helpuri !== 'undefined' ? helpuri : '/' %>">
+	    		<i class="glyphicon glyphicon-info-sign"></i><%%= getMessage("help") %>
+	    	</a>
+	    </li>
+	    <%}%>
+  	</ul>
+</div>

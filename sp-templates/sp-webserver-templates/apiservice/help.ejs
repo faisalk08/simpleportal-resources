@@ -1,0 +1,22 @@
+<div class="span12">
+	<h3><%= serverconfig.title %></h3>
+<%	var wpindex=0;
+	if(userprofile && userprofile.webapps){
+		for(var i =0; i<userprofile.webapps.length; i++){
+			var webapp = userprofile.webapps[i];
+			if(webapp.webappsetting && !webapp.disabled){
+	%>
+		<h4><%= Number(i)+1 %>. <%= webapp.title %> 
+			<%if(webapp.webappsetting.helpuri){%>
+				<a class="media" href="<%= webapp.webappuri %><%= webapp.webappsetting.helpuri %>"><%= getMessage("read-more") %>&raquo;</a>
+			<%} %> 
+		</h4>
+		<p><%= webapp.description %></p>
+		<hr/>
+<%		}
+	}
+} else{%>
+	<div>Please <a href="<%= serverconfig.loginuri %>"><%= getMessage("login") %> &raquo;</a> to access further information.</div>
+<%}
+%>
+</div>

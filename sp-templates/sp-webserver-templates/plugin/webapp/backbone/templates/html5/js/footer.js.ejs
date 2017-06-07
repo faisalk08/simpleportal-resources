@@ -1,0 +1,27 @@
+/**
+ * Override using the custom.js file inside your plugin
+ */
+$(document).ready(function () {
+	/*
+	 * Cookie Cuttr plugin
+	 * http://cookiecuttr.com/
+	 */
+	if($.fn.cookieCuttr)
+		$.cookieCuttr();
+	
+	/* 
+	 * Bootstrap Session time out warning plugin
+	 * https://github.com/orangehill/bootstrap-session-timeout 
+	 */
+	if(typeof $.sessionTimeout !== 'undefined') {
+		$.sessionTimeout({
+		    keepAliveUrl: '/keep-alive',
+		    logoutUrl: '/logout',
+		    redirUrl: '/view/userprofile/session-locked',
+		    warnAfter: 60000,
+		    redirAfter: 90000,
+		    countdownMessage: 'Redirecting in {timer} seconds.',
+		    countdownBar: true, countdownSmart:true
+		});	
+	}
+});

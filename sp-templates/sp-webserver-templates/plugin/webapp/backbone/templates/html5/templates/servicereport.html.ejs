@@ -1,0 +1,321 @@
+<%
+	var dbsearchOperators=[{"id":"$eq", display:"equal-to"}, {"id":"$ne", display:"not-equal-to"},{"id":"$regex", display:"starts-with", prepend:"^", type:["string"]},{"id":"$regex", display:"ends-with", append:'$', type:["string"]},{"id":"$gt", display:"greater-than", type:["number"]},{"id":"$gte", display:"greater-than-or-equal-to", type:["number"]}, ,{"id":"$lt", display:"less-than", type:["number"]}, {"id":"$lte", display:"less-than-or-equal-to", type:["number"]},{"id":"$regex", display:"contains", type:["string"]}];
+	var dbsortOperators=[{"id":"-1", display:"ascending"}, {"id":"1", display:"descending"}];
+%>
+<ol class="breadcrumb">
+	<li><%%= getMessage("report-view") %> &raquo; (<%= serviceconfig.modelname %>)</li>
+	
+	<li class="pull-right">
+		<!--<a name="data-aggregate" data-aggregate-title="<%= modelname %>" href="javascript:void(0);" class='btn btn-xs btn-success modelaction pull-right' data-modelaction="aggregate" data-plugin="<%= serviceconfig.plugin %>" data-aggregate-query='<%= serviceconfig.apiurl %>/$cmd/aggregate'><i class="glyphicon glyphicon-dashboard"></i> <%%= getMessage("show-report") %> &raquo;</a>-->
+		<a class="btn btn-default btn-xs advanced_control"><i class="glyphicon glyphicon-wrench"></i><span><%%= getMessage("show-advanced-query") %></span></a>
+		<a name="aggregate-sort" class="btn btn-default btn-xs aggregate-sort addmore pull-right" ><i class="glyphicon glyphicon-plus-sign"></i><%%= getMessage("add-sorting-order") %></a>
+		<a name="aggregate-filter" class="btn btn-default btn-xs aggregate-filter addmore pull-right" ><i class="glyphicon glyphicon-plus-sign"></i><%%= getMessage("add-filter") %></a>
+	</li>
+</ol>
+<div class="service-report">
+	<!--
+	<div class="row">
+		<div class="col-sm-9">
+			<div class="row advanced" style="display:none;">
+				<div class="col-sm-12">
+					<div class="form-group">
+					  	<label for="pipeline">
+					  		Mongo DB Aggregate Pipeline(For advanced user)
+					  		<span class="glyphicon glyphicon-info-sign"></span>
+					  		<a target="new" href="https://docs.mongodb.org/manual/core/aggregation-pipeline/">Mongo DB Aggregation&raquo;</a>
+					  	</label>
+					  	<div class="controls">
+					  		<textarea class="form-control" name="aggregate-pipeline">[{}]</textarea>
+					  	</div>
+					</div>
+	  			</div>
+			</div>
+			<div class="row basic">
+	  			<div class="col-sm-9">
+					<div class="form-group">
+					  	<label for="aggregate-query_field">
+					  		Field (Group by field)
+					  		<span class="glyphicon glyphicon-info-sign"></span> 
+					  		<a target="new" href="https://en.wikipedia.org/wiki/SQL">SQL&raquo;</a>
+					  		<a target="new" href="https://docs.mongodb.org/manual/core/aggregation-pipeline/">Mongo DB Aggregation&raquo;</a>
+					  	</label>
+					  	<div class="controls">
+					  		<select multiple class="select2 form-control" name="aggregate-query_field">
+					  			<option value=""><%%= getMessage("select") %> Field</option>
+					  			<%for( var fieldIndex in modelfields){var modelfield = modelfields[fieldIndex];%>
+								<option value="<%= modelfield.field %>"><%= modelfield.field %></option>
+								<%}%>
+					  		</select>
+					  	</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+			  		<div class="form-group">
+					  	<label for="$count"><%%= getMessage("minimum-count") %> (>=)</label>
+					  	<div class="controls">
+					  		<input type="number" name="$count" id="$count" class="form-control" placeholder="Enter minimum count" value="2"/>
+					  		<input type="hidden" name="$count_operator" id="$count_operator" class="form-control" value=">="/>
+					  	</div>
+					</div>
+				</div>
+	  		</div>
+		</div>
+	</div>-->
+	<div class="row">
+		<div class="col-sm-9">
+			<label for="aggregate-query_filter_field">
+		  		<%%= getMessage("field") %> (Filter By field) 
+		  		<span class="glyphicon glyphicon-info-sign"></span> 
+		  		<a target="new" href="https://en.wikipedia.org/wiki/Where_(SQL)">SQL&raquo;</a>
+		  		<a target="new" href="https://docs.mongodb.org/manual/core/aggregation-pipeline/">Mongo DB Aggregation&raquo;</a>
+		  	</label>
+		</div>
+		<div class="col-sm-3">
+	  		<a name="aggregate-filter" class="btn btn-default btn-xs aggregate-filter addmore pull-right" ><i class="glyphicon glyphicon-plus-sign"></i><%%= getMessage("add-more-filter") %></a>
+		</div>
+	</div>
+	<!--
+	<div class="row aggregate-filter-raw">
+		<div class="col-sm-3">
+	  		<div class="form-group">
+			  	<label for="aggregate-query_filter_field" class="field-operator">
+			  		<%%= getMessage("field") %>
+			  	</label>
+			  	<div class="controls">
+			  		<select class="select2 form-control" name="aggregate-query_filter_field">
+			  			<option value=""><%%= getMessage("select") %> <%%= getMessage("field") %></option>
+			  			<%for( var fieldIndex in modelfields){var modelfield = modelfields[fieldIndex];%>
+							<option><%= modelfield.field %></option>
+						<%}%>
+			  		</select>
+			  	</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-6">
+	  		<div class="form-group">
+			  	<label for="charttype"><%%= getMessage("value") %></label>
+			  	<div class="controls">
+			  		<div class="input-group">
+				    	<span class="input-group-addon">
+							<select name="aggregate-query_filter_field_operator" id="aggregate-query_filter_operator">
+								<%for(var index in dbsearchOperators){
+								var option = dbsearchOperators[index]; 
+								if(typeof option == "object"){%>
+									<option data-prepend="<%= option.prepend || "" %>" data-append="<%= option.append || "" %>" data-type="<%= option.type %>" value="<%= option.id %>"><%%= getMessage("<%= option.display %>") %%></option>
+								<%}else if(typeof option == "string"){%>
+								<%}}%>
+							</select>
+					    </span>
+				      	<input type="text" name="aggregate-query_filter_field_value" class="form-control" placeholder="Filter <%%= getMessage("value") %>">
+				  	</div>
+			  	</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+	  		<div class="form-group">
+			  	<label for="aggregate-filter">&nbsp;</label>
+			  	<div class="controls">
+			  		<a name="aggregate-filter" class="btn btn-danger btn-xs aggregate-filter remove pull-right disabled" ><i class="glyphicon glyphicon-remove-sign"></i><%%= getMessage("remove") %></a>
+			  	</div>
+		 	</div>
+		</div>
+	</div>
+	-->
+	<div class="row advanced pipeline-advanced" style="display:none;">
+		<div class="col-sm-12">
+			<div class="form-group">
+			  	<label for="pipeline">
+			  		Mongo DB Aggregate Pipeline(For advanced user)
+			  		<span class="glyphicon glyphicon-info-sign"></span>
+			  		<a target="new" href="https://docs.mongodb.org/manual/core/aggregation-pipeline/">Mongo DB Aggregation&raquo;</a>
+			  	</label>
+			  	<div class="controls">
+			  		<textarea class="form-control"  name="aggregate-pipeline">[{}]</textarea>
+			  	</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+	  	<div class="col-sm-3">
+	  		<div class="form-group">
+			  	<label for="displaytype"><%%= getMessage("displaytype") %></label>
+			  	<div class="controls" id="displaytypecontainer"></div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+	  		<div class="form-group">
+			  	<label for="layout"><%%= getMessage("layout") %></label>
+			  	<div class="controls" id="layoutcontainer"></div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+	  		<div class="form-group">
+			  	<label for="charttype"><%%= getMessage("chart-type") %></label>
+			  	<div class="controls" id="charttypecontainer"></div>
+			</div>
+		</div>
+	  	<div class="col-sm-3">
+	  		<div class="form-group">
+	  			<label for="data-aggregate"></label>
+			  	<div class="controls">
+			  		<a name="data-aggregate" data-aggregate-title="<%= modelname %>" href="javascript:void(0);" class='btn btn-xs btn-success modelaction pull-right' data-modelaction="aggregate" data-plugin="<%= serviceconfig.plugin %>" data-aggregate-query='<%= serviceconfig.apiurl %>/$cmd/aggregate'><i class="glyphicon glyphicon-dashboard"></i> <%%= getMessage("show-report") %> &raquo;</a>
+			  	</div>
+			</div>
+	  	</div>
+	</div>
+	<div class="row">
+	  	<div class="col-sm-12" class="service-report_results"></div>
+	</div>
+</div>
+<script type="text/template" id="aggregate_pipeline_group_template">
+	<div class="row pipeline" data-pipeline-type="$group">
+		<div class="col-sm-9">
+			<div class="form-group">
+			  	<label for="aggregate-query_field">
+			  		<%%= getMessage("group-by-field") %>
+			  		<span class="glyphicon glyphicon-info-sign"></span> 
+			  		<a target="new" href="https://en.wikipedia.org/wiki/SQL">SQL&raquo;</a>
+			  		<a target="new" href="https://docs.mongodb.org/manual/core/aggregation-pipeline/">Mongo DB Aggregation&raquo;</a>
+			  	</label>
+			  	<div class="controls">
+			  		<select multiple class="select2 form-control" data-aggregate-field="_id" name="_id">
+			  			<option value=""><%%= getMessage("select-field") %></option>
+			  			<%for( var fieldIndex in modelfields){var modelfield = modelfields[fieldIndex];
+							if(modelfield.type != "array"){
+						%>
+							<option value="$<%= modelfield.field %>"><%= modelfield.field %></option>
+						<%}else if(modelfield.type !== "array"){%>
+							<option value="$<%= modelfield.field %>"><%= modelfield.field %></option>
+						<%}else if(modelfield.type !== "object"){%>
+							<option value="$<%= modelfield.field %>"><%= modelfield.field %></option>
+						<%}}%>
+			  		</select>
+			  	</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+	  		<div class="form-group">
+			  	<label for="$count"><%%= getMessage("count-by") %></label>
+			  	<div class="controls">
+			  		<select class="form-control" name="count" data-aggregate-field="count">
+			  			<option value=""><%%= getMessage("select") %> Field</option>
+			  			<option selected value="1"><%%= getMessage("number-of-records") %></option>
+			  			<%for( var fieldIndex in modelfields){var modelfield = modelfields[fieldIndex];
+							if(modelfield.dataType=="number"){%>
+							<option value="$<%= modelfield.field %>"><%= modelfield.field %></option>
+						<%}}%>
+						<option value="-1"><%%= getMessage("custom-field") %></option>
+			  		</select>
+			  	</div>
+			</div>
+		</div>
+	</div>
+</script>
+<script type="text/template" id="aggregate_pipeline_filter_template">
+	<div class="row pipeline advanced aggregate-filter-raw" data-pipeline-type="$match" style="display:none;">
+		<div class="col-sm-3">
+	  		<div class="form-group">
+			  	<label for="aggregate-query_filter_field" class="field-operator">
+			  		<%%= getMessage("field") %>
+			  	</label>
+			  	<div class="controls">
+			  		<select class="form-control" name="filterfield">
+			  			<option value=""><%%= getMessage("select") %> <%%= getMessage("field") %></option>
+			  			<%for( var fieldIndex in modelfields){var modelfield = modelfields[fieldIndex];%>
+							<option><%= modelfield.field %></option>
+						<%}%>
+			  		</select>
+			  	</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+	  		<div class="form-group">
+			  	<label for="charttype"><%%= getMessage("value") %></label>
+			  	<div class="controls">
+			  		<div class="input-group">
+				    	<span class="input-group-addon">
+							<select name="filterfieldoperator">
+								<%for(var index in dbsearchOperators){
+								var option = dbsearchOperators[index];
+								if(typeof option == "object"){%>
+									<option data-prepend="<%= option.prepend || "" %>" data-append="<%= option.append || "" %>" data-type="<%= option.type %>" value="<%= option.id %>"><%%= getMessage("<%= option.display %>") %%></option>
+								<%}else if(typeof option == "string"){%>
+								<%}}%>
+							</select>
+					    </span>
+				      	<input type="text" name="filterfieldvalue" class="form-control" placeholder="Filter <%%= getMessage("value") %>">
+				  	</div>
+			  	</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+	  		<div class="form-group">
+			  	<label for="aggregate-filter">&nbsp;</label>
+			  	<div class="controls">
+			  		<a name="aggregate-filter" class="btn btn-danger btn-xs aggregate-filter remove pull-right disabled" ><i class="glyphicon glyphicon-remove-sign"></i><%%= getMessage("remove") %></a>
+			  	</div>
+		 	</div>
+		</div>
+	</div>
+</script>
+<script type="text/template" id="aggregate_pipeline_project_template">
+	<div class="row pipeline advanced" data-pipeline-type="$project" style="display:none;">
+		<div class="col-sm-9">
+			<div class="form-group">
+			  	<label for="aggregate-query_field">
+			  		<%%= getMessage("project-_id-as") %>
+			  	</label>
+			  	<div class="controls">
+			  		<textarea class="form-control" name="_id_text">$_id</textarea>
+			  	</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+	  		<div class="form-group">
+			  	<label for="count"><%%= getMessage("count-as") %></label>
+			  	<div class="controls">
+			  		<input type="text" name="count" value="$count"/>
+			  	</div>
+			</div>
+		</div>
+	</div>
+</script>
+<script type="text/template" id="aggregate_pipeline_sort_template">
+	<div class="row pipeline aggregate-sort-raw advanced" data-pipeline-type="$sort" >
+		<div class="col-sm-9">
+	  		<div class="form-group">
+			  	<label for="sortfieldvalue"><%%= getMessage("sort-order") %></label>
+			  	<div class="controls">
+			  		<div class="input-group">
+				    	<span class="input-group-addon">
+							<select  name="sortfield">
+					  			<option value=""><%%= getMessage("select") %> <%%= getMessage("field") %></option>
+					  			<%for( var fieldIndex in modelfields){var modelfield = modelfields[fieldIndex];%>
+									<option><%= modelfield.field %></option>
+								<%}%>
+					  		</select>
+					    </span>
+					    <span class="input-group-addon">
+						    <select name="sortfieldvalue">
+								<%for(var index in dbsortOperators){
+								var option = dbsortOperators[index];
+								if(typeof option == "object"){%>
+									<option value="<%= option.id %>"><%%= getMessage("<%= option.display %>") %%></option>
+								<%}}%>
+							</select>
+						</span>
+				  	</div>
+			  	</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+	  		<div class="form-group">
+			  	<label for="aggregate-sort">&nbsp;</label>
+			  	<div class="controls">
+			  		<a name="aggregate-sort" class="btn btn-danger btn-xs aggregate-sort remove pull-right disabled" ><i class="glyphicon glyphicon-remove-sign"></i><%%= getMessage("remove") %></a>
+			  	</div>
+		 	</div>
+		</div>
+	</div>
+</script>

@@ -1,0 +1,10 @@
+{
+	"title":"Layout",
+	"description":"Layout - Description",
+	"version":"0.1",
+   	"plugintype":"layout",
+	"priority":0.1,
+	"layoutdir":"layouts",
+	"servicedir":"",
+	"status":"default"
+}

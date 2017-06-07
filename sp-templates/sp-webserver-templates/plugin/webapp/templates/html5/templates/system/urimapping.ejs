@@ -1,0 +1,9 @@
+<%if (typeof configuration == "object" && configuration !== "undefined" && configuration.modelsettings) {%>
+<script>
+	window.urimappings = _.extend(window.urimappings||{}, {"<%= name %>":{"fieldsettings":<%- JSON.stringify(configuration.modelsettings) %>
+	<%if (typeof model == "object") {%>, "defaultmodel":<%- JSON.stringify(model) %><%}%>
+	<%if (configuration.modelaction) {%>, "action":<%- JSON.stringify(configuration.modelaction) %><%}%>
+	<%if (serviceconfig.servicelinks) {%>, "tabs":<%- JSON.stringify(serviceconfig.servicelinks) %><%}%>
+	<%if (configuration.validation) {%>, "validation":<%- JSON.stringify(configuration.validation) %><%}%>}});
+</script>
+<%}%>

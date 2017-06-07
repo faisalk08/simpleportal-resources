@@ -1,0 +1,11 @@
+define( [
+ 	"/uiplugin/backbone-ext/src/backbone-ext.js"
+], function(Backbone){
+	"use strict";
+	
+	var exports = this || window || {}; // Local variable for exporting the functions.
+<%- include views/common.js.ejs %>
+<%for(var i in serviceconfiglist){ var serviceconfig = serviceconfiglist[i];%>
+<%- include urimapping.js.ejs %><%}%>
+	return exports;
+});

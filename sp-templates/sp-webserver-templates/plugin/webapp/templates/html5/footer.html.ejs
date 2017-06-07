@@ -1,0 +1,66 @@
+<%
+var staticfooterpagelinks  = [];
+if(pluginsetting && pluginsetting.webappsetting && pluginsetting.webappsetting.websiteconfig && pluginsetting.webappsetting.websiteconfig.webpages)
+	staticfooterpagelinks = pluginsetting.webappsetting.websiteconfig.webpages.filter(function(weblink){return (!weblink.hasOwnProperty("footer") || weblink.footer) && weblink.status == "active";});	
+else{
+	var _webapges=[];
+	if(typeof serverconfig.webpages !== "undefined")
+		_webapges = serverconfig.webpages;
+	else if(serverconfig && typeof serverconfig.termsofserviceuri)
+		_webapges = [
+			{footer:true, url:'', uri:(serverconfig.termsofserviceuri), icon:"fa fa-cog", display:'terms-of-service', public:true}
+		];
+		
+	if(typeof userprofile != "undefined" && typeof userprofile != "undefined" && userprofile.username)
+		staticfooterpagelinks = _webapges.filter(function(weblink){return !weblink.hidden && (weblink.footer) && (weblink.signin==true||(weblink.signin==false && weblink.public==true)||(weblink.public==true));});
+	else
+		staticfooterpagelinks = _webapges.filter(function(weblink){return !weblink.hidden && (weblink.footer) && ((weblink.public==true) || weblink.public==false && weblink.signin==false);});
+}
+var _footerconfig = serverconfig.footerconfig;
+if(webappsetting && typeof webappsetting.footerconfig == 'object')
+	_footerconfig = webappsetting.footerconfig;
+%>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<span class='pull-left'>
+				<%if(typeof _footerconfig === 'object' && _footerconfig.copyright){%>
+					&copy; <a href='<%= _footerconfig.copyright.website %>' target='_blank'><%= _footerconfig.copyright.company %> <%= _footerconfig.copyright.info %></a>
+				<%}%>
+			</span>
+			<span class='pull-right'>
+			    <%if(typeof _footerconfig === 'object' && _footerconfig.contact && _footerconfig.contact.phone){%>
+					&nbsp;&nbsp;<i class="fa fa-phone"></i> <%= _footerconfig.contact.phone %>
+				<%}%>
+			</span>
+			<span class='pull-right'>
+				<%if(typeof _footerconfig === 'object' && _footerconfig.contact){%>
+					<i class="fa fa-envelope"></i> <a href='mailto:<%= _footerconfig.contact.email %>'><%= _footerconfig.contact.display||_footerconfig.contact.email %></a>
+				<%}%>
+			</span>
+		</div>
+	</div>
+	<div class="row versioninfo">
+		<center>
+			<%if(webappsetting && webappsetting.mobile){%><a href='<%= webappuri %>/mobile'><i class="fa fa-mobile"></i> Mobile version&raquo;</a><%}%>
+			<%for(var spi in staticfooterpagelinks){ var splpagelink = staticfooterpagelinks[spi];var spselected = (splpagelink.uri == htmlfile || (htmlfile == "/index.html" && splpagelink.uri == "/home.html"));%>
+				<a href='<%= spselected ? "javascript:void(0);" : splpagelink.uri || '/' %>'>
+					<i class="<%= splpagelink.icon %>"></i> <%= getMessage(splpagelink.display) %>
+		    	</a>
+			<%}%><br/>
+			<i>
+				<%if(typeof pluginsetting == 'object' && pluginsetting.id){%><%= pluginsetting.title %>@v<%= pluginsetting.version %> / <%}%>
+				<%if(themeconfig){%><%= themeconfig.title %>@v<%= themeconfig.version %> - <%}%>
+				<%= getMessage("upated-on") %> '<b><%= curtime %></b>'
+			</i>
+		</center>
+	</div>
+</div>
+<!--
+<div id="google_translate_element"></div><script type="text/javascript">
+	function googleTranslateElementInit() {
+	  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+	}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+-->

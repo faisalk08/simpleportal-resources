@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<base href="<%= webappuri %>/">
+	    
+	    <title><%= title %><%= typeof description != "undefined" ? " / " + description : "" %></title>
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    
+	    <%- include(metatagpage) %>
+		
+		<!--[if IE]><![endif]-->
+    	<link rel="stylesheet" href="app.css">
+    	<style>
+			.navbar .brand, .navbar .navbar-brand {
+				<%if(typeof pluginsetting != "undefined" &&typeof pluginsetting.webappsetting != "undefined" && pluginsetting.webappsetting.logo){%>
+  					background:url('<%= pluginsetting.webappsetting.logo %>')
+  				<%} else if(typeof serverconfig != "undefined" && serverconfig.logo && serverconfig.logo.length > 0){%>
+  					background:url('data:<%= serverconfig.logo[0].type %>;base64,<%= serverconfig.logo[0].content %>')
+  				<%}else{%>
+  					background:url('/logo.png')
+  				<%}%>
+					no-repeat
+		  	} 
+    	</style>
+	</head>
+	
+	<body class="nonmobilea">
+		<%- include(pagelayout) %>
+	   
+	    <div id="modal"></div>
+	    
+		<script type="text/template" id='notification_tmpl'>
+			<div class='alert info'><button type="button" class="close" data-dismiss="alert">×</button><h4>Message!</h4><%%= message %></div>
+		</script>
+		<script type="text/template" id='modal_tmpl'>
+			<%- include templates/modaldialog.html.ejs %>
+		</script>
+		
+		<script src="js/appconfig.js"></script>
+		<script data-main="js/javascript.js" src="/cdn/lib/require.min.js"></script>
+	</body>
+</html>

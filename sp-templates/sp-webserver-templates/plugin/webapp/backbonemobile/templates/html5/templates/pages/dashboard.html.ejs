@@ -1,0 +1,28 @@
+<div class="ui-bar ui-bar-a ui-corner-all">
+	<%= pluginsetting.title %>
+</div>
+<div class="ui-grid-b ui-responsive">
+	<%	var wpindex=0;
+		if(pluginsetting && pluginsetting.webappsetting && pluginsetting.webappsetting.layout && pluginsetting.webappsetting.layout.sidepanel){
+			for(var i =0; i<pluginsetting.webappsetting.layout.sidepanel.length; i++) {
+				var pluginservice = pluginsetting.webappsetting.layout.sidepanel[i];
+				
+				if(pluginservice.uri == "#dashboard") {
+					pluginservice.url = "#home";
+					pluginservice.paneltitle=pluginsetting.title;
+				}
+		%>
+		<div class="ui-block-<%= wpindex++%3 == 0 ? "a" : wpindex%3 == 1 ? "b" : "c"%>">
+			<a class="app-icon" 
+				<% if(pluginservice.templatedir && pluginservice.templateName){ %>data-template="true" data-templatedir="<%= pluginservice.templatedir %>" data-templateName="<%= pluginservice.templateName %>.html"<%}%>
+				<% if(pluginservice.urlRoot){ %>data-urlRoot="<%= pluginservice.urlRoot %>"<%}%>
+				data-paneltitle='<%= pluginservice.paneltitle ? pluginservice.paneltitle : "" %>' 
+				data-panellink="true" 
+				data-role="button" 
+				href="<%= pluginservice.url || pluginservice.uri.replace("#", "#/view/") %>">
+				<i class="<%= pluginservice.icon || "fa fa-database" %> fa-3x"></i><br/>
+				<strong><%= getMessage(pluginservice.display) %></strong>
+			</a>
+		</div>
+	<%	}} %>
+</div>

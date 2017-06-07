@@ -1,0 +1,18 @@
+<div class="panel-group" id="<%%= name %>_accordion_group" role="tablist">
+	<div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+		<h4 class="panel-title">
+        	<a role="button" data-toggle="collapse" data-parent="#<%%= name %>_accordion_group" href="#<%%= name %>_accordion" aria-expanded="true" aria-controls="<%%= name %>_accordion">
+				<%%= getMessage(typeof title == 'undefined' ? title : name) %>
+				<a class='btn btn-xs printchart pull-right' ><i class="glyphicon glyphicon-print"></i> <%%= getMessage("print") %></a>
+				<a class='btn btn-xs exportchart pull-right' ><i class="glyphicon glyphicon-download"></i> <%%= getMessage("export") %></a>
+				<a class='btn btn-xs savefilter pull-right' style="display:none;" ><i class="glyphicon glyphicon-plus"></i> <%%= getMessage("save") %> &raquo;</a>
+        	</a>
+      </h4>
+    </div>
+    <div id="<%%= name %>_accordion" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      	<div class="panel-body">
+      		<canvas width="550px" height="200px"></canvas>
+      	</div>
+	</div>
+</div>

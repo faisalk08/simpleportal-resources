@@ -1,0 +1,54 @@
+<div id="navigation-bar" class="navigation-bar">
+	<div class="bar">
+		<button id="navbox-trigger" class="navbox-trigger"><i class="fa fa-lg fa-th"></i></button>
+	</div>
+	<div class="navbox" >
+		<div class="navbox-tiles">
+<%% 
+	if(userprofile.dashboards&& userprofile.dashboards.length >0) {
+		for( var i in userprofile.dashboards ){
+			var dashboard = userprofile.dashboards[i];
+			var _dashboarduri = (dashboard && dashboard.id) ?  dashboard.id : (dashboard.uri||dashboard.id);
+			var _iconclass = (dashboard && dashboard.iconclass) ?  dashboard.iconclass : 'glyphicon glyphicon-home';
+			
+			if(_dashboarduri.indexOf("#") == 0)
+				_dashboarduri = '#dashboard/'+_dashboarduri.substring(1);
+			if(_dashboarduri.indexOf("#dashboard/") == -1)
+				_dashboarduri = '#dashboard/'+_dashboarduri;
+%>
+	<a href="<%%= _dashboarduri %>" class="tile <%%= window.location.pathname == _dashboarduri + '/' ? 'active' : '' %>">
+  		<div class="icon"><i class="<%%= _iconclass %>"></i></div>
+  		<span class="title"><%%= dashboard.title %>  </span>
+  	</a>
+<%%
+		}
+	}
+	if(typeof layout !== 'undefined') { 
+		for(var index in layout.sidepanel){
+			var sidepanelitem = layout.sidepanel[index];
+			if(typeof sidepanelitem.sidepanel == 'undefined' || sidepanelitem.sidepanel){
+%>
+	<a href="<%%= sidepanelitem.uri %>" class="tile">
+  		<div class="icon"><i class="glyphicon glyphicon-th-list <%%= sidepanelitem.icon||sidepanelitem.iconclass %>"></i></div>
+  		<span class="title"><%%= window.getMessage(sidepanelitem.display) %> </span>
+  	</a>
+<%%
+			}
+		}
+	}
+	for( var i in userprofile.webapps ){
+			var webapp = userprofile.webapps[i];
+			var _webapuri = (webapp && webapp.webappsetting) ?  webapp.webappsetting.webappuri : (webapp.webappuri||'/'+webapp.id);
+			var _iconclass = (webapp && webapp.webappsetting) ?  webapp.webappsetting.iconclass : (webapp.iconclass);
+%>
+			<a href="<%%= _webapuri %>" class="tile">
+	      		<div class="icon"><i class="<%%= _iconclass %>"></i></div>
+	      		<span class="title"><%%= webapp.title %> </span>
+	      	</a>
+<%%
+		}
+%>
+		</div>
+	  </div>
+  </div>
+</div>

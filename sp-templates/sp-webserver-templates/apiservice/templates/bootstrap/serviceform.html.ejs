@@ -1,0 +1,36 @@
+<ol class="breadcrumb">
+	<li><%%= getMessage("service-form") %> &raquo; (<%= serviceconfig.modelname %>)<li>
+</ol>
+<%
+if(typeof modelfields == "undefined"){
+	modelfields = configuration.modelfields;
+}%>
+
+<div class="row">
+	<div class="col-sm-12 span12">
+		<form id="<%= name %>-form" class="smart-form" action="<%= apiurl %>" method="POST" >
+			<fieldset>
+				<%for( var fieldIndex in modelfields){var modelfield = modelfields[fieldIndex];
+					var fieldsetting = modelfield.modelsettings;
+					
+					if(configuration && typeof configuration.modelsettings !== 'undefined')
+					 	fieldsetting = configuration.modelsettings[modelfield.field];
+				%>
+				<%- draw_form_input(modelfield, fieldsetting);%>
+				<%}%>
+			</fieldset>
+			<hr/>
+			<footer class="form-actions form-group">
+				<!--<span href="#<%= name %>" class="btn btn btn-default back">
+					&laquo; <%%= getMessage("go-back") %>
+				</span>&nbsp;&nbsp;-->
+				<button type="button" name="submit" class="save btn btn-primary btn-s">
+					<i class='glyphicon glyphicon-floppy-disk'></i> <%%= getMessage("submit") %>
+				</button>
+				<button type="reset" class="btn btn-default  btn-s clear">
+					<i class='glyphicon glyphicon-repeat'></i> <%%= getMessage("clear") %>
+				</button>
+			</footer>
+		</form>
+	</div>
+</div>

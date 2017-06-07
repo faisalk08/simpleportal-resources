@@ -1,0 +1,75 @@
+// Sets the require.js configuration for your application.
+require.config( {
+      // 3rd party script alias names (Easier to type "jquery" than "libs/jquery-1.8.2.min")
+      paths: {
+            // Core Libraries
+            // @TODO theme must mention the version of the various dependent files
+            "jquery": "/uiplugin/jquery/jquery-2.1.4.min",
+            "jquerymobile": "/uiplugin/jquerymobile/1.4.5/jquery.mobile-1.4.5.min",
+            "underscore": "/uiplugin/underscorejs/underscore-min",
+            "backbone": "/uiplugin/backbonejs/javascript/backbone-min",
+            "backbonemobileapp": "/uiplugin/backbone-ext/src/backbone-ext-mobile"
+      },
+      // Sets the configuration for your third party scripts that are not AMD compatible
+      shim: {
+            "backbone": {
+                  "deps": [ "underscore", "jquery" ],
+                  "exports": "Backbone"  //attaches "Backbone" to the window object
+            }
+      } // end Shim Configuration
+});
+
+var routerjsdependencies = [
+    "/cdn/lib/order.js!js/app.js"
+];
+<% if(typeof webappsetting.routerjsdependencies !== 'undefined' ) {%>routerjsdependencies=routerjsdependencies.concat(<%- JSON.stringify(webappsetting.routerjsdependencies)%>);<%}%>
+
+require(routerjsdependencies,
+	function(MobileAppRouter){
+		// do the start up here not at the end of index.html
+		$( document ).on( "mobileinit",
+			// Set up the "mobileinit" handler before requiring jQuery Mobile's module
+			function() {
+				// Prevents all anchor click handling including the addition of active button state and alternate link bluring.
+				$.mobile.linkBindingEnabled = false;
+
+				// Disabling this will prevent jQuery Mobile from handling hash changes
+				$.mobile.hashListeningEnabled = false;
+			}
+		)
+
+		require( [ "jquerymobile" ], function() {
+			// Instantiates a new Backbone.js Mobile Router
+			var mystorage = window.localStorage;
+			var paginationDelta = mystorage.paginationDelta||10;
+			
+			 // Tells Backbone to start watching for hashchange events
+	        Backbone.history.start();
+	        
+	        var isPhone = screen.height < 800 || screen.width < 800;
+	        
+			this.router = new MobileAppRouter({
+				mainurl:"<%= webappsetting && typeof webappsetting.mainurl !== 'undefined' ? webappsetting.mainurl.replace("#", "") : webappsetting.webappuri.replace("#", "") + '/' %>"
+				,themeskin:'<%= themeconfig.preference && themeconfig.preference.colorskin || "a" %>'
+				,mystorage:mystorage
+				,paginationDelta:paginationDelta
+				,popuppage:"#mainpopup" 
+				,mainpage:'#mainpage', singlepage:true
+				,loginuri:"/login", paneldisplay:isPhone ? "overlay" : "push"
+				,defaulturi:"<%= (webappsetting && typeof webappsetting.defaulturi !== 'undefined') ? webappsetting.defaulturi.replace("#", "") : 'mobile/templates/pages/dashboard.html' %>"
+				,settingsuri:"<%= (webappsetting && typeof webappsetting.settingsuri !== 'undefined') ? webappsetting.settingsuri.replace("#", "") : 'mobile/templates/pages/settings.html' %>"
+			});
+			
+			if(!Backbone.history.getFragment()){
+				this.router.home();
+			} else{
+				var defaulturi = Backbone.history.getFragment();
+				
+				Backbone.history.fragment = null;
+				this.router.navigate(defaulturi, {trigger: true, replace: true});
+			}
+				
+			$(document).find("[data-role=page]").show();
+		});
+	}
+);

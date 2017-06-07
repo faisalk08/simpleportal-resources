@@ -1,0 +1,15 @@
+{
+	"title":"UI Plugin",
+	"description":"UI plugin - Description",
+	"version":"0.1",
+   	"plugintype":"uiplugin",
+	"priority":0.1,
+	"uiplugindir":"uiplugin",
+	"status":"default",
+	"uipluginsetting":{
+		"downloadpage":"",
+		"homepage":"",
+		"css":[],
+		"javascript":[]
+	}
+}

@@ -1,0 +1,17 @@
+<ul data-role="listview">
+	<li data-icon="home">
+		<a href="#home" data-mini="true" data-icon="home"><%= getMessage("home") %></a>
+	</li>
+<%if(typeof userprofile != 'undefined'){%>
+    <li data-role="list-divider">
+    	<%= getMessage("logged-in-as") %> <%= userprofile.emailAddress %>
+    </li>
+	<li data-icon="delete">
+	    <a href="#logout" data-mini="true"  data-icon="delete"><%= getMessage("logout") %></a>
+	</li>
+<%} else{%>
+	<li data-icon="user">
+		<a href="#login" data-mini="true" ><%= getMessage("login") %></a>
+	</li>
+<%}%>
+</ul>

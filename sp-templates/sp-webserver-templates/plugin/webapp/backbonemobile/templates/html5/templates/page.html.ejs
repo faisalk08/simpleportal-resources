@@ -1,0 +1,14 @@
+<div data-role="page" id="<%%= pageid %>">
+ <%%if(appendTemplate){%>
+    <div data-role="header" data-position="fixed" data-add-back-btn="<%%= false||backButton %>" >
+        <a data-iconpos="notext" data-direction="reverse" href="#back" data-rel="back" data-icon="back">Back</a>
+        <h1 class="logo"></h1>
+        <a data-iconpos="notext" data-pos="right" data-direction="reverse" href="#settings" data-icon="gear">Settings</a>
+    </div>
+    <div data-role="content" class="content ui-content">
+ <%%}%>
+ <%%= pagedata %>
+<%%if(appendTemplate){%>
+    </div>
+</div>
+<%%}%>

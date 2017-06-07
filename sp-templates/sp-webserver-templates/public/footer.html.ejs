@@ -1,0 +1,49 @@
+<%	
+var _webapges=[];
+if(typeof serverconfig.webpages !== "undefined")
+	_webapges = serverconfig.webpages;
+else if(serverconfig && typeof serverconfig.termsofserviceuri)
+	_webapges = [
+		{footer:true, url:'', uri:(serverconfig.termsofserviceuri), icon:"fa fa-cog", display:'terms-of-service', public:true}
+	]
+	
+var staticfooterpagelinks = [];
+if(typeof userprofile != "undefined" && typeof userprofile != "undefined" && userprofile.username)
+	staticfooterpagelinks = _webapges.filter(function(weblink){return !weblink.hidden && (weblink.footer) && (weblink.signin==true||(weblink.signin==false && weblink.public==true)||(weblink.public==true));});
+else
+	staticfooterpagelinks = _webapges.filter(function(weblink){return !weblink.hidden && (weblink.footer) && ((weblink.public==true) || weblink.public==false && weblink.signin==false);});
+%>
+<div class="navbar navbar-default navbar-fixed-bottom footer">
+	<div class="container container-fluid">
+		<div class="row">
+			<%if(serverconfig && typeof serverconfig.footerconfig === 'object' && serverconfig.footerconfig && serverconfig.footerconfig.copyright){%>
+				<span class='pull-left'>&copy; <a href='<%= serverconfig.footerconfig.copyright.website %>' target='_blank'><%= serverconfig.footerconfig.copyright.company %> <%= serverconfig.footerconfig.copyright.info %></a></span>
+			<%}%>
+			
+			<%if(serverconfig && typeof serverconfig.footerconfig === 'object' && serverconfig.footerconfig && serverconfig.footerconfig.contact){%>
+				<span class='pull-right'>
+			      &nbsp;&nbsp;<i class="icon-volume-down"></i><%= serverconfig.footerconfig.contact.phone %>
+				</span>
+				<%if(serverconfig.footerconfig.contact.email){%>
+				<span class='pull-right'>
+					<a href='mailto:<%= serverconfig.footerconfig.contact.email %>'><i class="icon-envelope"></i><%= serverconfig.footerconfig.contact.email %></a> 
+				</span>
+				<%}%>
+			<%}%>
+		</div>
+		<div class="row versioninfo">
+			<center>
+				<%for(var spi in staticfooterpagelinks){ var splpagelink = staticfooterpagelinks[spi];var spselected = (splpagelink.uri == htmlfile || (htmlfile == "/index.html" && splpagelink.uri == "/home.html"));%>
+					<a href='<%= spselected ? "javascript:void(0);" : splpagelink.uri || '/' %>'>
+						<i class="<%= splpagelink.icon %>"></i> <%= getMessage(splpagelink.display) %>
+			    	</a>
+				<%}%><br/>
+				<i>
+					<%if(typeof pluginsetting == 'object' && pluginsetting.id){%><%= pluginsetting.title %>@v<%= pluginsetting.version %> / <%}%>
+					<%if(themeconfig){%><%= themeconfig.title %>@v<%= themeconfig.version %> - <%}%>
+				 	<%= getMessage("upated-on") %> '<b><%= curtime %></b>'
+				 </i>
+			</center>
+		</div>
+    </div>
+</div>

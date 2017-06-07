@@ -1,0 +1,49 @@
+<%%draw_dynamic_table = function(name, dynamicresult, tableheaderindex){%>
+<table width="100%" id="datatable_<%%= name %>_dynamic_table" class="table table-striped table-hover table-condensed dt-responsive">
+	<thead>
+		<tr>
+			<%%  var modelfields = [];
+			if(typeof dynamicresult == "object" && typeof dynamicresult.length != "number"){
+				modelfields = Object.keys(dynamicresult);
+				if(modelfields.length == 1 && typeof dynamicresult[modelfields[0]].length == "number"){
+					dynamicresult=dynamicresult[modelfields[0]];
+				}
+			}
+			
+			if(dynamicresult.length > 0){
+				modelfields = Object.keys(dynamicresult[0]);
+				if(tableheaderindex == 0){
+				_.forEach(modelfields, function (modelfield, mdi){
+				//for (var i=0; i < modelfields.length; i++) {
+			%>
+				<th data-data="<%%= modelfield %>"><%%= getMessage(modelfield) %></th>
+			<%%})}}%>
+		</tr>
+	</thead>
+	<tbody>
+		<%% _.forEach(dynamicresult, function (modeldata, i) {
+			//var modeldata = dynamicresult[i];
+		%>
+		<tr data-id='<%%= typeof modeldata == "object" ? (modeldata._id||modeldata[modelfields[0]]) : modeldata %>'>
+			<%% for( var fieldIndex in modelfields){
+			var modelfield = modelfields[fieldIndex];
+			var displayfield =  modeldata[modelfield];
+			%>
+			<td>
+			<%%if(typeof displayfield == "object" && typeof displayfield.length == "number"){%>
+				<%% draw_dynamic_table(name+"_"+modelfield, displayfield, i*fieldIndex); %>
+			<%%} else if(typeof displayfield == "object"){%>
+				<%% draw_dynamic_table(name+"_"+modelfield, [displayfield], i*fieldIndex); %>
+			<%%}else if(typeof displayfield == "float" || typeof displayfield == "number"){%>
+				<%%= Math.round(displayfield) %>
+			<%%}else{%>
+				<%%= displayfield %>
+			<%% } %>
+			</td>
+			<%% } %>
+		</tr>
+		<%% }); %>			
+	</tbody>
+</table>
+<%%}%>
+<%% draw_dynamic_table(name, results, 0);%>

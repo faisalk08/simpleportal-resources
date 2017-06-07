@@ -1,0 +1,94 @@
+/**
+ * Javascript files required for the application is configured in appconfig.js
+ */
+/**
+ * Version number for the template inside local storage
+ */
+window.templateVersion= '<%= id %>-<%= version %>';
+window.app_cdn_js_files = [];
+window.app_dependencies = [];
+<%var themeinjectedfiles = [];pluginsetting.preference=null;themeconfig.preference=null;%>
+<% var themejsfiles = ["jquery", "theme", "cdn", "plugins", "dynamic"];%>
+window.app_cdn_js_files = [<%
+	if(typeof themeconfig.themesetting !== 'undefined' && themeconfig.themesetting.javascript !== 'undefined'){
+		var firstFile=true;	
+		var thememinified = themeconfig.preference&&themeconfig.preference.minified;
+		for(var i in themejsfiles){
+			var themesubfiles = themeconfig.themesetting.javascript[themejsfiles[i]];
+			if(themesubfiles && typeof themesubfiles == 'object' && typeof themesubfiles.length == 'number'){
+				if(thememinified){%>
+<%= firstFile ? "" : ","%>'/cdn/lib/order.js!/theme<%= themeconfig.themesetting.themeuri %>/js/theme.<%= themejsfiles[i] %>.js'<%firstFile=false;}else{
+				for(var index in themesubfiles){ if(themeinjectedfiles.indexOf(themesubfiles[index]) == -1){themeinjectedfiles.push(themesubfiles[index])}%>	
+<%= firstFile ? "" : ","%>'/cdn/lib/order.js!<%= themesubfiles[index] %>'<%firstFile=false;
+				}}
+			} else if(themesubfiles && typeof themesubfiles == 'object'){for(var plugin in themesubfiles){
+			var pluginfiles = themesubfiles[plugin];
+			if(pluginfiles && typeof pluginfiles == 'object' && typeof pluginfiles.length == 'number'){
+				if(thememinified){%>
+<%= firstFile ? "" : ","%>'/cdn/lib/order.js!/theme<%= themeconfig.themesetting.themeuri %>/js/theme.<%= plugin %>.js'<%firstFile=false;}else{for(var index in pluginfiles){
+if(themeinjectedfiles.indexOf(pluginfiles[index]) == -1){themeinjectedfiles.push(pluginfiles[index])}%>	
+<%= firstFile ? "" : ","%>'/cdn/lib/order.js!<%= pluginfiles[index] %>'<%firstFile=false;
+				}}
+			}}}
+		}
+	}%>
+];
+<%if(pluginsetting.preference && pluginsetting.preference.minified){%>
+window.app_js_files = [<%// pre script files
+	if(webappsetting.javascript && typeof webappsetting.javascript.prescript !== 'undefined' && webappsetting.javascript.prescript !== 'undefined'){
+		for(var i in webappsetting.javascript.prescript){%>
+'/cdn/lib/order.js!<%= webappsetting.javascript.prescript[i] %>',<%}}%>
+'/cdn/lib/order.js!<%= webappsetting.webappuri %>/js/app.<%= pluginsetting.id %>.dynamic.min.js',
+'/cdn/lib/order.js!<%= webappsetting.webappuri %>/js/app.<%= pluginsetting.id %>.min.js'<%	// post script files
+	if(webappsetting.javascript && typeof webappsetting.javascript.postscript !== 'undefined' && webappsetting.javascript.postscript !== 'undefined'){
+		for(var i in webappsetting.javascript.postscript){%>
+,'/cdn/lib/order.js!<%= webappsetting.javascript.postscript[i] %>'<%
+		}}%>
+];
+<%}else{%>
+window.app_js_files = [<%// pre script files
+	if(webappsetting.javascript && typeof webappsetting.javascript.prescript !== 'undefined' && webappsetting.javascript.prescript !== 'undefined'){
+	for(var i in webappsetting.javascript.prescript){%>
+'/cdn/lib/order.js!<%= webappsetting.javascript.prescript[i] %>',<%}}if(pluginsetting.preference && pluginsetting.preference.minified){%>
+'/cdn/lib/order.js!<%= webappsetting.webappuri %>/js/models.min.js',
+'/cdn/lib/order.js!<%= webappuri %>/service/js/models.js',
+'/cdn/lib/order.js!<%= webappsetting.webappuri %>/js/views.min.js',
+'/cdn/lib/order.js!<%= webappuri %>/service/js/views.js',
+<%	}else{if(webappsetting.javascript && webappsetting.javascript.dependencies && webappsetting.javascript.dependencies.modelfiles){for(var i in webappsetting.javascript.dependencies.modelfiles){%>
+'/cdn/lib/order.js!<%= webappsetting.javascript.dependencies.modelfiles[i] %>',<%	}}
+if(webappsetting.javascript && webappsetting.javascript.modelfiles){for(var i in webappsetting.javascript.modelfiles){%>
+'/cdn/lib/order.js!<%= webappsetting.javascript.modelfiles[i] %>',<%}}if(modelfiles){for(var i in modelfiles){%>
+'/cdn/lib/order.js!/<%= id %>/js/models/<%= modelfiles[i] %>',<%}}%>
+'/cdn/lib/order.js!/<%= id %>/service/js/models.js',<%	
+if(webappsetting.javascript && webappsetting.javascript.dependencies && webappsetting.javascript.dependencies.viewfiles){for(var i in webappsetting.javascript.dependencies.viewfiles){%>
+'/cdn/lib/order.js!<%= webappsetting.javascript.dependencies.viewfiles[i] %>',
+<%	}}
+if(webappsetting.javascript && webappsetting.javascript.viewfiles){for(var i in webappsetting.javascript.viewfiles){%>
+'/cdn/lib/order.js!<%= webappsetting.javascript.viewfiles[i] %>',<% }}if(viewfiles){for(var i in viewfiles){%>
+'/cdn/lib/order.js!/<%= id %>/js/views/<%= viewfiles[i] %>',<%}}}%>
+'/cdn/lib/order.js!/<%= id %>/service/js/views.js',
+<% if(typeof webappsetting.routerjsdependencies !== 'undefined' ) {for(var i in webappsetting.routerjsdependencies){%>
+'/cdn/lib/order.js!<%= webappsetting.routerjsdependencies[i] %>',<%}}if(webappsetting.javascript && webappsetting.javascript.routerfiles){for(var i in webappsetting.javascript.routerfiles){%>
+'/cdn/lib/order.js!<%= webappsetting.javascript.routerfiles[i] %>',<%}} if(webappsetting.javascript && webappsetting.javascript.dependencies && webappsetting.javascript.dependencies.routerfiles){
+for(var i in webappsetting.javascript.dependencies.routerfiles){%>
+'/cdn/lib/order.js!<%= webappsetting.javascript.dependencies.routerfiles[i] %>',<%	}}%>
+<%	// dynamic files
+	if(webappsetting.javascript && typeof webappsetting.javascript.dynamic !== 'undefined' && webappsetting.javascript.dynamic !== 'undefined'){
+		for(var i in webappsetting.javascript.dynamic){if(themeinjectedfiles.indexOf(webappsetting.javascript.dynamic[i]) == -1){%>
+,'/cdn/lib/order.js!<%= webappsetting.javascript.dynamic[i] %>'<%
+		}}}%>
+    <%	// post script files
+	if(webappsetting.javascript && typeof webappsetting.javascript.postscript !== 'undefined' && webappsetting.javascript.postscript !== 'undefined'){
+		for(var i in webappsetting.javascript.postscript){%>
+,'/cdn/lib/order.js!<%= webappsetting.javascript.postscript[i] %>'<%
+		}}%>    
+,'/cdn/lib/order.js!/theme/footer.js'
+,'/cdn/lib/order.js!/theme<%= themeconfig.themesetting.themeuri %>/js/app.js'
+,'/cdn/lib/order.js!/<%= id %>/js/custom.js'
+,'/cdn/lib/order.js!/<%= id %>/js/app.js'
+];
+<%}%>
+<% 	if(typeof webappsetting !== "undefined" && typeof webappsetting.javascript !== 'undefined') {
+	if (typeof webappsetting.javascript.cdn !== 'undefined') { for(var index in webappsetting.javascript.cdn){if(webappsetting.javascript.cdn[index]){%>
+window.app_cdn_js_files.push('/cdn/lib/order.js!<%= webappsetting.javascript.cdn[index] %>');<%		}}}}%>
+<% if(typeof webappsetting.routerjsdependencies !== 'undefined' ) {%>window.app_dependencies=window.app_dependencies.concat(<%- JSON.stringify(webappsetting.routerjsdependencies)%>);<%}%>

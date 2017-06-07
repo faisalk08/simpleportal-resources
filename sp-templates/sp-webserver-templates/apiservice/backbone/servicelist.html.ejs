@@ -1,0 +1,57 @@
+<table width="100%" id="datatable_<%= serviceconfig.modelname %><%= (typeof subservice !== 'undefined' ? "_" + subservice : "") %>" data-plugin="datatable" class="table table-striped table-hover table-condensed dt-responsive <%= (typeof subservice !== 'undefined' && subservice ? "table-bordered" : "") %>">
+	<thead>
+		<tr>
+			<% if(typeof dataType !== "undefined" && dataType === "string"){%>
+				<th >
+					<%= serviceconfig.modelname %>
+				</th>
+			<%}else{%>
+			<%for( var fieldIndex in modelfields){var modelfield = modelfields[fieldIndex];
+			if(fieldIndex == 0 && (typeof subservice == 'undefined' || !subservice)){
+			%>
+				<th data-data="<%= modelfield.field %>"><%%= getMessage("<%= modelfield.field %>") %%>></th>
+			<%}else if(fieldIndex==0 &&  typeof subservice !== 'undefined' && subservice){%>
+				<th data-data="<%= modelfield.field %>"><%%= getMessage("<%= modelfield.field %>") %%>></th>
+			<%}else if(modelfield.type != 'array' && modelfield.type != "object"){
+			%>
+				<th data-data="<%= modelfield.field %>"><%%= getMessage("<%= modelfield.field %>") %%>></th>
+			<%}}}%>			
+			<th data-data="" class="no-sort"><%%= getMessage("actions") %></th>
+		</tr>
+	</thead>
+	<tbody>
+		<%% for (var i=0; i < results.length; i++) { 
+			var modeldata = results[i];
+		%>
+		<tr <%% if(typeof modeldata == "object") {%>data-id='<%%= modeldata['<%= primaryKey %>'] %%>>'<%%}else{%>data-id='<%%= modeldata %>'<%%}%>>
+			<% if(typeof dataType !== "undefined" && dataType === "string"){%>
+				<td>
+					<%% if(typeof modeldata == "object") {%>
+					<%%= modeldata["<%= modelfields[0].field %>"] %%>>
+					<%%}else{%>
+					<%%= modeldata %>
+					<%%}%>
+				</td>
+			<%}else{%>
+			<%for( var fieldIndex in modelfields){var modelfield = modelfields[fieldIndex];
+			if(fieldIndex==0 && (typeof subservice == 'undefined' || !subservice)){
+			%>
+			<td><a href='#<%= configuration.uri %>/<%%= modeldata['<%= primaryKey %>'] %%>>'><%%= modeldata["<%= modelfield.field %>"] %%>></a></td>
+			<%}else if(fieldIndex==0 &&  typeof subservice !== 'undefined' && subservice){%>
+				<td><%% if(typeof modeldata == "object") {%>
+					<span data-field="<%= modelfield.field %>" data-id="<%%= modeldata["<%= modelfield.field %>"] %%>>" class='btn btn-link view-sub'><%%= modeldata["<%= modelfield.field %>"] %%>></span>
+				<%%}else{%>
+					<%%= modeldata %>
+				<%%}%>
+				</td>
+			<%}else if(modelfield.type != 'array' && modelfield.type !="object"){%>
+			<td><%%= modeldata["<%= modelfield.field %>"] %%>></td>	
+			<%}}%>
+			<%}%>
+			<td class="no-sort">
+				<%draw_service_list_action(serviceconfig, (typeof subservice !== 'undefined' ? subservice : ""));%>
+			</td>
+		</tr>
+		<%% } %>			
+	</tbody>
+</table>

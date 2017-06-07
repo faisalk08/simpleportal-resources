@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    
+	    <title><%= serverconfig.title %>- session timeout</title>
+	    
+	    <link href="/theme/theme.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container">
+	      	<div class="header clearfix">
+		      	<%if(typeof serverconfig.logo != "undefined" && serverconfig.logo && serverconfig.logo.length > 0){%>
+			  		<h3 class="text-muted">
+			  			<img class="img-responsive logo" style="display:inline-block; height:30px; margin-top:-5px" src="data:<%= serverconfig.logo[0].type %>;base64, <%= serverconfig.logo[0].content %>" alt="<%= serverconfig.title %>"/>
+			  		</h3>
+			  	<%}else{%> 
+			  	<img class="img-responsive logo" src="/logo.png"/>
+			  	
+			  	<h3 class="text-muted"><%= serverconfig.title %></h3> <%}%>
+	      	</div>
+	      	
+	      	<div class="jumbotron">
+		        <h1>Session timeout</h2>
+		        
+		        <hr>
+		        <p class="lead">You have been redirected to a this page because of inactivity.</p>
+		
+		        <a onclick="backClick()" class="btn btn-primary" type="button"><i class="fa fa-undo"></i> <%= getMessage("back-to-home") %></a>
+		    </div>
+	  	</div>
+	    <div class="container">
+	        
+	    </div>
+	    <script>
+		    function backClick() {
+		        window.history.back()
+		    }
+	    </script>
+	</body>
+</html>

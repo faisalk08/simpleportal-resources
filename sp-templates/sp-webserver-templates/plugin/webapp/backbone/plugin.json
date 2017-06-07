@@ -1,0 +1,39 @@
+{
+	"title":"Backbone app",
+	"description":"Backbone app - Description",
+	"version":"0.1",
+   	"plugintype":"webapp",
+	"htmldir":"html5",
+	"servicedir":["services"],
+	"priority":0.1,
+	"dependencies":[],
+	"webappsetting":{
+		"changetheme":false,
+		"webapptype":"backbone",
+		"javascript":{
+	        "prescript":[]
+		},
+		"layout":{
+			"servicelayout":"tab.html.ejs",
+			"pagelayout":"default.html.ejs",
+			"sidepanel":[
+				{
+					"icon":"fa fa-home", 	
+					"display":"dashboard", 
+					"uri":"#dashboard",
+					"view":"grid", "sidepanel":false
+				 }
+			]
+		}, "dependencies":[
+		     "jqueryuiplugin", 
+		     "underscorejsuiplugin",
+		     "backbonejsuiplugin"
+		]
+	},
+	"preferencesetting":{
+		"tabview":false
+	},"preference":{
+		"tabview":true
+	},
+	"status":"default"
+}

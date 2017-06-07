@@ -1,0 +1,16 @@
+<% if(themeconfig && themeconfig.themesetting && themeconfig.themesetting.requireconfig){%>
+requirejs.config({
+	baseUrl: '/',
+	paths:<%- JSON.stringify(themeconfig.themesetting.requireconfig.paths) %>
+});<%}%>
+require(
+	window.app_cdn_js_files,
+	function(){
+		// Now load app specific files
+		
+		// router dependencies must be included her mostly dynamic urls must be loaded here
+		require(window.app_dependencies, function(){
+			require(window.app_js_files, function(){});
+		});
+	}
+);

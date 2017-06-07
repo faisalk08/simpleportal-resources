@@ -1,0 +1,5 @@
+<% if(typeof bodytemplate != "undefined"){%>
+	<%- include(bodytemplate) %>
+<%}else{%>
+	<%- include(pluginsetting.installeddir + "/resources/templates/pages/home.html.ejs") %>
+<%}%>

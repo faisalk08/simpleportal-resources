@@ -1,0 +1,26 @@
+<%	var _webapps;
+	if(typeof userprofile != "undefined" && typeof userprofile.webapps !== 'undefined')
+		_webapps = userprofile.webapps;%>
+<div class="sidebar-nav">
+	<ul class="nav nav-sidebar">
+<%if(_webapps && _webapps.length > 0){for( var i in _webapps ){
+	var webapp = _webapps[i];
+	var _webapuri = (webapp && webapp.webappsetting) ?  webapp.webappsetting.webappuri : (webapp.webappuri||'/'+webapp.id);
+	var _iconclass = (webapp && webapp.webappsetting) ?  webapp.webappsetting.iconclass : (webapp.iconclass||'fa fa-puzzle-piece');
+%>
+		<li>
+			<a href="<%= _webapuri %>"> 
+				<i class="<%= _iconclass ||'fa fa-puzzle-piece' %>"></i> 
+				<span><%= webapp.title %></span>
+			</a>
+		</li>
+<%}%>
+		<li>
+			<a href="/logout"><i class="fa fa-sign-out"></i> <span><%= getMessage("logout") %></span></a>
+		</li>
+	</ul>
+<%}%>
+	<div class='togglemenuleft'>
+		<a class='toggle-menu'><i class="fa fa-toggle-left"></i></a>
+	</div>
+</div>

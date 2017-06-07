@@ -1,0 +1,8 @@
+{
+	"title":"Util",
+	"description":"Util - Description",
+	"version":"0.1",
+   	"plugintype":"util",
+	"priority":0.1,
+	"status":"default"
+}

@@ -1,0 +1,83 @@
+<div class="row">
+    <div class="col-md-12">
+        <form action="" class="pull-right search-form">
+            <div class="form-group has-feedback">
+        		<label for="search" class="sr-only"><%= getMessage("search") %></label>
+        		<input type="text" class="form-control" name="search" id="search" placeholder="search">
+          		<span class="fa fa-search form-control-feedback"></span>
+        	</div>
+        </form>
+    </div>
+</div>
+<%	var wpindex=0;
+	if(typeof userprofile !== "undefined" && userprofile && userprofile.webapps){
+		var rowsize = 12;
+		var colcount = 4;
+		var colsize = 3;
+		
+		var userapps = userprofile.webapps;
+		var totalapps = userapps.length;
+		
+		var offset = colsize == 2 ? "offset" + colsize : colsize == 3 ? "offset" + 1 : 0;
+		if(totalapps == 1){
+			colcount = 1;colsize=6;
+			offset = "offset3";
+		}else if(totalapps == 2){
+			colcount = 2;colsize=3;
+			offset = "offset3";
+		} else if(totalapps == 3){
+			colcount = 3;colsize=4;
+			offset = "offset0";
+		}	
+
+		var rowcount = totalapps/(colcount);
+
+		for( var rc = 0 ; rc <  rowcount; rc ++ ){%>
+<div class="row thumbnails row-fluid" >
+	<% 
+		for( var cc = 0 ; cc <  colcount; cc++ ){
+			if(totalapps > (cc + (rc*colcount))){
+			var webapp = userapps[cc + (rc*colcount)];
+	%>
+		<div class="col-md-<%= colsize %> col-s-<%= colsize %> col-xs-<%= colsize %>">
+			<a class="btn-default thumbnail" href="/<%= webapp.id %>" data-toggle="popover" title="<%= webapp.title %>" data-placement="bottom" data-content="<%= webapp.description||webapp.title %>">
+				<center>
+					<%if(webapp.webappsetting && webapp.webappsetting.iconclass){%>
+						<i class="<%= webapp.webappsetting && webapp.webappsetting.iconclass ? webapp.webappsetting.iconclass : 'fa fa-puzzle-piece' %> fa-4x"></i>
+					<%}else{%>
+						<img style="max-height:85px;" alt="<%= webapp.id %>" src="<%= webapp.icon ? (webapp.webappuri) + webapp.icon : '/icons/plugin.png' %>" class="img-rounded" />
+					<%}%>
+					<h5><%= webapp.title %></h5>
+				</center>
+			</a>
+		</div>	
+	<%
+			}
+		}
+	%>
+</div>
+<%}}%>
+<div class="row thumbnails row-fluid center">
+	<div class="col-md-4"></div>
+	<div class="col-md-4 ">
+		<%	if(typeof userprofile !== "undefined" && userprofile){%>
+			<a class="thumbnail btn btn-default" href="/logout">
+				<center>
+					<h5><i class="fa fa-power-off" ></i> <%= getMessage("logout") %></h5>
+				</center>
+			</a>
+			<center><i><%= getMessage("loged-in-as") %> <b><%= userprofile.username %></b></i></center>
+		<% } else{ %>
+			<a class="thumbnail btn btn-default" href="/login">
+				<center>
+					<h5><i class="fa fa-sign-in" ></i> <%= getMessage("login") %></h5>
+				</center>
+			</a>
+		<% } %>
+	</div>
+</div>
+<script>
+	$(function(){
+        $('.thumbnail').popover({trigger:'hover'});
+    });
+</script>

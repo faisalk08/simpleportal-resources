@@ -1,0 +1,16 @@
+<%
+	var _metatags;
+	if(typeof metatags !== "undefined" && typeof webappsetting != 'undefined' && !webappsetting.metatags)
+		_metatags = metatags;
+	else if(typeof webappsetting != 'undefined' && webappsetting.metatags )
+		_metatags = webappsetting.metatags;
+%>
+<% if(typeof _metatags != 'undefined' && _metatags ){ for(var metaindex in _metatags){
+	var metatag = _metatags[metaindex];
+	var contentdata = "";
+	if(metatag.content)
+		contentdata="content="+metatag.content;
+	else if(metatag.contentoptions)
+		contentdata="content="+metatag.contentoptions;%>
+<meta <%= metatag.attribute %>="<%= metatag.value %>" <%= metatag.contentoptions ? "content=" + metatag.contentoptions : "" %>/>
+<%}}%>

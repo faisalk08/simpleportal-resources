@@ -1,0 +1,16 @@
+define( [
+ 	"/uiplugin/backbone-ext/src/backbone-ext.js"
+], function(Backbone){
+	"use strict";
+<%- include models/common.js.ejs %>
+<%for(var i in serviceconfiglist){
+	//var service = serviceconfiglist[i];
+	//for(var i in service)
+	//	this[i]=service[i];
+	var serviceconfig = serviceconfiglist[i];
+%>
+	//##############################
+	<%- include model.js.ejs %>
+	//##############################
+<%}%>
+});

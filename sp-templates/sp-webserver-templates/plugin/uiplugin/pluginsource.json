@@ -1,0 +1,1119 @@
+{
+	"pluginstore":[
+      	    {
+      	    	"title":"Simpleportaljs pluginstore",
+      	    	"version":"1.0",
+      	    	"homepage":"http://www.simpleportaljs.com",
+      	    	"autoupdate":true,
+      	    	"downloadlink":"http://www.simpleportaljs.com/api/pluginstore/update"
+      	    }               
+   	],
+	"uiplugin":[
+      {
+    	  "title":"requirejs",
+    	  "version":"2.3.2",
+    	  "homepage":"http://requirejs.org",
+    	  "downloadlink":"http://requirejs.org/docs/release/2.3.2/minified/require.js",
+    	  "integration":{
+    		  "javascript":{
+    			  "latest":["require.js"]
+    		  }
+    	  }
+      },{
+    	  "title":"jquery",
+    	  "version":"3.1.1",
+    	  "homepage":"http://jquery.com/",
+    	  "resources":[
+               {
+					  "resourcename": "jquery-2.1.4.min.js",
+					  "downloadlink": "http://code.jquery.com/jquery-2.1.4.min.js"
+			   },{
+					  "resourcename": "jquery-2.1.4.min.map",
+					  "downloadlink": "http://code.jquery.com/jquery-2.1.4.min.map"
+			   }, {
+				   "downloadlink": "https://code.jquery.com/jquery-3.1.1.min.js"
+			   }, {
+				   "downloadlink": "https://code.jquery.com/jquery-3.1.1.min.map"
+			   }
+    	  ], "plugins":[
+            {
+            	"homepage":"http://beneverard.github.io/jqPagination/",
+				"resourcefolder": "paginate",
+            	"downloadlink":"https://raw.githubusercontent.com/jhuet/jPaginate-fork/master/jquery.paginate.js"
+            },{
+            	"homepage":"http://beneverard.github.io/jqPagination/",
+				"resourcefolder": "paginate",
+            	"downloadlink":"https://raw.githubusercontent.com/beneverard/jqPagination/master/js/jquery.jqpagination.min.js"
+            },
+            {
+            	"homepage":"https://github.com/carhartl/jquery-cookie",
+				"resourcefolder": "cookie",
+            	"downloadlink":"https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"
+            },
+			{
+				"homepage":"http://cookiecuttr.com/",
+				"resourcefolder": "cookiecuttr",
+				"resourcename": "cookiecuttr",
+				"downloadlink": "https://github.com/weare2ndfloor/cookieCuttr/archive/master.zip"
+			}, {
+				"homepage":"http://malsup.com/jquery/form",
+	        	"resourcename": "jquery.form.min.js",
+				"resourcefolder": "form",
+				"version":"3.51.0",
+				"downloadlink": "http://malsup.github.io/min/jquery.form.min.js"
+			}, {
+				"homepage":"http://malsup.com/jquery/block",	
+				"resourcename": "jquery.blockUI.min.js",
+				"resourcefolder": "blockui",
+				"version":"v1.7",
+				"downloadlink": "http://malsup.github.io/min/jquery.blockUI.min.js"
+			}, {
+				"homepage":"https://pupunzi.com/",	
+				"resourcename": "jquery.mb.browser.min.js",
+				"resourcefolder": "mb",
+				"downloadlink": "https://cdn.jsdelivr.net/jquery.mb.browser/0.1/jquery.mb.browser.min.js"
+			}, {
+				"homepage":"http://malsup.com/jquery/media/",
+				"resourcename": "jquery.media.js",
+				"resourcefolder": "media",
+				"version":"0.99",
+				"downloadlink": "http://malsup.github.io/jquery.media.js"
+			}, {
+				"homepage":"http://jsonmate.com/",
+				"resourcename": "jsoneditor",
+				"resourcefolder": "jsoneditor",
+				"downloadlink": "https://github.com/DavidDurman/FlexiJsonEditor/archive/master.zip"
+			}, {
+				"homepage":"https://jqueryvalidation.org/",
+				"resourcename": "jquery.validate.min.js",
+				"resourcefolder": "validate",
+				"version":"1.16.0",
+				"downloadlink": "https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js",
+				"resources":[
+				     {
+				    	 "downloadlink": "https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/additional-methods.min.js"
+				     }  
+				], "integration":{
+					"latest":{
+						"javascript":["jquery.validate.min.js", "additional-methods.min.js"]
+					}
+				}
+			}, {
+				"homepage":"http://omnipotent.net/jquery.sparkline",
+				"resourcename": "jquery.sparkline.min.js",
+				"resourcefolder": "sparkline",
+				"version":"2.1.2",
+				"downloadlink": "http://omnipotent.net/jquery.sparkline/2.1.2/jquery.sparkline.min.js"
+			}, {
+				"homepage":"http://digitalbush.com/projects/masked-input-plugin/",
+				"resourcename": "jquery.maskedinput.min.js",
+				"resourcefolder": "maskedinput",
+				"version":"1.4.1",
+				"downloadlink": "https://raw.githubusercontent.com/digitalBush/jquery.maskedinput/1.4.1/dist/jquery.maskedinput.min.js"
+			}, {
+				"homepage":"http://qtip2.com/",
+				"resourcename": "jquery.qtip.min.js",
+				"resourcefolder": "qtip2",
+				"version":"3.0.3",
+				"downloadlink": "http://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.js",
+				"resources":[
+				     {
+				    	 "downloadlink": "http://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css"
+				     },{
+				    	 "downloadlink": "http://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.map"
+				     }  
+				], "integration":{
+					"latest":{
+						"javascript":["jquery.qtip.min.js"],
+						"css":["jquery.qtip.min.css"]
+					}
+				}
+			}, {
+				"resourcename": "jquery.easypiechart.min.js",
+				"resourcefolder": "easypiechart",
+				"downloadlink": "https://raw.githubusercontent.com/rendro/easy-pie-chart/master/dist/jquery.easypiechart.min.js"
+			}, {
+				"resourcename": "jquery.knob.min.js",
+				"resourcefolder": "knobe",
+				"downloadlink": "https://raw.githubusercontent.com/aterrien/jQuery-Knob/master/dist/jquery.knob.min.js"
+			},{
+				"resourcefolder": "placeholder",
+				"homepage": "https://mathiasbynens.github.io/jquery-placeholder/",
+				"resources":[
+					 {
+						"downloadlink": "https://raw.githubusercontent.com/mathiasbynens/jquery-placeholder/gh-pages/jquery.placeholder.min.js"
+					}, {
+						"downloadlink": "https://raw.githubusercontent.com/mathiasbynens/jquery-placeholder/gh-pages/jquery.placeholder.min.js"
+					}
+				]	
+			}
+		], "requireconfig":{
+			"configkey":"jquery",
+			"paths":{"jquery": "jquery-3.1.1.min"}
+		}, "integration": {
+			"latest": {
+				"javascript": [
+					"jquery-3.1.1.min.js"
+				]
+			},
+			"v214": {
+				"javascript": [
+					"jquery-2.1.4.min.js"
+				]
+			},
+			"cookiecuttr": {
+				"javascript": [
+					"plugin/cookie/jquery.cookie.js",
+					"plugin/cookiecuttr/cookieCuttr-master/jquery.cookiecuttr.js"
+				],
+				"css": [
+					"plugin/cookiecuttr/cookieCuttr-master/cookiecuttr.css"
+				]
+			},
+			"blockUI": {
+				"javascript": [
+					"plugin/blockui/jquery.blockUI.min.js"
+				]
+			},
+			"browser": {
+				"javascript": [
+					"plugin/mb/jquery.mb.browser.min.js"
+				]
+			},
+			"form": {
+				"javascript": [
+					"plugin/form/jquery.form.min.js"
+				]
+			},
+			"media": {
+				"javascript": [
+					"plugin/media/jquery.media.js"
+				]
+			},
+			"jsoneditor": {
+				"javascript": [
+					"plugin/jsoneditor/FlexiJsonEditor-master/jquery.jsoneditor.min.js"
+				],"css": [
+				     "plugin/jsoneditor/FlexiJsonEditor-master/jsoneditor.css"
+				]
+			},
+			"validate": {
+				"javascript": [
+					"plugin/validate/jquery.validate.min.js"
+				]
+			},
+			"sparkline": {
+				"javascript": [
+					"plugin/sparkline/jquery.sparkline.min.js"
+				]
+			},
+			"qtip2": {
+				"javascript": [
+					"plugin/qtip2/jquery.qtip.min.js"
+				],"css":["plugin/qtip2/jquery.qtip.min.css"]
+			},
+			"easypiechart": {
+				"javascript": [
+					"plugin/easypiechart/jquery.easypiechart.min.js"
+				]
+			},
+			"maskedinput": {
+				"javascript": [
+					"plugin/maskedinput/jquery.maskedinput.min.js"
+				]
+			},
+			"paginate": {
+				"javascript": [
+					"plugin/paginate/jquery.paginate.js"
+				]
+			}
+		}
+      },{
+    	  "dependencies":["jquery"],
+    	  "title":"bootstrap",
+    	  "version":"3.3.5",
+    	  "homepage":"http://getbootstrap.com/",
+    	  "downloadlink":"https://github.com/twbs/bootstrap/releases/download/v3.3.5/bootstrap-3.3.5-dist.zip",
+    	  "resources":[
+    	      {
+    	    	  "resourcename":"latest",
+    	    	  "downloadlink":"https://github.com/twbs/bootstrap/releases/download/v3.3.7/bootstrap-3.3.7-dist.zip"
+	    	  }
+    	  ],"integration": {
+			"latest": {
+				"javascript": [
+					"latest/bootstrap-3.3.7-dist/js/bootstrap.min.js"
+				],
+				"css": [
+					"latest/bootstrap-3.3.7-dist/css/bootstrap.min.css",
+					"latest/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css"
+				]
+			}
+		}
+      },{
+    	  "title":"Font Awesome",
+    	  "version":"4.7.0",
+    	  "homepage":"http://fontawesome.io",
+    	  "resources":[
+			{
+				"resourcefolder": "fonts",
+				"downloadlink": "http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular"
+			},{
+				"resourcefolder": "fonts",
+				"downloadlink": "http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.ttf?v=4.7.0"
+			},
+			{
+				"resourcefolder": "fonts",
+				"downloadlink": "http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0"
+			},
+			{
+				"resourcefolder": "fonts",
+				"downloadlink": "http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff?v=4.7.0"
+			},
+			{
+				"resourcefolder": "fonts",
+				"resourcename": "fontawesome-webfont.iefix.eot",
+				"downloadlink": "http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0"
+			},
+			{
+				"resourcefolder": "fonts",
+				"downloadlink": "http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.eot?v=4.7.0"
+			},
+			{
+				"resourcefolder": "css",
+				"downloadlink": "http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+			}
+          ],"integration":{
+      		"latest":{
+    			"css":["css/font-awesome.min.css"]
+    		}
+    	}
+      },{
+    	  "title": "flag-icon-css",
+    	  "version": "2.4.0",
+    	  "homepage": "http://flag-icon-css.lip.is/",
+    	  "downloadlink": "https://github.com/lipis/flag-icon-css/archive/master.zip",
+    	  "comments":"Should download or create the flag iconsett to be able to use with in icon set plugin.",
+    	  "resources":[{
+    		  "resourcename":"flag-iconsett.js",
+    		  "downloadlink":"https://raw.githubusercontent.com/faisalk08/simpleportal-util/master/fieldplugin/flag-icon/flag-iconsett.js"
+    	  }],
+    	  "integration":{
+    		  "latest":{
+    			  "javascript":["flag-iconsett.js"],
+    			  "css":["flag-icon-css-master/css/flag-icon.min.css"]
+    		  }
+    	  }
+      },{
+    	  "dependencies":["bootstrap"],
+    	  "title":"bootstrap-maxlength",
+    	  "version":"1.7.0",
+    	  "homepage":"https://mimo84.github.io/bootstrap-maxlength/",
+    	  "downloadlink":"https://raw.githubusercontent.com/mimo84/bootstrap-maxlength/master/src/bootstrap-maxlength.js",
+    	  "integration":{
+    		  "latest":{
+    			  "javascript":["bootstrap-maxlength.js"]
+    		  }
+    	  }
+      },
+      {
+    	  "dependencies":["bootstrap"],
+    	  "title":"bootstrap-markdown",
+    	  "version":"2.10.0",
+    	  "homepage":"http://www.codingdrama.com/bootstrap-markdown/",
+    	  "downloadlink":"https://github.com/toopay/bootstrap-markdown/tarball/master",
+    	  "integration":{
+    		  "latest":{
+    			  "javascript":["bootstrap-markdown-2.10.0/js/bootstrap-markdown.js"],
+    			  "css":["bootstrap-markdown-2.10.0/css/bootstrap-markdown.min.css"]
+    		  }
+    	  }
+      },
+      {
+    	  "dependencies":["bootstrap"],
+    	  "title":"bootstrap-datepicker",
+    	  "version":"1.6.4",
+    	  "homepage":"https://bootstrap-datepicker.readthedocs.org",
+    	  "resources":[
+             {
+            	 "resourcefolder": "css",
+            	 "downloadlink": "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css"
+             },{
+            	 "resourcefolder": "js",
+            	 "downloadlink": "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"
+             }
+    	   ],"integration":{
+    		  "latest":{
+    			  "javascript":["js/bootstrap-datepicker.min.js"],
+    			  "css":["css/bootstrap-datepicker.min.css"]
+    		  }
+    	  }
+      },{
+    	  "dependencies":["bootstrap"],
+    	  "title":"bootstrap-wizard",
+    	  "version":"1.3.2",
+    	  "homepage":"http://vinceg.github.io/twitter-bootstrap-wizard/",
+    	  "downloadlink":"https://github.com/VinceG/twitter-bootstrap-wizard/archive/1.3.2.tar.gz",
+    	  "integration":{
+    		  "latest":{
+    			  "javascript":["twitter-bootstrap-wizard-1.3.2/jquery.bootstrap.wizard.min.js"]
+    		  }
+    	  }
+      },{
+    	  "dependencies":["bootstrap"],
+    	  "title":"bootstrap-slider",
+    	  "version":"9.7.2",
+    	  "homepage":"https://cdnjs.com/libraries/bootstrap-slider",
+    	  "resources":[{
+	    		  "downloadlink":"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.2/bootstrap-slider.min.js"
+	    	  },{
+	    		  "downloadlink":"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.2/css/bootstrap-slider.min.css"
+	    	  }
+	      ],
+    	  "integration":{
+    		  "latest":{
+    			  "javascript":["bootstrap-slider.min.js"],
+    			  "css":["bootstrap-slider.min.css"]
+    		  }
+    	  }
+      },{
+    	  "dependencies":["bootstrap"],
+    	  "title":"bootstrap-tagsinput",
+    	  "version":"0.8.0",
+    	  "homepage":"http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/",
+    	  "downloadlink":"https://github.com/bootstrap-tagsinput/bootstrap-tagsinput/archive/0.8.0.tar.gz",
+    	  "integration":{
+    		  "latest":{
+    			  "javascript":["bootstrap-tagsinput-0.8.0/dist/bootstrap-tagsinput.min.js"],
+    			  "css":["bootstrap-tagsinput-0.8.0/dist/bootstrap-tagsinput.css"]
+    		  }
+    	  }
+      },{
+    	  "dependencies":["bootstrap"],
+    	  "title":"bootstrap-timepicker",
+    	  "version":"0.5.2",
+    	  "homepage":"http://jdewit.github.io/bootstrap-timepicker/",
+    	  "downloadlink":"https://github.com/jdewit/bootstrap-timepicker/releases/download/v0.5.2/bootstrap-timepicker.tar.gz",
+    	  "integration":{
+    		  "latest":{
+    			  "javascript":["bootstrap-timepicker/js/bootstrap-timepicker.min.js"],
+    			  "css":["bootstrap-timepicker/css/bootstrap-timepicker.min.css"]
+    		  }
+    	  }
+      },{
+    	  "dependencies":["bootstrap"],
+    	  "title":"bootstrap-iconpicker",
+    	  "version":"1.7.0",
+    	  "homepage":"http://victor-valencia.github.io/bootstrap-iconpicker",
+    	  "downloadlink":" https://github.com/victor-valencia/bootstrap-iconpicker/archive/v1.7.0.zip",
+    	  "integration":{
+    		  "latest":{
+    			  	"javascript":[
+    			  	              "bootstrap-iconpicker-1.7.0/bootstrap-iconpicker/js/iconset/iconset-all.min.js",
+    			  	              "bootstrap-iconpicker-1.7.0/bootstrap-iconpicker/js/bootstrap-iconpicker.js"
+    			  	],
+      				"css":["bootstrap-iconpicker-1.7.0/bootstrap-iconpicker/css/bootstrap-iconpicker.css"]
+    		  }
+    	  }
+      }, {
+    	  "title": "bootstrap-session-timeout",
+    	  "version": "1.0.3",
+    	  "homepage": "https://github.com/orangehill/bootstrap-session-timeout",
+    	  "resources": [
+                {"downloadlink": "https://raw.githubusercontent.com/orangehill/bootstrap-session-timeout/master/dist/bootstrap-session-timeout.min.js"}
+    	   ],
+    	  "integration":{
+    		  	"latest":{
+    		  		"javascript":["bootstrap-session-timeout.min.js"]
+    		  	}
+    		},
+	      	"preferencesetting":{
+	      		"disabled":false,
+	      		"logoutAfter":"12000",
+	      		"redirectAfter":"78000",
+	      		"warnAfter":"48000"
+	    	}
+	  }, {
+    	  "title": "fullcalendar",
+    	  "version": "3.15.11",
+    	  "homepage": "http://fullcalendar.io/",
+    	  "resources":[
+	           {
+	    		  "downloadlink":"cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js"
+	           },{
+	     		  "downloadlink":"cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.css"
+	           },{
+	     		  "downloadlink":"cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.print.css"
+	           }
+    	  ],
+    	  "integration":{
+    		  	"latest":{
+    		  		"javascript":["fullcalendar.min.js"],
+    		  		"css":["fullcalendar.min.css", "fullcalendar.print.css"]
+    		  	}
+    		}
+      }, {
+    	  "title": "fuelux",
+    	  "version": "3.15.11",
+    	  "homepage": "http://getfuelux.com/",
+    	  "downloadlink": "https://github.com/ExactTarget/fuelux/raw/master/dist/fuelux.zip",
+    	   "integration":{
+    		  	"latest":{
+    		  		"javascript":["fuelux/js/fuelux.min.js"],
+    		  		"css":["fuelux.min.css"]
+    		  	}
+    		}
+      }, {
+    	  "title": "bootstrap-progressbar",
+    	  "version": "0.9.0",
+    	  "homepage": "http://www.minddust.com/project/bootstrap-progressbar/",
+    	  "downloadlink": "https://github.com/minddust/bootstrap-progressbar/archive/v0.9.0.zip",
+    	  "integration":{
+    		  	"latest":{
+    		  		"javascript":["bootstrap-progressbar-0.9.0/bootstrap-progressbar.min.js"], 
+    		  		"css":["bootstrap-progressbar-0.9.0/css/bootstrap-progressbar-3.3.4.min.css"]
+    		  	}
+    		}
+    	}, {
+    	  "dependencies":["underscorejs"],
+    	  "title":"backbonejs",
+    	  "version":"1.3.3",
+    	  "homepage":"http://backbonejs.org",
+    	  "downloadlink":"",
+    	  "resources":[
+    	      {
+    	    	  "resourcefolder":"javascript",
+    	    	  "downloadlink": "http://backbonejs.org/backbone-min.js"
+    	      },
+    	      { 	
+    	    	  "resourcefolder":"javascript",
+    	    	  "downloadlink": "http://backbonejs.org/backbone-min.map"
+    	      },{
+    	    	  "resourcename":"v0.4.0",
+    	    	  "resourcefolder":"plugins",
+    	    	  "downloadlink": "https://github.com/jhudson8/backbone-query-parameters/archive/v0.4.0.tar.gz"
+    	      },{
+    	    	  "resourcefolder":"plugins",
+    	    	  "downloadlink": "https://raw.github.com/marionettejs/backbone.syphon/master/lib/backbone.syphon.min.js"
+    	      },{
+    	    	  "resourcefolder":"plugins",
+    	    	  "downloadlink": "https://raw.github.com/boazsender/backbone.routefilter/master/dist/backbone.routefilter.min.js"
+    	      },{
+    	    	  "resourcefolder":"plugins",
+    	    	  "downloadlink": "https://raw.github.com/thedersen/backbone.validation/master/dist/backbone-validation-min.js"
+    	      }
+    	  ],"requireconfig":{
+    			"configkey":"backbone",
+    			"paths":{"backbone": "javascript/backbone-min"}
+    	  },"integration":{
+			  "latest":{
+				  "javascript":["javascript/backbone-min.js"]
+			  }, "plugin":{
+				  "javascriptold":[
+	                "plugins/v0.4.0/backbone-query-parameters-0.4.0/backbone.queryparams.min.js",
+	                "plugins/backbone.routefilter.min.js",
+	                "plugins/backbone.syphon.min.js",
+	                "plugins/backbone-validation-min.js"
+	               ], "javascript":[
+	                    "plugins/backbone.routefilter.min.js"
+	               ]
+			  }
+    	  }
+      }, {
+    	  "dependencies":["jquery"],
+    	  "title":"underscorejs",
+    	  "version":"1.8.3",
+    	  "homepage":"http://underscorejs.org",
+    	  "downloadlink":"",
+    	  "resources":[
+    	      {
+    	    	  "downloadlink": "http://underscorejs.org/underscore-min.js"
+    	      },
+    	      { 	
+    	    	  "downloadlink": "http://underscorejs.org/underscore-min.map"
+    	      }
+    	  ],"integration":{
+    			"latest":{
+    				"javascript":["underscore-min.js"]
+    			}
+    		}, "requireconfig":{
+    		  "configkey":"underscore",
+    		  "paths":{"underscore": "underscore-min.js"}
+		  }
+      }, {
+    	  "dependencies":["backbonejs"],
+    	  "title":"backbone-ext",
+    	  "version":"1.8.3",
+    	  "homepage":"http://simpleportaljs.com",
+    	  "downloadlink":"https://github.com/faisalk08/backbone-ext/archive/master.zip",
+    	  "integration":{
+      			"latest":{
+      				"javascript":["backbone-ext-master/src/backbone-ext.js"]
+      			}
+      		}
+      }, {
+    	  "dependencies":["jquery"],
+    	  "title":"jquery-ui",
+    	  "version":"1.12.1",
+    	  "homepage":"http://jqueryui.com/",
+    	  "downloadlink":"",
+    	  "resources":[
+				{
+					  "resourcename": "1.11.4",
+					  "resourcefolder": ".",
+					  "downloadlink": "http://jqueryui.com/resources/download/jquery-ui-1.11.4.zip"
+				}, {
+					"resourcename": "1.12.1",
+					  "resourcefolder": ".",
+					  "downloadlink": "http://jqueryui.com/resources/download/jquery-ui-1.12.1.zip"
+				}
+		 ],"integration":{
+ 		  	"latest":{
+		  		"javascript":["1.12.1/jquery-ui-1.12.1/jquery-ui.min.js"], 
+		  		"css":["1.12.1/jquery-ui-1.12.1/jquery-ui.min.css"]
+		  	}
+		 }
+      }, {
+    	  "dependencies":["jquery"],
+    	  "title":"jquery-ui-bootstrap",
+    	  "version":"1.0.0",
+    	  "homepage":"http://jquery-ui-bootstrap.github.io/",
+    	  "downloadlink":"https://github.com/jquery-ui-bootstrap/jquery-ui-bootstrap/archive/v1.0.0.tar.gz",
+    	  "integration": {
+    		  "latest": {
+    			  "css":["jquery-ui-bootstrap-1.0.0/css/custom-theme/jquery-ui-1.10.3.custom.css"]
+    		  }
+    	  }
+      }, {
+    	  "dependencies":["bootstrap"],
+    	  "title":"bootbox",
+    	  "version":"4.4.0",
+    	  "homepage":"http://bootboxjs.com/",
+    	  "downloadlink":"https://github.com/makeusabrew/bootbox/releases/download/v4.4.0/bootbox.min.js",
+    	  "integration":{
+			"latest":{
+				"javascript":["bootbox.min.js"]
+			}
+  		}
+      }, {
+    	  "title":"editarea",
+    	  "version":"0.8.2",
+    	  "homepage":"http://www.cdolivet.com/editarea",
+    	  "downloadlink":"http://downloads.sourceforge.net/project/editarea/EditArea/EditArea%200.8.2/editarea_0_8_2.zip",
+    	  "integration":{
+    		  "latest":{
+    			  "javascript":["editarea_0_8_2/edit_area/edit_area_full.js"]
+    		  }
+    	  }
+      }, {
+    	  "dependencies":["jquery"],
+    	  "title":"tree-multiselect",
+    	  "version":"1.14.5",
+    	  "homepage":"http://www.patosai.com/projects/tree-multiselect",
+    	  "downloadlink":"https://github.com/faisalk08/tree-multiselect.js/archive/master.zip",
+    	  "resources":[
+				{
+				  "resourcename":"custom",
+				  "resourcefolder":".",
+				  "downloadlink":"https://github.com/faisalk08/tree-multiselect.js/archive/master.zip"
+				}, {
+    	    	  "resourcename":"2.1.3",
+	    		  "resourcefolder":".",
+    	    	  "downloadlink":"https://github.com/patosai/tree-multiselect.js/archive/v2.1.3.tar.gz"
+    	      }
+    	  ],"integration":{
+			"latest":{
+				"css":["2.1.3/tree-multiselect.js-2.1.3/dist/jquery.tree-multiselect.min.css"],
+				"javascript":["2.1.3/tree-multiselect.js-2.1.3/dist/jquery.tree-multiselect.min.js"]
+			},"custom":{
+				"css":["custom/tree-multiselect.js-master/jquery.tree-multiselect.min.css"],
+				"javascript":["custom/tree-multiselect.js-master/jquery.tree-multiselect.min.js"]
+			}
+    	  }
+      },{
+    	  "dependencies":["jquery"],
+    	  "title":"select2",
+    	  "version":"3.5.4",
+    	  "homepage":"http://select2.github.io",
+    	  "downloadlink":"https://github.com/select2/select2/archive/3.5.4.tar.gz",
+    	  "integration":{
+    		  "latest":{
+    			  "javascript":["4.0.3/select2-4.0.3/dist/js/select2.min.js"],
+    			  "css":[
+    			         "4.0.3/select2-4.0.3/dist/css/select2.css",
+    			         "css/select2-bootstrap.min.css"     
+    			  ]
+    		  },"v354":{
+    			  "javascript":["select2-3.5.4/select2.min.js"],
+    			  "css":[
+    			         "select2.css",
+    			         "css/select2-bootstrap.min.css"     
+    			  ]
+    		  }
+    	  }, "resources":[
+    	         {
+    	        	 "resourcefolder":".", 
+    	        	 "resourcename":"4.0.3",
+    	        	 "downloadlink":"https://github.com/select2/select2/archive/4.0.3.tar.gz"
+    	         }, {
+    	        	 "resourcefolder":"css", 
+    	        	 "downloadlink":"https://raw.githubusercontent.com/select2/select2-bootstrap-theme/master/dist/select2-bootstrap.min.css"
+    	         }
+    	  ]
+      },{
+    	  "dependencies":["jquery"],
+    	  "title":"jquery-dragarrange",
+    	  "version":"0.2.0",
+    	  "homepage":"http://vishalok12.github.io/jquery-dragarrange/",
+    	  "downloadlink":"https://github.com/vishalok12/jquery-dragarrange/archive/v0.2.0.tar.gz",
+    	  "integration":{
+    		  "latest":{
+    			  "javascript":["jquery-dragarrange-0.2.0/edit_area/drag-arrange.min.js"]
+    		  }
+    	  }
+      },{
+    	  "dependencies":["jquery"],
+    	  "title":"DataTables",
+    	  "version":"1.10.13",
+    	  "homepage":"https://datatables.net/",
+    	  "resources":[
+                {
+                	"resourcefolder": "css",
+					"downloadlink": "https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"
+                }, {
+                	"resourcefolder": "css",
+					"downloadlink": "https://cdn.datatables.net/buttons/1.2.4/css/buttons.bootstrap.min.css"
+                }, {
+                	"resourcefolder": "css",
+					"downloadlink": "https://cdn.datatables.net/colreorder/1.3.2/css/colReorder.bootstrap.min.css"
+                }, {
+       	        	"resourcefolder":"css",
+       	        	"downloadlink":"https://cdn.datatables.net/rowreorder/1.2.0/css/rowReorder.bootstrap.min.css"
+       	        }, {
+       	        	"resourcefolder":"css",
+       	        	"downloadlink":"https://cdn.datatables.net/scroller/1.4.2/css/scroller.bootstrap.min.css"
+       	        },{
+       	        	"resourcefolder":"css",
+       	        	"downloadlink":"https://cdn.datatables.net/responsive/2.1.0/css/responsive.bootstrap.min.css"
+       	        },{
+       	        	"resourcefolder": "js",
+					"downloadlink": "https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"
+       	        }, {
+       	        	"resourcefolder": "js",
+					"downloadlink": "https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"
+       	        }, {
+       	        	"resourcefolder": "js",
+					"downloadlink": "https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"
+       	        }, {
+       	        	"resourcefolder": "js",
+					"downloadlink": "https://cdn.datatables.net/buttons/1.2.4/js/buttons.bootstrap.min.js"
+       	        }, {
+       	        	"resourcefolder": "js",
+					"downloadlink": "https://cdn.datatables.net/colreorder/1.3.2/js/dataTables.colReorder.min.js"
+       	        },{
+       	        	"resourcefolder":"js",
+       	        	"downloadlink":"https://cdn.datatables.net/rowreorder/1.2.0/js/dataTables.rowReorder.min.js"
+       	        },{
+       	        	"resourcefolder":"js",
+       	        	"downloadlink":"https://cdn.datatables.net/scroller/1.4.2/js/dataTables.scroller.min.js"
+       	        },{
+       	        	"resourcefolder":"js",
+       	        	"downloadlink":"https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"
+       	        },{
+       	        	"resourcefolder":"js",
+       	        	"downloadlink":"https://cdn.datatables.net/responsive/2.1.0/js/responsive.bootstrap.min.js"
+       	        },{
+	     			"resourcefolder": "1.10.9/css",
+	     			"downloadlink": "https://cdn.datatables.net/1.10.9/css/dataTables.bootstrap.min.css"
+	     		},
+	     		{
+	     			"resourcefolder": "1.10.9/css",
+	     			"downloadlink": "https://cdn.datatables.net/buttons/1.0.3/css/buttons.bootstrap.min.css"
+	     		},
+	     		{
+	     			"resourcefolder": "1.10.9/css",
+	     			"downloadlink": "https://cdn.datatables.net/responsive/1.0.7/css/responsive.bootstrap.min.css"
+	     		},
+	     		{
+	     			"resourcefolder": "1.10.9/js",
+	     			"downloadlink": "https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"
+	     		},
+	     		{
+	     			"resourcefolder": "1.10.9/js",
+	     			"downloadlink": "https://cdn.datatables.net/1.10.9/js/dataTables.bootstrap.min.js"
+	     		},
+	     		{
+	     			"resourcefolder": "1.10.9/js",
+	     			"downloadlink": "https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"
+	     		},
+	     		{
+	     			"resourcefolder": "1.10.9/js",
+	     			"downloadlink": "https://cdn.datatables.net/buttons/1.0.3/js/buttons.bootstrap.min.js"
+	     		},
+	     		{
+	     			"resourcefolder": "1.10.9/js",
+	     			"downloadlink": "https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"
+	     		}
+          ],"integration": {
+      		"v1013": {
+    			"javascript": [
+    				"js/jquery.dataTables.min.js",
+    				"js/dataTables.bootstrap.min.js",
+    				"js/dataTables.buttons.min.js",
+    				"js/buttons.bootstrap.min.js",
+    				"js/dataTables.colReorder.min.js",
+    				"js/dataTables.rowReorder.min.js",
+    				"js/dataTables.scroller.min.js",
+    				"js/dataTables.responsive.min.js",
+    				"js/responsive.bootstrap.min.js"
+    			],"css": [
+    				"css/dataTables.bootstrap.min.css",
+    				"css/buttons.bootstrap.min.css",
+    				"css/colReorder.bootstrap.min.css",
+    				"css/rowReorder.bootstrap.min.css",
+    				"css/scroller.bootstrap.min.css",
+    				"css/responsive.bootstrap.min.css"
+    			]
+    		},"latest": {
+    			"javascript": [
+					"1.10.9/js/jquery.dataTables.min.js",
+					"1.10.9/js/dataTables.bootstrap.min.js",
+					"1.10.9/js/dataTables.buttons.min.js",
+					"1.10.9/js/buttons.bootstrap.min.js",
+					"1.10.9/js/dataTables.responsive.min.js"
+				],
+				"css": [
+					"1.10.9/css/dataTables.bootstrap.min.css",
+					"1.10.9/css/buttons.bootstrap.min.css",
+					"1.10.9/css/responsive.bootstrap.min.css"
+				]
+			}
+    	}
+      },{
+    	  "title":"fastclick",
+    	  "version":"1.0.6",
+    	  "homepage":"https://github.com/ftlabs/fastclick",
+    	  "downloadlink":"https://raw.githubusercontent.com/ftlabs/fastclick/master/lib/fastclick.js"
+      },{
+    	  "title":"CKEditor",
+    	  "version":"4.6.2",
+    	  "homepage":"http://ckeditor.com/",
+    	  "plugins":[
+             {
+            	 "resourcename":"source",
+            	 "downloadlink":"http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.6.2/ckeditor_4.6.2_basic.zip"
+             }
+    	  ], "resources":[
+	         {
+	        	 "downloadlink":"http://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"
+	         },{
+	        	 "downloadlink":"http://cdn.ckeditor.com/4.6.2/standard/contents.css"
+	         }
+    	  ],"integration":{
+    		  "latest":{
+    			  "javascript":["ckeditor.js"],
+    			  "css":["contents.css"]
+    		  }
+    	  }
+      },{
+    	  "title":"ACE Editor",
+    	  "version":"1.2.2",
+    	  "homepage":"https://ace.c9.io/#nav=about",
+    	  "downloadlink":"https://github.com/ajaxorg/ace-builds/archive/v1.2.2.zip"
+      }, {
+    	  "title":"Vertical timeline",
+    	  "version":"1.0",
+    	  "homepage":"https://codyhouse.co",
+    	  "resourcebundle":"vertical-timeline.zip",
+    	  "downloadlink":"https://codyhouse.co/redirect/?resource=vertical-timeline"
+      },{
+    	  "title":"jQuery cron editor",
+    	  "version":"0.1.4.1",
+    	  "homepage":"http://shawnchin.github.io/jquery-cron/",
+    	  "downloadlink":"https://github.com/shawnchin/jquery-cron/archive/v0.1.4.1.tar.gz",
+    	  "integration":{
+				"latest":{
+					"javascript":["shawnchin-jquery-cron-78118ba/cron/jquery-cron-min.js"],
+					"css":["shawnchin-jquery-cron-78118ba/cron/jquery-cron.css"]
+				}
+    	  }
+      }, {
+  		  "title":"jQuery mobile",
+    	  "version":"1.4.5",
+    	  "homepage":"http://jquerymobile.com/",
+    	  "resources": [
+				{
+					"resourcename": "jquery.mobile-1.4.5.min.js",
+					"resourcefolder": "1.4.5",
+					"downloadlink": "http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"
+				},{
+					"resourcename": "jquery.mobile-1.4.5.min.map",
+					"resourcefolder": "1.4.5",
+					"downloadlink": "https://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/jquery.mobile.min.map"
+				},{
+					"resourcename": "jquery.mobile-1.4.5.min.css",
+					"resourcefolder": "1.4.5",
+					"downloadlink": "http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+				}, {
+					"resourcefolder": "1.4.5/images",
+					"downloadlink": "https://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/images/ajax-loader.gif"
+				}       
+    	  ], "integration":{
+    		  "latest":{
+    			  "javascript":["1.4.5/jquery.mobile-1.4.5.min.js"],
+    			  "css":["1.4.5/jquery.mobile-1.4.5.min.css"]
+    		  }
+    	  }
+      },
+      {
+    		"title": "xeditable",
+    		"version": "1.5.0",
+    		"homepage": "https://vitalets.github.io",
+    		"resources": [
+    	  		{
+    	  			"resourcename": "bootstrap-editable.min.js",
+    	  			"resourcefolder": "bootstrap",
+    	  			"downloadlink": "http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"
+    	  		},{
+    	  			"resourcename": "bootstrap-editable.css",
+    	  			"resourcefolder": "bootstrap",
+    	  			"downloadlink": "http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"
+    	  		}
+    	  	],"integration":{
+    			"bootstrap":{
+    				"javascript":[
+    					"bootstrap/bootstrap-editable.min.js"
+    				 ], "css":[
+    				    "bootstrap/bootstrap-editable.css"     
+    				 ]
+    			}
+    		}
+    	},
+    	{
+    		"title": "w2ui",
+    		"version": "1.4.3",
+    		"homepage": "http://w2ui.com",
+    		"downloadlink":"http://w2ui.com/web/downloads/w2ui-1.4.3.zip",
+    		"integration":{
+    			"latest":{
+    				"javascript":["w2ui-1.4.3.min.js"],
+    				"css":["w2ui-1.4.3.min.css"]
+    			}
+    		}
+    	},
+    	{
+    		"title": "canvasjs",
+    		"version": "1.9.2",
+    		"homepage": "http://canvasjs.com",
+    		"downloadlink":"http://canvasjs.com/fdm/chart/canvasjs-1.9.2.zip",
+    		"integration":{
+    			"latest":{
+    				"javascript":["jquery.canvasjs.min.js"]
+    			}
+    		}
+    	}, {
+    		"title": "jsoor-bootstrap-slider",
+    		"version": "1.0",
+    		"downloadlink":"http://www.jssor.com/jssor.carousel.slider.for.bootstrap.example.zip",
+			"integration":{
+    			"latest":{
+    				"javascript":["js/jssor.slider.mini.js"]
+    			}
+    		}
+    	}, {
+    	  "title":"dropzone",
+    	  "version":"4.3.0",
+    	  "homepage":"http://www.dropzonejs.com/",
+    	  "comments":"Need to include the field plugin from the simpleportal source code for using along with backbone field plugin.",
+    	  "resources": [
+    	  		{
+    	  			"resourcename": "dropzone-amd-module.js",
+    	  			"downloadlink": "https://raw.githubusercontent.com/enyo/dropzone/master/dist/dropzone-amd-module.js"
+    	  		},{
+    	  			"resourcename": "dropzone.min.css",
+    	  			"downloadlink": "https://raw.githubusercontent.com/enyo/dropzone/master/dist/min/dropzone.min.css"
+    	  		}, {
+    	  			"resourcename": "dropzone.min.js",
+    	  			"downloadlink": "https://raw.githubusercontent.com/enyo/dropzone/master/dist/min/dropzone.min.js"
+    	  		},{
+    	  			"resourcename": "fieldplugin.js",
+    	  			"resourcefolder":"js",
+    	  			"downloadlink":"https://raw.githubusercontent.com/faisalk08/simpleportal-util/master/fieldplugin/dropzone/fieldplugin.js"
+    	  		}
+    	  	],"integration":{
+			  	"latest":{
+					"javascript":[
+						"dropzone.min.js"
+					 ], "css":[
+					    "dropzone.min.css"     
+					 ]
+				}, "fieldplugin":{
+					"javascript":[
+						"js/fieldplugin.js"
+					 ], "css":[
+					    "dropzone.min.css"     
+					 ]
+				}
+			}
+      },{
+    		"title": "flowplayer",
+    		"version": "5.5.6",
+    		"homepage": "http://flowplayer.org",
+    		"downloadlink": "https://releases.flowplayer.org/6.0.5/flowplayer-6.0.5.zip",
+    		"integration": {
+    			"latest": {
+    				"javascript": [
+    					"flowplayer.min.js"
+    				],
+    				"css": [
+    					"skin/functional.css"
+    				]
+    			}
+    		}
+    	},{
+    		"title": "superbox",
+    		"version": "1.0.0",
+    		"homepage":"https://toddmotto.com/labs/superbox/",
+    		"downloadlink": "https://toddmotto.com/labs/superbox/superbox.zip",
+    		"integration": {
+    			"latest": {
+    				"javascript": [
+    				     "superbox/js/superbox.min.js"
+    				],
+    				"css": [
+    					"superbox/js/css/style.css"
+    				]
+    			}
+    		}
+    	},
+    	{
+    		"title": "blueimpgallery",
+    		"version": "2.21.3",
+    		"downloadlink": "https://github.com/blueimp/Gallery/archive/v2.21.3.tar.gz",
+    		"comments":"Please edit the blueimp-gallery.js as it is not using .js at the end of blueimp-helper.js",
+    		"integration": {
+    			"latest": {
+    				"javascript": [
+    				     "Gallery-2.21.3/js/blueimp-helper.js",
+    				     "Gallery-2.21.3/js/blueimp-gallery.js"
+    				],
+    				"css": [
+    					"Gallery-2.21.3/css/blueimp-gallery.min.css"
+    				]
+    			}
+    		}
+    	},{
+    		"title":"Highcharts",
+    		"version": "3.0.7",
+    		"homepage": "http://highcharts.com/",
+    		"resources": [{
+    				"resourcefolder":"3.0.7",
+	    			"downloadlink": "https://cdnjs.cloudflare.com/ajax/libs/highcharts/3.0.7/highcharts.js"
+	    		},
+	    		{
+	    			"downloadlink": "https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.7/js/highcharts.js"
+	    		}
+	    	],
+    		"integration": {
+    			"latest": {
+    				"javascript": [
+    					"highcharts.js"
+    				]
+    			},"v307": {
+    				"javascript": [
+			               "3.0.7/highcharts.js"
+    				]
+    			}
+    		}
+    	},{
+    		"title": "Morris chart",
+    		"version": "0.5.1",
+    		"homepage": "http://morrisjs.github.io/",
+    		"resources": [{
+	    			"downloadlink": "http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css"
+	    		},{
+	    			"downloadlink": "http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"
+	    		},{
+	    			"downloadlink": "http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"
+	    		}
+	    	],
+    		"integration": {
+    			"latest": {
+    				"javascript": [
+    					"raphael-min.js", "morris.js"
+    				]
+    			},"v102": {
+    				"javascript": [
+    					"morris.css"
+    				]
+    			}
+    		}
+    	},{
+    		"title": "Chart JS",
+    		"version": "2.5.0",
+    		"homepage": "http://www.chartjs.org/",
+    		"resources": [
+    			{
+    				"resourcefolder": "js",
+    				"downloadlink": "https://github.com/chartjs/Chart.js/releases/download/v2.5.0/Chart.bundle.min.js"
+    			},{
+    				"resourcefolder": "js",
+    				"downloadlink": "https://github.com/chartjs/Chart.js/releases/download/v2.5.0/Chart.min.js"
+    			},
+    			{
+    				"resourcefolder": ".",
+    				"resourcename":"1.0.2",
+    				"downloadlink": "https://github.com/chartjs/Chart.js/archive/v1.0.2.zip"
+    			}
+    		],
+    		"integration": {
+    			"latest": {
+    				"javascript": [
+    					"js/Chart.bundle.min.js"
+    				]
+    			},"v102": {
+    				"javascript": [
+    					"1.0.2/Chart.js-1.0.2/Chart.min.js"
+    				]
+    			}
+    		}
+    	},{
+    		"title": "Virtual-keyboard",
+    		"version": "1.49",
+    		"homepage": "http://www.greywyvern.com/code/javascript/keyboard",
+    		"resources": [
+    			{
+    				"downloadlink": "http://www.greywyvern.com/code/javascript/keyboard.css"
+    			},
+    			{
+    				"downloadlink": "http://www.greywyvern.com/code/javascript/keyboard.js"
+    			},
+    			{
+    				"downloadlink": "http://www.greywyvern.com/code/javascript/keyboard.png"
+    			}
+    		],
+    		"integration": {
+    			"latest": {
+    				"javascript": [
+    					"keyboard.js"
+    				],
+    				"css": [
+    					"keyboard.css"
+    				]
+    			}
+    		}
+    	},{
+    		"title": "typeahead",
+    		"version": "0.11.1",
+    		"homepage":"http://twitter.github.io/typeahead.js/",
+    		"downloadpage": "http://twitter.github.com/typeahead.js/releases/latest/typeahead.js.zip",
+    		"integration": {
+    			"latest": {
+    				"javascript": [
+    					"typeahead.js/typeahead.bundle.min.js"
+    				]
+    			}
+    		}
+    	}
+	]
+}

@@ -1,0 +1,23 @@
+{
+	"title":"Backbone mobile app",
+	"description":"Backbone mobile app - Description",
+	"version":"0.1",
+   	"plugintype":"webapp",
+	"pluginsubtype":"backbonemobile",
+	"dynamicwebapp":true,
+	"htmldir":"html5",
+	"servicedir":["services"],
+	"priority":0.1,
+	"javascript":{
+		"cdn":[],
+        "prescript":[],
+        "postscript":[]
+	},"webappsetting":{
+		"webapptype":"backbonemobile",
+		"css":[],
+		"defaulturi":"",
+		"mainurl":"/"
+	},
+	"layout":{},
+	"status":"default"
+}

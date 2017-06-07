@@ -1,0 +1,36 @@
+<%
+	var hassubaction=false; 
+	if(configuration&&configuration.modelsettings){
+		for(var modelindex in configuration.modelsettings) { 
+			var modelsetting = configuration.modelsettings[modelindex];
+			if(modelsetting&&typeof modelsetting === 'object')
+				hassubaction = hassubaction||modelsetting.type=="object";
+		}
+	}		
+%>
+<div class="ui-bar ui-bar-a ui-corner-all"><%= title %> details.</strong></div>
+
+<ul data-role="listview" data-theme="a" data-divider-theme="a" class="<%= name %>-details" data-inset='true'>
+    <%for( var fieldIndex in modelfields){
+		var modelfield = modelfields[fieldIndex];
+		
+		if(configuration && typeof configuration.modelsettings !== 'undefined')
+		 	fieldsetting = configuration.modelsettings[modelfield.field];
+		 	
+		if(modelfield.type == "array" || modelfield.type == "object"){
+	%>
+		<li>
+			<b><%%= getMessage("<%= modelfield.field %>") %%> : </b>
+			<div id="<%= modelfield.field %>_list_container" class="<%= fieldsetting && fieldsetting.html && fieldsetting.html.cssclass%>" <%= fieldsetting && fieldsetting.html && fieldsetting.html.display ? "style=display:none;" :""%>></div>
+		</li>
+	<%} else {%>
+		<li>
+			<b><%%= getMessage("<%= modelfield.field %>") %%> : </b>
+			<%% if(typeof <%= modelfield.field %> === "object"){%%>
+				<%%= JSON.stringify(<%= modelfield.field%>) %%>
+			<%%}else if(typeof <%= modelfield.field %> !== "undefined"){%%>
+				<%%= <%= modelfield.field %> %%>
+			<%%}%>										
+		</li>	
+	<%}}%>
+</ul>

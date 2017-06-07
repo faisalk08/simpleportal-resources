@@ -1,0 +1,31 @@
+ <div data-history="false"  data-role="popup" id="popupCloseLeft" class="ui-content" data-theme="a" data-overlay-theme="b" data-transition="flip">
+    <%%if(dismissable){%><a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a><%%}%>
+    <p>
+        <%%= pagedata %>
+        <%%if(settingsBtn){%>
+            <div>
+               <a href="#appsettings" data-role="button" data-icon="gear" >App settings</a>
+            </div>
+        <%%}%>
+        <%%if(refreshBtn){%>
+            <div>
+                <a href="#refresh" data-role="button" data-icon="refresh" >Refresh</a>
+            </div>
+        <%%}%>
+        <%%if(loginBtn){%>
+        <div>
+            <a href="#login" data-role="button" data-icon="user" >Login</a>
+        </div>
+        <%%}%>
+        <%%if(logoutBtn){%>
+        <div>
+            <a href="#logout" data-role="button" data-icon="delete" >Logout</a>
+        </div>
+        <%%}%>
+        <%%if(closeBtn){%>
+        <div>
+            <a href="#close" data-role="button" data-icon="power" >Close app</a>
+        </div>
+        <%%}%>
+    </p>
+</div>

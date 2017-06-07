@@ -1,0 +1,20 @@
+<!-- Content container -->
+<div class="container-fluid">
+	<div class="row notification" id="notification">
+		<div class="col-sm-12">
+			<div id="curtime" class='pull-right'>
+				<i class='glyphicon glyphicon-time'></i> <span class='time'><script>document.write((new Date()).toLocaleDateString() + ' ' + (new Date()).toLocaleTimeString())</script></span>
+			</div>
+		</div>
+	</div>
+	<div class="row content">
+		<div class="col-sm-3 col-md-2 col-lg-2 sidebar" id="sidepanel"></div>
+		<div class="col-sm-3 col-sm-offset-3 col-md-2 col-lg-3 col-md-offset-2 col-lg-offset-2  main" id="main" role="main">
+			<div class='loading'></div>
+		</div>
+		<div class="col-sm-6 col-sm-offset-6 col-md-8 col-lg-7 col-md-offset-2 col-lg-offset-2  main" id="main" role="main">
+			<div class='loading'></div>
+		</div>
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 col-lg-offset-2  main" id="subform"></div>
+	</div>
+</div>

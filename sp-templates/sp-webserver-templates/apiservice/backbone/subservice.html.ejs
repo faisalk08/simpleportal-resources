@@ -1,0 +1,25 @@
+<table class="table table-striped table-responsive">
+	<thead><tr><th colspan="2"><div  class='actions pull-right'></div></th></tr></thead>
+	<tbody>
+		<%for( var fieldIndex in modelfields){
+		var modelfield = modelfields[fieldIndex];
+		if(configuration && typeof configuration.modelsettings !== 'undefined')
+		 	fieldsetting = configuration.modelsettings[modelfield.field];
+		if(modelfield.type == "array" || modelfield.type == "object"){
+		%>
+			<tr>
+				<td colspan="2">
+					<b>
+						<%%= getMessage("<%= modelfield.field %>") %%>>
+					</b>
+					<hr/>
+					<div id="<%= modelfield.field %>_list_container"></div>
+				</td>
+			</tr>
+		<%} else {%>
+			<tr>
+				<td  width='30%'><%%= getMessage("<%= modelfield.field %>") %%>></td><td><%%= typeof <%= modelfield.field %> !== "undefined" ? <%= modelfield.field %> : "" %%>></td>										
+			</tr>	
+		<%}}%>
+	</tbody>
+</table>

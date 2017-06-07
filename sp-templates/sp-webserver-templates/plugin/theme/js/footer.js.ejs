@@ -1,0 +1,30 @@
+/**
+ * Please include require.js before including any of the portal defined js files
+ * jQuery as well
+ */<%var sessionTimeoutPreference = serverconfig.preference && serverconfig.preference["plugin"] && serverconfig.preference["plugin"]["bootstrap-session-timeoutuiplugin"] ? serverconfig.preference["plugin"]["bootstrap-session-timeoutuiplugin"]||{warnAfter:1000, redirAfter:2000} : {warnAfter:1000, redirAfter:2000};%>
+$(document).ready(function () {
+	/*
+	 * Cookie Cuttr plugin
+	 * http://cookiecuttr.com/
+	 */
+	if($.cookieCuttr)
+		$.cookieCuttr();
+	
+	/* 
+	 * Bootstrap Session time out warning plugin
+	 * https://github.com/orangehill/bootstrap-session-timeout 
+	 */
+	 <% if(!sessionTimeoutPreference || (sessionTimeoutPreference && !sessionTimeoutPreference.disabled)) {%>
+	if(typeof $.fn.sessionTimeout !== 'undefined') {
+		$.sessionTimeout({
+		    keepAliveUrl: '/keep-alive',
+		    logoutUrl: '/logout',
+		    redirUrl: '/session-locked',
+		    warnAfter: <%= sessionTimeoutPreference.warnAfter||1000 %>,
+		    redirAfter: <%= sessionTimeoutPreference.redirAfter||2000 %>,
+		    countdownMessage: 'Redirecting in {timer} seconds.',
+		    countdownBar: true, countdownSmart:true
+		});	
+	}
+	<%}%>
+});

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    
+	    <title><%= title %>- session timeout</title>
+	    
+	    <!-- Custom styles for this template -->
+	    <link href="/theme/theme.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container">
+	      	<div class="header clearfix">
+		      	<h3 class="text-muted"><%= title %></h3>
+	      	</div>
+	      	
+	      	<div class="jumbotron">
+		        <h1>Session timeout</h2>
+		        
+		        <hr>
+		        <p class="lead">You have been redirected to a this page because of inactivity.</p>
+		
+		        <input onclick="backClick()" class="btn btn-primary" type="button" value="Back to Home">
+		    </div>
+	  	</div>
+	    <div class="container">
+	        
+	    </div>
+	    <script>
+		    function backClick() {
+		        window.history.back()
+		    }
+	    </script>
+	</body>
+</html>

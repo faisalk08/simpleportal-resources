@@ -1,0 +1,6 @@
+<%var themekeys= ["dynamic", "theme"];if(themeconfig.themesetting && themeconfig.themesetting.css){for(var key in themekeys){var themefiles= themeconfig.themesetting.css[themekeys[key]];
+if(typeof themefiles == 'object' && typeof themefiles.length == 'number'){for(var findex in themefiles){%>
+@import url("<%= themefiles[findex] %>");<%}}}}%>
+@import url("dashboard.css");
+@import url("navbox.css");
+@import url("custom.css");

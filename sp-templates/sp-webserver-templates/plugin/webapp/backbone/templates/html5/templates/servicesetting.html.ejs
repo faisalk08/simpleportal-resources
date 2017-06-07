@@ -1,0 +1,47 @@
+<ol class="breadcrumb">
+	<li><%%= getMessage("service-setting") %> &raquo; (<%= serviceconfig.modelname %>)<li>
+</ol>
+<%
+	var hassubaction=false; 
+	if(configuration&&configuration.modelsettings){
+		for(var modelindex in configuration.modelsettings) { 
+			var modelsetting = configuration.modelsettings[modelindex];
+			if(modelsetting&&typeof modelsetting === 'object')
+				hassubaction = hassubaction||modelsetting.type=="object";
+		}
+	}		
+%>
+<table class="table table-striped table-responsive">
+	<tbody>
+		<%
+		if(typeof modelfields == "undefined")
+			modelfields = configuration.modelfields;
+		for( var fieldIndex in modelfields){
+		var modelfield = modelfields[fieldIndex];
+		if(configuration && typeof configuration.modelsettings !== 'undefined')
+		 	fieldsetting = configuration.modelsettings[modelfield.field];
+		if(modelfield.type == "array" || modelfield.type == "object"){
+		%>
+			<tr>
+				<td colspan="2">
+					<b>
+						<%%= getMessage("<%= modelfield.field %>") %%>
+					</b>
+					<hr/>
+					<div id="<%= modelfield.field %>_list_container" class="<%= fieldsetting && fieldsetting.html && fieldsetting.html.cssclass%>" <%= fieldsetting && fieldsetting.html && fieldsetting.html.display ? "style=display:none;" :""%>></div>
+				</td>
+			</tr>
+		<%} else {%>
+			<tr>
+				<th  width='30%'><%%= getMessage("<%= modelfield.field %>") %%></th>
+				<td>
+					<%% if(typeof <%= modelfield.field %> === "object"){%%>
+						<%%= JSON.stringify(<%= modelfield.field%>) %%>
+					<%%}else if(typeof <%= modelfield.field %> !== "undefined"){%%>
+						<%%= <%= modelfield.field %> %%>
+					<%%}%>
+				</td>										
+			</tr>	
+		<%}}%>
+	</tbody>
+</table>

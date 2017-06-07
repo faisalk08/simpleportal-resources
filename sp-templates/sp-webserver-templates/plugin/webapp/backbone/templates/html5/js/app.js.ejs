@@ -1,0 +1,44 @@
+/*
+ * Default impplementation of the backbone app, can be customized according to your theme
+ * by overriding inside templates folder
+ */
+var routerjsdependencies = [
+	"/uiplugin/backbone-ext/src/backbone-ext.js"
+];
+<% if(typeof webappsetting.routerjsdependencies !== 'undefined' ) {%>routerjsdependencies=routerjsdependencies.concat(<%- JSON.stringify(webappsetting.routerjsdependencies)%>);<%}%>
+define( 
+	routerjsdependencies,
+	function(Backbone){
+		var exports = this;
+		if(exports && window && window.customurimappings)
+			exports.urimappings = $.extend(true, window.urimappings||{}, window.customurimappings);
+		
+		$(function(){
+			if(exports && exports.customurimappings)
+				exports.urimappings = $.extend(true, exports.urimappings||{}, exports.customurimappings);
+		});
+		
+		window.templateLoader = new Backbone.TemplateLoader();
+		
+		var DashboardApp = Backbone.Router.extend({
+		   	routes: {}
+		});
+		
+		var app = new DashboardApp({
+			tabview:<%= pluginsetting.preference.tabview %>,
+			templatedir:'templates/',
+			layout:<%- JSON.stringify(webappsetting.layout||webappsetting.layout) %>,
+			themes:<%- JSON.stringify(themes) %>,
+			curtheme:<%- JSON.stringify(themeconfig) %><%if(webappsetting.defaulturi){%>,defaulturi:'<%= webappsetting.defaulturi %>'<%}%>
+			,onLoad:function(){
+				<%if(webappsetting.defaulturi){%>app.navigate('<%= webappsetting.defaulturi %>', {trigger:true});<%}%>
+			}
+		});
+		
+		exports.app = app;
+		if(window)
+			window.app=app;
+		
+		return exports;	
+	}
+);

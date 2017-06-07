@@ -1,0 +1,10 @@
+<div data-role="collapsible" data-collapsed="false" data-theme="e" data-content-theme="e">
+	<h3>Error</h3>
+	<p>
+	<%if (typeof loginRequired != 'undefined' && loginRequired ){%>
+		<a rel="external" href="/oauth/login">Login Required please Login</a>
+	<%} else{%>
+		<%- exception %>
+	<%}%>
+	</p>
+</div>

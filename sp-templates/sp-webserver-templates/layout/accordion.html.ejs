@@ -1,0 +1,25 @@
+<div class="accordion-group">
+	<div class="accordion-heading">
+		<a class="accordion-toggle" data-toggle="collapse" href="#<%%= name %>_accordion" data-original-title="">
+			<i class="icon-chevron-down pull-right"></i>
+			<i class="icon-th"></i>
+			<span class="divider-vertical"></span>
+			<%%= getMessage("<%= name %>") %%>>
+		</a>
+	</div>
+	<div id="<%%= name %>_accordion" class="accordion-body collapse in">
+		<div class="accordion-inner padding">
+			<ul class="breadcrumb">
+				<li><i class='icon-home'></i><a href="#dashboard">Home</a> <span class="divider">/</span></li>
+				<li><a href="#<%= name %>"><%%= getMessage( "<%= name %>") %%>> </a> 
+					<% if(typeof id !== "undefined") {%><span class="divider">/</span><%}%>
+				</li>
+				<% if(typeof id !== "undefined") {%>
+					<li class="active">Details</li>
+				<%}%>
+			</ul>
+			<hr/>
+			<%- include(bodytemplate) %>
+		</div>
+	</div>
+</div

@@ -1,0 +1,27 @@
+<div class="panel-group" id="<%%= name %>_accordion_group" role="tablist">
+	<div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+		<h4 class="panel-title">
+        	<a role="button" data-toggle="collapse" data-parent="#<%%= name %>_accordion_group" href="#<%%= name %>_accordion" aria-expanded="true" aria-controls="<%%= name %>_accordion">
+				<%%= getMessage( typeof title !== 'undefined' ? title : name) %>
+        	</a>
+        	<span class="configbox-control pull-right">
+        		<i class="glyphicon glyphicon-minus-sign minimise"></i>
+        	</span>
+     	</h4>
+    </div>
+    <div id="<%%= name %>_accordion" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      	<div class="configbox"></div>
+      	<div class="panel-body">
+      		<!--<ul class="breadcrumb">
+				<li><i class='icon-home'></i><a href="#dashboard">Home</a></li>
+				<li><a href="#<%%= name %>"><%%= getMessage(name) %> </a></li>
+				<% if(typeof id !== "undefined") {%>
+					<li class="active">Details</li>
+				<%}%>
+			</ul>
+			<hr/>-->
+			<%- include(bodytemplate) %>
+      	</div>
+	</div>
+</div>

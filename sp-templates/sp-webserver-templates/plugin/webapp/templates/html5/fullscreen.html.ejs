@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<base href="<%= webappuri %>/">
+	    
+	    <title><%= title %><%= typeof description != "undefined" ? " / " + description : "" %></title>
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    
+	    <%- include(metatagpage) %>
+		
+		<!--[if IE]><![endif]-->
+    	<link rel="stylesheet" href="app.css">
+	</head>
+	
+	<body>
+		<!-- Top Navigation header should come here -->
+		<nav class="navbar navbar-fixed-top">
+      		<div class="container-fluid" id="header"></div>
+	   	</nav>
+	   	<%- include("../../../layout/templates/fullscreen.html.ejs") %>
+	   	
+		<!--  footer content -->
+		<footer class="footer navbar navbar-fixed-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-3 col-md-2"></div>
+					<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+						<span class='pull-left'>
+							<%if(webappsetting && typeof webappsetting.footerconfig === 'object' && webappsetting.footerconfig && webappsetting.footerconfig.copyright){%>
+								&copy; <a href='<%= webappsetting.footerconfig.copyright.website %>' target='_blank'><%= webappsetting.footerconfig.copyright.company %> <%= webappsetting.footerconfig.copyright.info %></a>
+							<%}%>
+						</span>
+						<span class='pull-right'>
+						    <%if(webappsetting && typeof webappsetting.footerconfig === 'object' && webappsetting.footerconfig && webappsetting.footerconfig.contact && webappsetting.footerconfig.contact.phone){%>
+								&nbsp;&nbsp;<i class="glyphicon glyphicon-phone-alt"></i>+ <%= webappsetting.footerconfig.contact.phone %>
+							<%}%>
+						</span>
+						<span class='pull-right'>
+							<%if(webappsetting && typeof webappsetting.footerconfig === 'object' && webappsetting.footerconfig && webappsetting.footerconfig.contact){%>
+								<i class="glyphicon glyphicon-envelope"></i> <a href='mailto:<%= webappsetting.footerconfig.contact.email %>'><i class="icon-envelope"></i><%= webappsetting.footerconfig.contact.display||webappsetting.footerconfig.contact.email %></a>
+							<%}%>
+						</span>
+					</div>
+				</div>
+		    </div>
+	    </footer>
+	    
+	    <div id="modal"></div>
+	    
+	    <!-- inline-templates -->
+		<script type="text/template" id='notification_tmpl'>
+			<div class='alert info'><button type="button" class="close" data-dismiss="alert">×</button><h4>Message!</h4><%%= message %></div>
+		</script>
+		<script type="text/template" id='modal_tmpl'>
+			<%- include templates/modaldialog.html.ejs %>
+		</script>
+
+		<script src="js/appconfig.js"></script>
+		<script data-main="js/javascript.js" src="/cdn/lib/require.min.js"></script>	
+	</body>
+</html>

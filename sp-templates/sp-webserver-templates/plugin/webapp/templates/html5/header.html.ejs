@@ -1,0 +1,82 @@
+<%
+	var _languages;
+	var _curlanguageId;
+	var _curlanguage;
+	if(typeof userprofile != "undefined" && typeof userprofile.preference !== 'undefined' && userprofile.preference)
+		_curlanguageId = userprofile.preference.languageId;
+		
+	if(typeof userprofile != "undefined" && typeof userprofile != "undefined" && userprofile.username && typeof userprofile.languages !== "undefined")
+		_languages = userprofile.languages;
+	else if(typeof serverconfig != "undefined" && serverconfig.languages && typeof serverconfig.languages !== "undefined")
+		_languages = serverconfig.languages;
+		
+	var statictoppagelinks=[];
+	if(pluginsetting && pluginsetting.webappsetting && pluginsetting.webappsetting.websiteconfig && pluginsetting.webappsetting.websiteconfig.webpages)
+		statictoppagelinks = pluginsetting.webappsetting.websiteconfig.webpages.filter(function(weblink){return (weblink.header) && weblink.status=="active";});	
+%>
+<div class="navbar-inner top">
+   	<div class="navbar-header">
+	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header-nav" aria-expanded="false">
+		    <span class="sr-only">Toggle navigation</span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+	  	</button>
+	  	<%if(pluginsetting && pluginsetting.public){%>
+		  	<a class="navbar-brand brand" href="<%= pluginsetting.public ? pluginsetting.webppuri : typeof userprofile !== "undefined" ?  serverconfig.dashboarduri : typeof serverconfig.homeuri !== 'undefined' ? serverconfig.homeuri : '/' %>">
+				<span class="plugintitle"><%= pluginsetting.title %></span> <span class="plugincaption hidden-xs"><%= pluginsetting.description %></span>
+		  	</a>
+		  	<!--<img class="logo" src="<%= pluginsetting.webappsetting.logo %>" alt="Logo"/>-->
+		<%}else{%>
+		  	<a class="navbar-brand brand" href="<%= pluginsetting.public ? pluginsetting.webppuri : typeof userprofile !== "undefined" ?  serverconfig.dashboarduri : typeof serverconfig.homeuri !== 'undefined' ? serverconfig.homeuri : '/' %>">
+				<%= serverconfig.title %> <%= pluginsetting.title %>
+		  	</a>
+	  	<%}%>
+  	</div>
+    <div class="collapse nav-collapse in" id="header-nav" aria-expanded="false">
+    	<ul class="nav navbar-nav navbar-right">
+	    <%if(statictoppagelinks.length == 0){%>
+			<li><a href="#dashboard"><i class="fa fa-home"></i> <%= getMessage("home") %></a></li>
+			<% if( typeof userprofile != "undefined" && userprofile.username ){%><li><a href="#profile"><i class="fa fa-user"></i> <%= getMessage("profile") %></a></li><%}%>
+		    <li><a href="#help"><i class="fa fa-question-sign"></i> <%= getMessage("help") %></a></li>
+		<%}else{for(var spl in statictoppagelinks){var splpagelink = statictoppagelinks[spl];var spselected = (splpagelink.uri == htmlfile || (htmlfile == "/index.html" && splpagelink.uri == "/home.html"));%>
+	   		<li <%= spselected ? "class=selected" : "" %>><a href="<%= pluginsetting.webappuri %><%= splpagelink.uri %>"><%if(splpagelink.icon){%><i class="<%= splpagelink.icon %>"></i><%}%> <%= splpagelink.display %></a></li>
+   		<%}}%>
+		<% if(serverconfig.translation && _languages && _languages.length > 0){%>
+			<li class="langselector preferenceselector" data-preference-key="languageId">
+				<% 
+				for( var i=0; i< _languages.length; i++){
+					var language = _languages[i];
+					
+					if(language.languageid == _curlanguageId)
+						_curlanguage = language;
+				}
+				
+				if(!_curlanguage && _languages.length > 0)
+					_curlanguage = _languages[0];
+				%>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					<% if (_curlanguage  && _curlanguage.icon){%><i class="flag-icon <%= _curlanguage.icon %>" alt="<%= _curlanguage.display %>"><%}%></i><span> <%= _curlanguage.native || _curlanguage.display %></span>
+					<i class="caret"></i>
+				</a>
+				<ul class="dropdown-menu">
+					<%
+					for( var i=0; i<_languages.length; i++){
+						var language=_languages[i];
+						var active = language.languageid == _curlanguageId;
+					%>
+					<li class="<%= active ? 'active' : '' %>">
+						<% if(active){%>
+							<a href='#'><span data-languageId='<%= language.languageid %>'><i class="flag-icon <%= language.icon %>" alt="<%= language.display %>"></i> <%= language.native || language.display %></span></a>
+						<%}else{%>
+							<a href="javascript:void(0);" data-languageId='<%= language.languageid %>'><i class="flag-icon <%= language.icon %>" alt="<%= language.display %>"></i> <%= language.native || language.display %></a>
+						<%}%>
+					</li>
+					<%}%>
+				</ul>
+			</li>
+		<%}%>
+		</ul>    
+	</div>
+</div>
+<div class="" id="header-navigation"></div>

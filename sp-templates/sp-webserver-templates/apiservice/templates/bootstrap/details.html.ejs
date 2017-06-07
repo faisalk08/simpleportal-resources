@@ -1,0 +1,86 @@
+<%
+	var hassubaction=false; 
+	if(configuration && configuration.modelsettings){
+		for(var modelindex in configuration.modelsettings) { 
+			var modelsetting = configuration.modelsettings[modelindex];
+			if(modelsetting && typeof modelsetting === 'object')
+				hassubaction = hassubaction||modelsetting.type=="object";
+		}
+	}		
+%>
+<table class="table table-striped table-responsive">
+	<tbody>
+	<%
+	if(typeof modelfields == "undefined")
+		modelfields = configuration.modelfields;
+	for( var fieldIndex in modelfields){
+	var modelfield = modelfields[fieldIndex];
+	if(configuration && typeof configuration.modelsettings !== 'undefined')
+	 	fieldsetting = configuration.modelsettings[modelfield.field];
+	if(modelfield.type == "array" || modelfield.type == "object"){ -%>
+		<tr>
+			<td colspan="2">
+				<b>
+					<%%= getMessage("<%= modelfield.field %>") %%>
+				</b>
+				<hr/>
+				<div id="<%= modelfield.field %>_list_container" class="<%= fieldsetting && fieldsetting.html && fieldsetting.html.cssclass%>" <%= fieldsetting && fieldsetting.html && fieldsetting.html.display ? "style=display:none;" :""%>>
+					<%%= typeof <%= modelfield.field %> == 'object' && typeof <%= modelfield.field %>.length == 'number' ? '<ul class="list-group"><li class="list-group-item">' + <%= modelfield.field %>.join('</li><li class="list-group-item">') + '</ul>' : "" %%>
+				</div>
+			</td>
+		</tr>
+	<%} else {%>
+		<tr>
+			<th  width='30%'><%%= getMessage("<%= modelfield.field %>") %%></th>
+			<td>
+				<%% if(typeof <%= modelfield.field %> === "object"){%%>
+					<%%= JSON.stringify(<%= modelfield.field%>) %%>
+				<%%}else if(typeof <%= modelfield.field %> !== "undefined"){%%>
+					<%%= <%= modelfield.field %> %%>
+				<%%}%>
+			</td>										
+		</tr>	
+	<%}}%>
+	</tbody>
+</table>
+<div class="row">									
+	<div class="col-sm-12 span12">
+	<span class="btn btn-xs btn-default back">
+		&laquo; <%%= getMessage("go-back") %>
+	</span>&nbsp;&nbsp;
+	<% if(typeof serviceconfig.modify != 'undefined' && serviceconfig.modify) {%>
+		<span type="button" class="btn btn-xs btn-default modelaction" data-modelaction="edit"><i class="fa fa-edit"></i> <%%= getMessage("edit") %></span>
+	<%}
+	if (configuration && typeof configuration.modelaction !== 'undefined'){%>
+	<div class="pull-right">
+	<%
+		for(var actionindex in configuration.modelaction){
+			var modelaction = configuration.modelaction[actionindex]; -%>
+		<span type="button" class="btn btn-xs btn-default modelaction" data-method="<%= modelaction.method||'post' %>" data-modelaction="<%= modelaction.url||modelaction.action %>"><i class="fa fa-<%= modelaction.iconclass||'cog' %>"></i> <%%= getMessage("<%= modelaction.display %>") %%></span>
+	<% }%>
+	</div>
+	<%}
+	if(hassubaction){ -%>
+		<div class="btn-group dropup">
+			<button class="btn btn-xs btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    	<i class="fa fa-cog"></i><%= serviceconfig.modelname %> <span class="caret"></span>
+		  	</button>
+			<ul class="dropdown-menu">
+	<% 
+		if(configuration&&configuration.modelsettings){
+			for(var modelindex in configuration.modelsettings) { 
+				var modelsetting = configuration.modelsettings[modelindex];
+				if(modelsetting && modelsetting.type == "object"){%>
+				<li>
+					<a href="javascript:void(0);" class="modelaction subview" data-modelaction="form" data-subview="<%= modelindex %>" title="Edit">
+						<i class="fa fa-edit"></i> <%%= getMessage("edit-<%= modelindex %>") %%>
+					</a>
+				</li>
+		<% }}}%>
+			</ul>
+		</div>
+		<%} if(typeof serviceconfig.modify != 'undefined' && serviceconfig.modify) {%>
+		<span type="button" class="btn btn-xs btn-default modelaction" data-modelaction="remove"><i class="fa fa-remove"></i> <%%= getMessage("remove") %></span>
+		<%}%>
+	</div>
+</div>

@@ -1,0 +1,12 @@
+<fieldset>
+<%	for( var fieldIndex in modelfields){var modelfield = modelfields[fieldIndex];
+		var fieldsetting;
+	
+		if(configuration && typeof configuration.modelsettings !== 'undefined')
+	 		fieldsetting = configuration.modelsettings[modelfield.field];
+%>
+		<%- draw_form_input(modelfield, fieldsetting);%>
+<%	}%>
+</fieldset>
+<hr/>
+<footer class="form-actions form-group"></footer>

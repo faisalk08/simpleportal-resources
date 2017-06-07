@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+ 	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="<%= serverconfig.description %>">
+		<meta name="author" content="<%= serverconfig.author %>">
+		
+		<base href="<%= webappuri %>/">
+		<title><%= serverconfig.title %></title>
+		
+		<% if(serverconfig.resources.defaulttheme != "/sp-default"){%>
+			<link href="/theme/sp-default/theme.css" rel="stylesheet">
+		<% }%>
+		<link href="/theme/<%= serverconfig.resources.defaulttheme %>/theme.css" rel="stylesheet">
+	   	<style>
+			.navbar .brand, .navbar .navbar-brand {
+				<%if(typeof serverconfig != "undefined" && serverconfig.logo && serverconfig.logo.length > 0){%>
+  				background:url('data:<%= serverconfig.logo[0].type %>;base64,<%= serverconfig.logo[0].content %>')
+  				<%}else{%>
+  				background:url('/logo.png')
+  				<%}%>
+					no-repeat
+		  	} 
+    	</style>
+	   	<script src="/cdn/jquery/jquery-2.1.4.min.js"></script>
+		<script src="/cdn/bootstrap/3.3.5/js/bootstrap.min.js"></script><!-- 
+		<script src="/theme/app.js"></script>-->
+		<script data-main="/theme/app.js" src="/cdn/lib/require.min.js"></script>
+  	</head>
+	<body>
+		<%- include(templatedir + "/header.html.ejs" ) %>
+		
+		<div class="content container container-fluid">
+			<%- include(pagelayout) %>
+		</div>
+	   	
+	   	<%- include(templatedir + "/footer.html.ejs" ) %>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+<%
+	var sessionTimeoutPreference = serverconfig && serverconfig.preference ? serverconfig.preference["plugin"]["bootstrap-session-timeoutuiplugin"]||{} : {};
+%>
+$(document).ready(function () {
+	<%if(!sessionTimeoutPreference || (sessionTimeoutPreference && !sessionTimeoutPreference.disabled)){%>
+	/* 
+	 * Bootstrap Session time out warning plugin
+	 * https://github.com/orangehill/bootstrap-session-timeout 
+	 */
+	if(typeof $.sessionTimeout !== 'undefined') {
+		$.sessionTimeout({
+		    keepAliveUrl: '/keep-alive',
+		    logoutUrl: '/logout',
+		    redirUrl: '/session-locked',
+		    warnAfter: <%= sessionTimeoutPreference.warnAfter||48000 %>,
+		    redirAfter: <%= sessionTimeoutPreference.redirectAfter||78000 %>,
+		    countdownMessage: 'Redirecting in {timer} seconds.',
+		    countdownBar: true
+		});
+	}
+	<%}%>
+	
+	/*
+	 * Cookie Cuttr plugin
+	 * http://cookiecuttr.com/
+	 */
+	if(typeof $.cookieCuttr !== 'undefined')
+		$.cookieCuttr({
+			cookieDeclineButton:false,
+			cookieResetButton:false,
+			cookieOverlayEnabled:false,
+			cookiePolicyPage:false,
+			cookiePolicyLink:'/pages/terms-of-service'
+		});
+});

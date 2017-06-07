@@ -1,0 +1,79 @@
+<%
+var datadriven= Object.keys(serviceconfig.model).length>0||serviceconfig.modify;
+if(!datadriven)
+serviceconfig.servicelinks=[];%>/**
+ * Auto generated uri mapping for the service  - <%= serviceconfig.apiurl %>
+ */
+ if(!exports.urimappings)
+	exports.urimappings = window.urimappings||{};
+ 
+var <%= serviceconfig.modelname %>_<%= serviceconfig.name %>_urimappings = {
+	"<%= serviceconfig.name %>":{
+		"url":"<%= serviceconfig.apiurl %>",
+		templatedira:'<%= pluginsetting.webappuri %>/service/<%= serviceconfig.serviceurl %>/templates/',
+		<%if(serviceconfig.viewurl){%>"templateName":"searchresult.html", "templatedir":"<%= serviceconfig.viewurl %>/templates/bootstrap/",<%}else{%>
+			"templateName":"servicelist.html"
+		<%}%>
+		defaultmode:'<%= serviceconfig.defaultmode||"list" %>',
+		plugins:{
+			datatable:{
+				colReorder: false,
+				rowReorder: false,
+				responsive:true,
+				deferRender:true,
+				columnDefs: [
+		             { 
+		             	targets: 'index', 
+		             	orderable: false,
+		             	searchable:false
+		             }
+	            ],
+	            paging:true,
+				serverSide:true,
+				processing:false,
+				pageLength:100,
+				deferLoading:<%= serviceconfig.totalrecords||0 %>,
+				recordsTotal:<%= serviceconfig.totalrecords||0 %>,
+				totalrecords:<%= serviceconfig.totalrecords||0 %>,
+				searching:false, ordering:false
+			}
+		}, tabs:<%- JSON.stringify(serviceconfig.servicelinks||[]) %>,
+		"details":{
+			<%if(serviceconfig.viewurl){%>"templateName":"details.html", "templatedir":"<%= serviceconfig.viewurl %>/templates/bootstrap/",<%}else{%>
+			"templateName":"service.html"
+			<%}%>
+		},"search":{
+			"urlRoot":"<%= serviceconfig.apiurl %>/search",
+			<%if(serviceconfig.viewurl){%>"templateName":"searchform.html", "templatedir":"<%= serviceconfig.viewurl %>/templates/bootstrap/",<%}else{%>
+			"templateName":"servicesearch.html",<%}%>
+		},"backup":{
+			<%if(serviceconfig.viewurl){%>"templateName":"backup.html", "templatedir":"<%= serviceconfig.viewurl %>/templates/bootstrap/",<%}else{%>
+			"templateName":"servicebackup",
+			<%}%>
+			"uri":"#apiservice",
+			"urlRoot":"<%= serviceconfig.apiurl %>/setting", 
+			"url":"<%= serviceconfig.apiurl %>/setting"
+		},"report":{
+			<%if(serviceconfig.viewurl){%>"templateName":"servicereport.html", "templatedir":"<%= serviceconfig.viewurl %>/templates/bootstrap/",<%}else{%>
+			"templateName":"servicereport",
+			"templatedir":"/view/system/apiservice/templates/bootstrap/",
+			<%}%>
+			"uri":"#apiservice",
+			"urlRoot":"<%= serviceconfig.apiurl %>/setting", 
+			"url":"<%= serviceconfig.apiurl %>/$cmd/aggregate", "aggregatequery":"<%= serviceconfig.apiurl %>/$cmd/aggregate"
+		},"setting":{
+			"uri":"#apiservice",
+			"urlRoot":"<%= serviceconfig.apiurl %>/setting",
+			"url":"<%= serviceconfig.apiurl %>/setting",
+			"templatedir":"/view/system/apiservice/templates/bootstrap/",
+			"templatedira":"<%= pluginsetting.webappuri %>/service/<%= serviceconfig.serviceurl %>/setting/templates/",
+			"templateName":"servicesetting.html"
+		}<% if(serviceconfig.modify) {%>,"form":{
+			"templateName":"serviceform.html"
+		}<%} if (typeof serviceconfig.model == "object") {%>, "defaultmodel":<%- JSON.stringify(serviceconfig.model) %>
+		<%} if (typeof serviceconfig.configuration == "object" && serviceconfig.configuration.modelsettings) {%>, "fieldsettings":<%- JSON.stringify(serviceconfig.configuration.modelsettings) %>
+		<%} if (typeof serviceconfig.configuration == "object" && serviceconfig.configuration.validation) {%>, "validation":<%- JSON.stringify(serviceconfig.configuration.validation) %>
+		<%} if (typeof serviceconfig.configuration == "object" && serviceconfig.configuration.modelaction) {%>, "action":<%- JSON.stringify(serviceconfig.configuration.modelaction) %><%}%>
+	}
+};
+exports.urimappings = _.extend(exports.urimappings||{}, <%= serviceconfig.modelname %>_<%= serviceconfig.name %>_urimappings);

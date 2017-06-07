@@ -1,0 +1,24 @@
+{
+	"title":"Webapp",
+	"description":"Webapp - Description",
+	"version":"0.1",
+   	"plugintype":"webapp",
+	"htmldir":"html5",
+	"servicedir":["services"],
+	"layoutdir":"layouts",
+	"priority":0.1,
+	"iconclass": "fa fa-folder-open-o",
+	"webappsetting":{
+		"dynamicwebapp":true,
+		"iconclass": "fa fa-folder-open-o",
+		"layout":{
+			"pagelayout":"default.html.ejs"
+		},
+		"changetheme":false,
+		"websiteconfig":{"webapages":[]}
+	},
+	"themesetting":{
+	},"preference":{},
+	"templatedir":"templates",
+	"status":"default"
+}

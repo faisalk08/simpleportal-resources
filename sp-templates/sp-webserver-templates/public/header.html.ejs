@@ -1,0 +1,88 @@
+<%
+	var _languages;
+	var _curlanguageId;
+	var _curlanguage;
+	if(typeof userprofile != "undefined" && typeof userprofile.preference !== 'undefined' && userprofile.preference)
+		_curlanguageId = userprofile.preference.languageId;
+		
+	if(typeof userprofile != "undefined" && typeof userprofile != "undefined" && userprofile.username && typeof userprofile.languages !== "undefined")
+		_languages = userprofile.languages;
+	else if(typeof serverconfig != "undefined" && serverconfig.languages && typeof serverconfig.languages !== "undefined")
+		_languages = serverconfig.languages;	
+%>
+<%	
+var _webapges=[];
+if(typeof serverconfig.webpages !== "undefined")
+	_webapges = serverconfig.webpages;
+else
+	_webapges = [
+		{header:true, url:'', uri:(typeof serverconfig.helpuri !== 'undefined' ? serverconfig.helpuri : '/'), icon:"glyphicon glyphicon-book", display:'help', signin:false, public:true},
+		{header:true, url:'', uri:(typeof serverconfig.profileuri !== 'undefined' ? serverconfig.profileuri : '/pages/profile'), display:'profile', icon:"fa fa-user", signin:true},
+		{header:true, url:'', uri:(typeof serverconfig.loginuri !== 'undefined' ? serverconfig.loginuri : '/signin'), icon:"glyphicon glyphicon-log-in", display:'login', signin:false, public:true},
+		{header:true, url:'', uri:(typeof serverconfig.logouturi !== 'undefined' ? serverconfig.logouturi : '/logout'), icon:"glyphicon glyphicon-off", display:'logout', signin:true}
+	]
+	
+var statictoppagelinks = [];
+if(typeof userprofile != "undefined" && typeof userprofile != "undefined" && userprofile.username)
+	statictoppagelinks = _webapges.filter(function(weblink){return !weblink.hidden && (weblink.header) && (weblink.signin==true||(weblink.signin==false && weblink.public==true));});
+else
+	statictoppagelinks = _webapges.filter(function(weblink){return !weblink.hidden && (weblink.header) && ((weblink.public==true) || weblink.public==false && weblink.signin==false);});
+%>
+<div class="navbar navbar-<%=themeconfig && themeconfig.preference ?  themeconfig.preference.headercolorscheme : 'default' %> navbar-fixed-top" id="header-navigation">
+	<div class="navbar-inner top">
+		<div class="navbar-header">
+		  	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+		    	<span class="icon-bar"></span>
+		    	<span class="icon-bar"></span>
+		    	<span class="icon-bar"></span>
+		  	</button>
+		  	<a class="navbar-brand brand" href="<%=typeof userprofile !== "undefined" ?  serverconfig.dashboarduri : typeof serverconfig.homeuri !== 'undefined' ? serverconfig.homeuri : '/' %>">
+				<%= serverconfig.title %>
+		  	</a>
+		</div>
+		<ul class="nav navbar-nav pull-right">
+		<% if(_languages && _languages.length > 0){%>
+			<li class="langselector">
+				<% 
+				for( var i=0; i< _languages.length; i++){
+					var language = _languages[i];
+					
+					if(language.languageid == _curlanguageId)
+						_curlanguage = language;
+				}
+				
+				if(!_curlanguage && _languages.length > 0)
+					_curlanguage = _languages[0];
+				%>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					<% if (_curlanguage  && _curlanguage.icon){%><i class="flag-icon <%= _curlanguage.icon %>" alt="<%= _curlanguage.display %>"><%}%></i><span> <%= _curlanguage.native || _curlanguage.display %></span>
+					<i class="caret"></i>
+				</a>
+				<ul class="dropdown-menu">
+					<%
+					for( var i=0; i<_languages.length; i++){
+						var language=_languages[i];
+						var active = language.languageid == _curlanguageId;
+					%>
+					<li class="<%= active ? 'active' : '' %>">
+						<% if(active){%>
+							<a href='#'><span data-languageId='<%= language.languageid %>'><i class="flag-icon <%= language.icon %>" alt="<%= language.display %>"></i> <%= language.native || language.display %></span></a>
+						<%}else{%>
+							<a href="javascript:void(0);" data-languageId='<%= language.languageid %>'><i class="flag-icon <%= language.icon %>" alt="<%= language.display %>"></i> <%= language.native || language.display %></a>
+						<%}%>
+					</li>
+					<%}%>
+				</ul>
+			</li>
+		<%}%>
+		<%for(var spi in statictoppagelinks){ var splpagelink = statictoppagelinks[spi];var spselected = (splpagelink.uri == htmlfile || (htmlfile == "/index.html" && splpagelink.uri == "/home.html"));%>
+			<li <%= spselected ? "class=selected" : "" %>>
+	    		<a href="<%= spselected ? "javascript:void(0);" : splpagelink.uri || '/' %>">
+					<i class="<%= splpagelink.icon %>"></i> <%= getMessage(splpagelink.display) %>
+				</a>
+	    	</li>
+		<%}%>
+	  	</ul>
+  </div>
+</div>

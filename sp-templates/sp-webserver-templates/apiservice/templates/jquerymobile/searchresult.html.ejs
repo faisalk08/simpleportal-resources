@@ -1,0 +1,20 @@
+<div class="ui-bar ui-bar-a ui-corner-all">
+	Search result for <%= serviceconfig.title %>
+</div>
+<ul data-role="listview" data-filter="true" data-theme="a" data-divider-theme="a" class="<%= serviceconfig.name %>-list" data-inset='true'>
+<% if(serviceconfig.configuration.viewservice && serviceconfig.configuration.viewservice.searchresult){%>
+<%%
+var prevFirstChar = null;
+for(var index in result) {
+    var <%= serviceconfig.name %> = result[index];
+    var thisFirstChar = (<%= serviceconfig.name %>['<%= serviceconfig.configuration.viewservice.searchresult.primaryDisplay %>']).charAt(0);
+    if(!prevFirstChar||(thisFirstChar.toLowerCase() !== prevFirstChar.toLowerCase())) {%%>
+    <li data-role="list-divider" class="list-divider"><%%= thisFirstChar %></li>
+<%%}%>
+    <li>
+    	<a href="#view/<%= serviceconfig.name %>/<%%= <%= serviceconfig.name %>['<%= serviceconfig.primaryKey %>'] %%>">
+    		<strong><%%= <%= serviceconfig.name %>['<%= serviceconfig.configuration.viewservice.searchresult.primaryDisplay %>'] %%></strong>
+   		</a>
+    </li>
+<%%prevFirstChar = thisFirstChar;}%><%}%>
+</ul>

@@ -1,0 +1,30 @@
+<ul class="list-group">
+	<%% for (var i=0; i < results.length; i++) {var modeldata = results[i];%>
+		<li class="list-group-item" data-id='<%%= modeldata._id %>'>
+			<% if(typeof dataType !== "undefined" && dataType === "string"){%>
+				<span>
+					<%% if(typeof modeldata == "object") {%>
+					<%%= modeldata["<%= modelfields[0].field %>"] %%>>
+					<%%}else{%>
+					<%%= modeldata %>
+					<%%}%>
+				</span>
+			<%}else{%>
+			<%for( var fieldIndex in modelfields){var modelfield = modelfields[fieldIndex];
+			if(fieldIndex==0 && (typeof subservice == 'undefined' || !subservice)){
+			%>
+			<span><a href='#<%= configuration.uri %>/<%%= modeldata['<%= primaryKey %>'] %%>>'><%%= modeldata["<%= modelfield.field %>"] %%>></a></span>
+			<%}else if(fieldIndex==0 &&  typeof subservice !== 'undefined' && subservice){%>
+				<span><%% if(typeof modeldata == "object") {%>
+					<span data-field="<%= modelfield.field %>" data-id="<%%= modeldata["<%= modelfield.field %>"] %%>>" class='btn btn-link view-sub'><%%= modeldata["<%= modelfield.field %>"] %%>></span>
+				<%%}else{%>
+					<%%= modeldata %>
+				<%%}%>
+				</span>
+			<%}else if(modelfield.type != 'array' && modelfield.type !="object"){%>
+			<span><%%= modeldata["<%= modelfield.field %>"] %%>></span>	
+			<%}}%>
+			<%}%>
+		</li>
+	<%%}%>
+</ul>

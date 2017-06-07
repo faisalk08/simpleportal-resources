@@ -1,0 +1,67 @@
+<% 
+	tabs = servicelinks;
+	var viewmode = serviceviewmode;
+	var servicename = servicename||name;
+%>
+<span class='view-info'></span>
+<div id='<%= servicename %>_tabs'>
+	<ul class="nav nav-tabs" role="tablist">
+		<% for(var i in tabs) {
+			var tab = tabs[i];
+			if(!tab.title)
+				tab.title=tab.id;
+		%>
+			<% if(!tab.disabled && tab.subpage){%>
+				<%%if(typeof <%= primaryKey %> != "undefined" && <%= primaryKey %>){%%>>
+					<li role="presentation" class="<%= tab.cssclass %> <%= tab.id == viewmode ? "active" :"" %>"><a href='#<%= servicename %>_tab_<%= tab.id %>' data-url="#<%= servicename %>/<%= tab.id %>/<%%= <%= primaryKey %> %%>>" data-area-controls="<%= servicename %>_tab_<%= tab.id %>" role="tab" data-toggle="tabajax"><%if(tab.icon){%><i class="<%= tab.icon %>"></i><%}%> <%%= getMessage("<%= servicename %>") %%>>  <%%= getMessage("<%= tab.title %>") %%>> (<%%= <%= primaryKey %> %%>>)</a></li>
+				<%%} else if("<%= tab.id %>" == "form" ){%%>>
+					<li role="presentation" class="<%= tab.cssclass %> <%= tab.id == viewmode ? "active" :"" %>"><a href='#<%= servicename %>_tab_<%= tab.id %>' data-url="#<%= servicename %>/<%= tab.id %>" data-area-controls="<%= servicename %>_tab_<%= tab.id %>" role="tab" data-toggle="tabajax"><%if(tab.icon){%><i class="<%= tab.icon %>"></i><%}%> <%%= getMessage("<%= servicename %>") %%>>  <%%= getMessage("<%= tab.title %>") %%>></a></li>
+				<%%}%>
+			<%} else if(!tab.disabled){%>
+				<li role="presentation" class="<%= tab.cssclass %> <%= tab.id == viewmode ? "active" :"" %>"><a href='#<%= servicename %>_tab_<%= tab.id %>' data-url="<%= tab.url ? tab.url : ("#" + servicename + "/" + tab.id) %>" data-area-controls="<%= servicename %>_tab_<%= tab.id %>" role="tab" data-toggle="tabajax"><%if(tab.icon){%><i class="<%= tab.icon %>"></i><%}%> <%%= getMessage("<%= tab.title %>") %%>></a></li>
+			<%}%>
+		<%}%>
+	</ul>
+	<div class="tab-content">
+		<% for(var i in tabs) {
+			var tab = tabs[i];
+			if(tab.id == viewmode){%>
+			<div role="tabpanel" class="tab-pane active" id="<%= servicename %>_tab_<%= tab.id %>">
+				<%- include(bodytemplate) %>
+			</div>
+			<% }else{%>
+				<div role="tabpanel" class="tab-pane" id="<%= servicename %>_tab_<%= tab.id %>"></div>
+			<%}%>
+		<%}%>
+	</div>
+</div>
+<script>
+	$('#<%= servicename %>_tabs [data-toggle="tabajax"]').click(function(e) {
+	    e.preventDefault();
+	    
+	    $this = $(this);
+	    if($this.is("i"))
+	    	$this = $this.parent();
+	    
+	    var loadurl = $(this).data('url');
+	   
+	    //$this.parent().addClass('active').siblings().removeClass('active');
+	    var arguments_ = loadurl.replace('#', '').split('/');
+	    
+	    arguments = [{dataprops:{"app-uri":loadurl}, container:'#'+ $(this).data('area-controls'), disablelayout:true}];
+	    arguments = arguments.concat(arguments_);
+	    
+	    $this.tab('show');
+	    var existingurl = $('#'+ $(this).data('aria-controls')).data('app-uri');
+	    	    
+	    if(existingurl == loadurl && $('#'+ $(this).attr('area-controls')).data('remote-loading') == 'loaded'){
+	    	app.navigate(loadurl, {trigger:false});
+	    } else{
+	    	app.navigate(loadurl, {trigger:false});
+	    	
+	    	var view = app.loadView.apply(app, arguments);
+	    	if(!view)
+	    		app.showMessage('error', {title:'No view found for your url', message:'No view defined for the mentioned tab!'});
+		}
+	});
+</script>

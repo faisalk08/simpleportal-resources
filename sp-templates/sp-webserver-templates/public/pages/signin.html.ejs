@@ -1,0 +1,71 @@
+<% 	if(typeof userprofile !== 'undefined' && userprofile.username){ %>
+<div class="alert alert-success" role="alert">You are logged in with user name '<%= userprofile.username %>'</div>
+<%}else{%>
+<%
+	var rowsize = 12
+	if(typeof serverconfig.oauthloginlinks != "undefined" && serverconfig.oauthloginlinks.length > 0){rowsize = rowsize/2;}
+%>
+<div class="container content">
+  	<div class='well'>
+		<div class="row">
+			<div class="col-md-<%= rowsize %>">
+				<form class="form-signin signin-block" method="post" action='/login'>
+		        	<h4 class="form-signin-heading"><%= getMessage("login-with-user-name") %></h4>
+		        	
+		        	<label for="username" class="sr-only"><%= getMessage("email-address") %> (<%= getMessage("user-name") %>)</label>
+		        	
+		        	<input type="text" id="username" name="username" class="form-control" placeholder="User name" required autofocus>
+		        	
+		        	<label for="password" class="sr-only">Password</label>
+		        	<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+		        	
+		        	<input type="text" id="text" name="_username_" id="_sp_sigin_username_" style="display:none;">
+		        	
+		        	<div class="checkbox">
+			          	<label>
+			            	<input type="checkbox" value="remember-me"> <%= getMessage("remember-me") %>
+			          	</label>
+		    		</div>
+		    		
+		    		<button class="btn btn-lg btn-primary" type="submit">
+		    			<i class="glyphicon glyphicon-log-in"></i> <%= getMessage("sign-in") %>
+		    		</button>
+				</form>
+			</div>
+			<%
+				if(typeof serverconfig.oauthloginlinks != "undefined" && serverconfig.oauthloginlinks.length > 0){
+			%>
+				<div class="col-md-<%= rowsize %>">
+					<div class="signin-block">
+		  				<h4 class="form-signin-heading"><%= getMessage("login-with-remote-server") %></h4>
+		  				
+		  				<%for(var op = 0; op < serverconfig.oauthloginlinks.length; op++){var oauthloginlink = serverconfig.oauthloginlinks[op];%>
+		  					<a class="btn btn-lg btn-primary" href="<%= oauthloginlink.loginlink %>" >
+		  						<i class="glyphicon glyphicon-log-in"></i><%= getMessage("login-in with") %> <%= oauthloginlink.title %>
+		  					</a>
+		  				<%}%>
+		  			</div>
+				</div>
+			<% } %>
+		</div>
+	</div>
+</div><!--
+<img style="display:none;"
+     onload="logged_in_to_gmail()"
+     onerror="not_logged_in_to_gmail()"
+     src="https://mail.google.com/mail/photos/static/AD34hIhNx1pdsCxEpo6LavSR8dYSmSi0KTM1pGxAjRio47pofmE9RH7bxPwelO8tlvpX3sbYkNfXT7HDAZJM_uf5qU2cvDJzlAWxu7-jaBPbDXAjVL8YGpI"
+/>-->
+<script>
+	function not_logged_in_to_gmail(){
+		alert("yes logged in ");
+	}
+	$(function() {
+		$("form").submit(function(event){
+			if($("#_sp_sigin_username_").val() == ""){
+				event.preventDefault();
+				return true;
+			}
+		});
+	});
+</script>
+<%}%>

@@ -1,0 +1,23 @@
+/* 
+ * Bootstrap Session time out warning plugin
+ * https://github.com/orangehill/bootstrap-session-timeout 
+ */
+<%
+	var sessionTimeoutPreference = preference["plugin"]["bootstrap-session-timeoutuiplugin"]||{};
+%>
+$(document).ready(function () {
+	
+	<%if(!sessionTimeoutPreference || (sessionTimeoutPreference && !sessionTimeoutPreference.disabled)){%>
+	if(typeof $.sessionTimeout !== 'undefined') {
+		$.sessionTimeout({
+		    keepAliveUrl: '/keep-alive',
+		    logoutUrl: '/logout',
+		    redirUrl: '/session-locked',
+		    warnAfter: <%= sessionTimeoutPreference.warnAfter %>,
+		    redirAfter: <%= sessionTimeoutPreference.redirectAfter %>,
+		    countdownMessage: 'Redirecting in {timer} seconds.',
+		    countdownBar: true
+		});
+	}
+	<%}%>
+});

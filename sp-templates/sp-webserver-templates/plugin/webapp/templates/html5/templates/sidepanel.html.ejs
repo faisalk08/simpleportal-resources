@@ -1,0 +1,100 @@
+<div class="login-info">
+	<span>
+		<a href="javascript:void(0);" id="show-shortcut" class="faa-parent animated-hover">
+			<i class="fa fa-user-circle fa-2x"></i><!--
+			<img src="/cdn/images/avatars/male.png" alt="me"/>-->
+		</a>
+	</span>
+</div>
+<div class="sidebar-nav">
+	<%% if(userprofile.dashboards&& userprofile.dashboards.length >0) {%>
+	<ul class="nav nav-sidebar">
+	<%%for( var i in userprofile.dashboards ){
+		var dashboard = userprofile.dashboards[i];
+		var _dashboarduri = (dashboard && dashboard.id) ?  dashboard.id : (dashboard.uri||dashboard.id);
+		var _iconclass = (dashboard && dashboard.iconclass) ?  dashboard.iconclass : 'fa fa-home';
+		
+		if(_dashboarduri.indexOf("#") == 0)
+			_dashboarduri = '#dashboard/'+_dashboarduri.substring(1);
+		if(_dashboarduri.indexOf("#dashboard/") == -1)
+			_dashboarduri = '#dashboard/'+_dashboarduri;
+	%>
+		<li class="<%%= window.location.pathname == _dashboarduri + '/' ? 'active' : '' %>">
+			<a href="<%%= _dashboarduri %>"> 
+				<i class="<%%= _iconclass %>"></i> 
+				<span><%%= dashboard.title %></span>
+			</a>
+		</li>
+	<%%}%>
+	</ul>
+	<%%}%>
+	<ul class="nav nav-sidebar">
+		<%% if(typeof layout !== 'undefined') { for(var index in layout.sidepanel){
+		var sidepanelitem = layout.sidepanel[index];
+		if(typeof sidepanelitem.sidepanel == 'undefined' || sidepanelitem.sidepanel){
+		
+		var _iconclass = sidepanelitem.icon||sidepanelitem.iconclass||'fa fa-database';
+		%>
+		<li>
+			<a href='<%%= sidepanelitem.uri %>'>
+				<i class="<%%= _iconclass %>"></i>
+				<span><%%= window.getMessage(sidepanelitem.display) %></span>
+			</a>
+			<%%if(sidepanelitem.searchform || sidepanelitem.searchform || (sidepanelitem.subpage && typeof sidepanelitem.subpage.length !== 'undefined') ) {%>
+			<ul class="nav nav-list">
+				<%%if(sidepanelitem.subpage && typeof sidepanelitem.subpage.length !== 'undefined' ) {
+				for(var subindex in sidepanelitem.subpage){
+					var sidepanelsubitem = sidepanelitem.subpage[subindex];
+				if(typeof sidepanelsubitem.sidepanel == 'undefined' || sidepanelsubitem.sidepanel){
+						var suburi = sidepanelsubitem.uri;
+						if(suburi.indexOf('#') == -1)
+							suburi = sidepanelitem.uri + '/' + suburi;
+						
+						suburi = suburi.replace('#', '');
+						var _subiconclass = sidepanelsubitem.icon||_iconclass||'fa fa-database';
+				%>
+				<li>
+					<a href='#<%%= suburi %>'>
+						<i class="<%%= _subiconclass %>"></i>  
+						<span><%%= getMessage(sidepanelsubitem.display) %></span>
+					</a></li>
+				<%%}}}
+				if(sidepanelitem.searchform){%>
+					<li>
+						<a href="<%%= sidepanelitem.uri %>/search"><i class="fa fa-search"></i> <span><%%= getMessage('search') %></span></a>
+					</li>
+				<%%}if(sidepanelitem.newform){%>
+					<li>
+						<a href="<%%= sidepanelitem.uri %>/form"><i class="fa fa-plus-circle"></i> <span><%%= getMessage('new') %></span></a>
+					</li>
+				<%%}%>
+			</ul>
+			<%%}%>
+		</li>
+		<%%}}}%>
+		<li>
+			<hr/>
+		</li>
+	</ul>
+	<ul class="nav nav-sidebar">
+	<%%for( var i in userprofile.webapps ){
+		var webapp = userprofile.webapps[i];
+		var _webapuri = (webapp && webapp.webappsetting) ?  webapp.webappsetting.webappuri : (webapp.webappuri||'/'+webapp.id);
+		var _iconclass = (webapp && webapp.webappsetting) ?  webapp.webappsetting.iconclass : (webapp.iconclass||'glyphicon glyphicon-link');
+	%>
+		<li class="<%%= window.location.pathname == _webapuri + '/' ? 'active' : '' %>">
+			<a href="<%%= _webapuri %>"> 
+				<i class="<%%= _iconclass ||'glyphicon glyphicon-new-window' %>"></i> 
+				<span><%%= webapp.title %></span>
+			</a>
+		</li>
+	<%%}%>
+		<li>
+			<a href="/logout"><i class="fa fa-sign-out"></i> <span><%%= getMessage("logout") %></span></a>
+		</li>
+	</ul>
+	<!-- Toggle Menu -->
+	<div class='togglemenuleft'>
+		<a class='toggle-menu'><i class="fa fa-toggle-left fa-2x"></i></a>
+	</div>
+</div>

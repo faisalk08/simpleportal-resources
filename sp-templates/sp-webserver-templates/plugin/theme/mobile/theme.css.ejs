@@ -1,0 +1,3 @@
+<%var themekeys= ["dynamic", "theme"];if(themesetting && themesetting.mobilesetting&& themesetting.mobilesetting.css){for(var key in themekeys){var themefiles= themesetting.mobilesetting.css[themekeys[key]];
+if(typeof themefiles == 'object' && typeof themefiles.length == 'number'){for(var findex in themefiles){%>
+@import url("<%= themefiles[findex] %>");<%}}}}%>
