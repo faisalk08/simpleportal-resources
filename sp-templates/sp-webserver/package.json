@@ -1,0 +1,15 @@
+{
+  "name": "Simpleportaljs webserver",
+  "keywords": ["simpleportaljs", "Simpleportal", "nodejs", "webserver"],
+  "description": "Node server based on simpleportal",
+  "version": "1.0.0",
+  "author": "Simpleportaljs <admin@simpleportaljs.com>",
+  "directories" : {},
+  "homepage": "http://www.simpleportaljs.com",
+  "main": "main.js",
+  "engines": { "node": ">= 0.4.0" },
+  "dependencies" : { 
+  		"simpleportal": ""
+  },
+  "licenses": [ { "type": "Properatory" } ]
+}

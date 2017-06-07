@@ -1,0 +1,16 @@
+{
+	"title":"Simpleportal webserver",
+	"id":"simpleportal-webserver",
+	"plugintype":"resource",
+	"version":"1.0",
+	"buildprops":{
+		"resource":[
+            {
+            	"subpath":"./node_modules/simpleportal","type":"directory",
+            	"files":[
+					"simpleportal"
+    	       ]
+            }
+        ]
+	}
+}

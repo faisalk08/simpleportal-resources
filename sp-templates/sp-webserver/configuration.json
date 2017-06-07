@@ -1,0 +1,20 @@
+{
+	"translation":true
+	"db":{
+		"use":"mongodb",
+		"mongodb":{
+			"host":"localhost",
+			"port":"27017",
+			"dbName":"simpleportal_webserver",
+			"authdb":"admin"
+		}
+	},
+	"logger":{
+		"root":"serverlog",
+		"stream":"file",
+		"log":"server.log",
+		"access":"access.log",
+		"console":"true",
+		"logtype":"debug"
+	}
+}
