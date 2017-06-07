@@ -2,7 +2,7 @@
 /*!
  * Simpleportaljs 
  * 
- * Copyright(c) 2012 Faisal(faisalk08@gmail.com)
+ * Copyright(c) 2012 Faisal(admin@simpleportaljs.com)
  * MIT Licensed
  */
 
