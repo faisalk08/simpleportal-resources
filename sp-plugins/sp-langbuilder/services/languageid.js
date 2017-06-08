@@ -1,3 +1,5 @@
+"use strict";
+
 var simpleportal = require("simpleportal"),
 	util = require("simpleportal/lib/util"),
 	fs = require("fs");
@@ -12,7 +14,7 @@ var simpleportal = require("simpleportal"),
  * @static
  */
 var languageidService = new simpleportal.Service.CRUDService({
-	collection:'langageids', 
+	collection:'langageid', 
 	name:'languageid', modify:true,
 	primaryKeyFields:['languageid'],
 	model:{
@@ -24,11 +26,15 @@ var languageidService = new simpleportal.Service.CRUDService({
 	},validation:{
 		languageid:"required",
 		display:"required",
-		icon:"required",
+		icon:"required"
 	},configuration:{
 		modelsettings:{
-			status:{url:'/api/languageid/status', display:'display', id:'id', multiple:false},
-			icon:{fieldplugin:'iconpicker', displayoptions:{iconset:'flagicon', showlabel:true}}
+			status:{
+				url:'/api/languageid/status', display:'display', id:'id', multiple:false
+			},
+			icon:{
+				fieldplugin:'iconpicker', displayoptions:{iconset:'flagicon', showlabel:true}
+			}
 		}
 	}	
 });
@@ -66,17 +72,17 @@ languageidService.get('/active', function(request, response, callback){
  * @param callback callback function
  */ 
 languageidService.get('/', function(request, response, callback){
-	languageidService.search({status:{$ne:'archived'}}, callback);
+	languageidService.search({status:{'$ne':'archived'}}, callback);
 });
 
 
 languageidService.beforeSave = function(data, callback){
-	if(data.iconpath&&data.iconpath!=''){
+	if(data.iconpath && data.iconpath!='') {
 		if(fs.existsSync(data.iconpath))
 			fs.readFile(data.iconpath, function(err, original_data){
 			    var base64Image = new Buffer(original_data, 'binary').toString('base64');
 			    
-			    data.icontext=base64Image;
+			    data.icontext = base64Image;
 			    
 			    callback(null, data);
 			});
@@ -93,44 +99,50 @@ languageidService.beforeSave = function(data, callback){
  */
 languageidService.langIdsFromISOJSON = function(callback, disable){
 	var isojsonpath = languageidService.getPluginloader().getDataDirectory({plugintype:'webapp', id:languageidService.plugin}, "iso_639-2.json");
-	if(fs.existsSync(isojsonpath)){
+	if(fs.existsSync(isojsonpath)) {
 		var isojson = util.readJSONFile(isojsonpath);
 		
 		//languageidService.getStorageService().clear(function(){});
 		languageidService.getStorageService().count({}, function(erro, dbcount){
 			var langids = Object.keys(isojson),
-				totcount = langids.length,
-				langobjects=[],
-				count =0;
+				langobjects = [],
+				count = 0;
+			
+			var totcount = langids.length;
 			
 			if(dbcount >= totcount){
 				languageidService.getLogger().info('languageid:langIdsFromISOJSON', 'Skipping data import from json as database has more data than the json!');
 				if(callback)callback();
 			} else{
 				var langids = Object.keys(isojson),
-					langobjects=[],
-					totcount = langids.length,
-					count =0;
+					langobjects = [],
+					count = 0;
+				var totcount = langids.length;
 				
 				for(var index in langids){
 					var langid = langids[index];
 					var lang = isojson[langid];
 					
-					var langobj = {languageid:langid, display:lang.int, native:lang.native};
+					var langobj = {
+						"id": langid,
+						"languageid": langid, 
+						"display": lang["int"], 
+						"native": lang["native"]
+					};
 
-					if(lang.int.length == 1)
-						langobj = {languageid:langid, display:lang.int[0], native:lang.native[0]};
+					if(lang["int"].length == 1)
+						langobj = {"languageid":langid, "display":lang["int"][0], "native":lang["native"][0]};
 					
 					if(langid.length  == 2){
 						langobj.status='active';
 						langobj.iso='639-1';
-					}else if(langid.length == 3 && (lang.int.length == 1 && lang.native.length == 1) && langobj.display.toLowerCase().substring(0,3) == langid)
+					}else if(langid.length == 3 && (lang["int"].length == 1 && lang["native"].length == 1) && langobj["display"].toLowerCase().substring(0,3) == langid)
 						langobj.iso='639-2/T';
-					else if(langid.length == 3 && (lang.int.length == 1 && lang.native.length == 1) && langobj.native.toLowerCase().substring(0,3) == langid)
+					else if(langid.length == 3 && (lang["int"].length == 1 && lang["native"].length == 1) && langobj["native"].toLowerCase().substring(0,3) == langid)
 						langobj.iso='639-2/B';
 					else if(langid.length == 3)
 						langobj.iso='639-2/B';
-					else if(lang.int.length > 1)
+					else if(lang["int"].length > 1)
 						langobj.status='default';
 					
 					if(langobj.iso != '639-1')
@@ -138,9 +150,7 @@ languageidService.langIdsFromISOJSON = function(callback, disable){
 					else
 						langobj.status='imported';
 					
-					langobj.id=langid;
-					
-					languageidService.getStorageService().add_update({id:langid}, langobj, function(error){
+					languageidService.getStorageService().add_update({"id":langid}, langobj, function(error){
 						if(count++ == totcount-1)
 							if(callback)callback();
 					});
@@ -174,10 +184,14 @@ languageidService.on("startup", function(configuration){
 		var languages = ['en'];
 		for(var i in languages){
 			var languageid = languages[i];
+			
 			languageidService.getStorageService().findOne(
 				{languageid:languageid, status:'imported'}, function(error, data){
 					if(data){
-						languageidService.getStorageService().add_update({id:data.id}, {id:data.id, status:'active', icon:'flag-icon flag-icon-'+ (data.languageid == "en" ? "gb" : data.languageid) }, function(){});
+						languageidService.getStorageService().add_update({id:data.id}, {
+							id:data.id, status:'active', 
+							icon:'flag-icon flag-icon-'+ (data.languageid == "en" ? "gb" : data.languageid)
+						}, function(){});
 					}
 				}
 			);

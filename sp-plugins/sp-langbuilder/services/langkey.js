@@ -1,6 +1,8 @@
+"use strict";
+
 var simpleportal = require("simpleportal"),
 	util = require("simpleportal/lib/util"),
-	fs = require("fs");
+	fs = require("fs"),
 	TemplateUtil = require('simpleportal/lib/editor/template'),
 	exec = require('child_process').exec,
 	TEMPLATE_DIR=__dirname + '/../templates';
